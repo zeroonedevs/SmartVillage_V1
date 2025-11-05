@@ -1,309 +1,836 @@
 const newData = [
     {
-        "Year": "2023-24",
-        "Name of the activity": "Voter Awareness Program",
-        "Date of the activity \nDD-MM-YYYY": "06-03-2024",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EcH5xAT1UIlDiva9ZqQw1hUBbE3eG55IGUqthGEbiTNqzg?e=Lxh2oR"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Smart Village Revolution -Extension & Outreach Club",
-        "Date of the activity \nDD-MM-YYYY": "12-02-2024",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EeJ2sFR3pddDq8f5nrHbIb8BO4xRZEBzim7qVCkmI6rPZg?e=uBXDps"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Drive on Dry waste and wet waste",
-        "Date of the activity \nDD-MM-YYYY": "19-02-2024",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/Ea4DnWbi9XNBveSemkUDUYUBk7fvBt9MS82NjvJNdI4WUg?e=dx5nHS"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Awareness on solid waste management",
-        "Date of the activity \nDD-MM-YYYY": "07-02-2024",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EbFGVTBOJV1OvkDTCBJtdpwB4TEiOnQofp-KRZN_zm6eOg?e=s5mUAw"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "AIDS Awareness Program",
-        "Date of the activity \nDD-MM-YYYY": "11-03-2024",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EQ_6q2sDrnFIr0weIzTIKg8BZrSeK_ivzE8d-1715PiFxw?e=gi4EcO"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Awareness On Rain Water Harvesting",
-        "Date of the activity \nDD-MM-YYYY": "27-03-2024",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EbUxCwM9TQNLmek8ojMy1u4Bh8lHKuX3rxJ-5EHW3PLPNQ?e=6Ywm5o"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Mobilised to villagers for Low cost sanitation",
-        "Date of the activity \nDD-MM-YYYY": "14-06-2024",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EYZFuFqsOGVJniE9D_cXOt8BBAQmk7sTQvODysoJMH3x2g?e=SOYEHy"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Awareness om Effects of Single Use Plastic in Village",
-        "Date of the activity \nDD-MM-YYYY": "29-12-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EU_Ao3S4chJJn-IXLoii0MMBbglorImcPyfrd_IIHcv3nQ?e=iN3EtT"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Clean Village and Green Village",
-        "Date of the activity \nDD-MM-YYYY": "29-12-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EVcKBU5Jv_BJr1OK6x4KhqIBLlBO9GuUNC1Uce_VPm55xw?e=HF9tK3"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Conducting clean drive programme with villagers",
-        "Date of the activity \nDD-MM-YYYY": "01-10-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EbiULdNBNzREiI0g77dIBWYBoiozhI8b3FFe1DvPgt-Ibw?e=2EZ3mo"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Program on Youth Involvement in Agriculture",
-        "Date of the activity \nDD-MM-YYYY": "17-10-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/ERvqQq4ulmFLuQCmbDk7-1gBXZoWv9LwP4k2Rk2LRcr-fA?e=lNE9ZT"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Workshop on organic farming",
-        "Date of the activity \nDD-MM-YYYY": "29-09-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EUJJDucpAB5Ls9msX4vazWcBdRthGrDJ0hQZMkE3ggRXGg?e=aprarq"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Promoting Proper Usage Toilets in Rural Areas",
-        "Date of the activity \nDD-MM-YYYY": "07-09-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EQFpGQIkfANNoQZWDZsEBdYBul-jBcmTW1zcSm-LFpKX6Q?e=JNxfTb"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Blood Grouping Camp",
-        "Date of the activity \nDD-MM-YYYY": "08-09-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EXso2giNkdhIspvuA7_4XYYBTNh_APGhN_yBOcclEy-scQ?e=IspfQK"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Program on crop rotation, inter cropping and mixed cropping",
-        "Date of the activity \nDD-MM-YYYY": "01-09-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EeaLV7LdrlBEklNzcDSZooEBih37aky74r3RDjHtABTtzA?e=T4ZyTk"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Health & Hygiene And Drinking Water",
-        "Date of the activity \nDD-MM-YYYY": "22-07-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EV7MuMMnUdFPpY3ixQ2QOf4BwrB7262c1vng3ftzrWbHPg?e=bB7pIY"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Workshop on Farmer Training Program On Chemical Usage in Fields",
-        "Date of the activity \nDD-MM-YYYY": "22-07-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EQZKxXIeK8VDrJvAal9tEIUBnL9pJyzNBIMCc0w7pK6nQQ?e=w2Sr0B"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Awareness of the effects of climate change in agriculture and celebrate on environment day",
-        "Date of the activity \nDD-MM-YYYY": "22-06-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EVdR0V8pYIRGtau9fDknFmcB_nqxAbskXUvch8GQcvtFTw?e=Kai4tw"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "Awareness on Health Issues and Usages of Medicines",
-        "Date of the activity \nDD-MM-YYYY": "16-06-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EYMoT1kgakJCrdP8gK1iGpcBL6uhCfZsOGctqdgXa1hDkQ?e=65tJYN"
-    },
-    {
-        "Year": "2023-24",
-        "Name of the activity": "77th independence day celebrations",
-        "Date of the activity \nDD-MM-YYYY": "14-08-2023 to 15-08-2023",
-        "Number of students participated in such activities": "35",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/venkatasatyanarayana_kluniversity_in/EQOq8Z2r0AxKh-BJhqioFCsBm5XulLb1ZtXrhnZM6aAVBQ?e=xzERNd"
+        "Year": "2024-25",
+        "Name of the activity": "Adopt-a-Tree Campaign",
+        "Date of the activity \nDD-MM-YYYY": "22-09-2025",
+        "Number of students participated in such activities": "21",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Adopt-a-Tree.pdf"
     },
     {
         "Year": "2024-25",
-        "Name of the activity": "Vriksharopam Mahotsav (Tree Plantation) (Phase-5)",
-        "Date of the activity \nDD-MM-YYYY": "23-12-2024",
+        "Name of the activity": "Balanced Nutrition and Diet Workshop",
+        "Date of the activity \nDD-MM-YYYY": "25-08-2025",
+        "Number of students participated in such activities": "23",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Balanced%20Nutrition%20and%20Diet.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Basic Education Program (Phase-1)",
+        "Date of the activity \nDD-MM-YYYY": "31-07-2025",
+        "Number of students participated in such activities": "17",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Basic%20Education%20-%201.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Basic Education Program",
+        "Date of the activity \nDD-MM-YYYY": "07-02-2025",
+        "Number of students participated in such activities": "37",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Basic%20Education.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Chemical Usage & Fertilizer Management Workshop",
+        "Date of the activity \nDD-MM-YYYY": "06-02-2025",
+        "Number of students participated in such activities": "35",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Chemical%20Usage%20%26%20Fertilizer%20Management.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Computer Literacy Program (Phase-2)",
+        "Date of the activity \nDD-MM-YYYY": "17-02-2025",
+        "Number of students participated in such activities": "22",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Computer%20Literacy%20P-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Depression and Mental Health Awareness",
+        "Date of the activity \nDD-MM-YYYY": "17-03-2025",
+        "Number of students participated in such activities": "25",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Depression%20and%20Mental%20Health.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Dropout Students Awareness Program",
+        "Date of the activity \nDD-MM-YYYY": "28-07-2025",
+        "Number of students participated in such activities": "25",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Dropout%20Students.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Education Workshop",
+        "Date of the activity \nDD-MM-YYYY": "31-07-2025",
+        "Number of students participated in such activities": "17",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Education%20Workshop.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Farm Machinery Workshop",
+        "Date of the activity \nDD-MM-YYYY": "24-02-2024",
+        "Number of students participated in such activities": "27",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Farm%20Machinery.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "First Aid and Primary Health Care Workshop",
+        "Date of the activity \nDD-MM-YYYY": "30-08-2025",
+        "Number of students participated in such activities": "16",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/First%20Aid%20and%20Primary%20Health%20Care.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "First-Aid CPR Training (Phase-7-1)",
+        "Date of the activity \nDD-MM-YYYY": "21-02-2025",
+        "Number of students participated in such activities": "1000",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/First-Aid%20CPR%20P-7-1.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "First-Aid CPR Training (Phase-7-2)",
+        "Date of the activity \nDD-MM-YYYY": "21-03-2025",
+        "Number of students participated in such activities": "38",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/First-Aid%20CPR%20P-7-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Fitness Yoga Workshop",
+        "Date of the activity \nDD-MM-YYYY": "06-02-2025",
+        "Number of students participated in such activities": "30",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Fitness%20Yoga.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Implementation of Health Education Program",
+        "Date of the activity \nDD-MM-YYYY": "02-08-2025",
+        "Number of students participated in such activities": "18",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Implementation%20of%20Health%20Education.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Learning Enhancement Camps",
+        "Date of the activity \nDD-MM-YYYY": "30-07-2025",
+        "Number of students participated in such activities": "16",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Learning%20Enhancement%20Camps.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Library Development Program",
+        "Date of the activity \nDD-MM-YYYY": "15-02-2025",
+        "Number of students participated in such activities": "50",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Library%20Development.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Life Skill Workshop",
+        "Date of the activity \nDD-MM-YYYY": "14-03-2025",
+        "Number of students participated in such activities": "69",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Life%20Skill%20Workshop.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Mobile Security Workshop",
+        "Date of the activity \nDD-MM-YYYY": "22-03-2025",
         "Number of students participated in such activities": "40",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/tsivakrishna_kluniversity_in/EVj3e7koIuZIm21_riY8WvQB2nd1KCIw2t0Ex5WTsxhVSA"
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Mobile%20Security.pdf"
     },
     {
         "Year": "2024-25",
-        "Name of the activity": "Green School Program (Phase-2)",
-        "Date of the activity \nDD-MM-YYYY": "23-12-2024",
-        "Number of students participated in such activities": "40",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/tsivakrishna_kluniversity_in/ET5G3c0ZTpFGoSlGsXl4lesBAu38XB7s-fDkjDejH99vIw"
+        "Name of the activity": "Nutri Gardening in Anganwadis",
+        "Date of the activity \nDD-MM-YYYY": "19-09-2025",
+        "Number of students participated in such activities": "29",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Nutri%20Gardening%20in%20Anganwadis.pdf"
     },
     {
         "Year": "2024-25",
-        "Name of the activity": "National Farmers Day",
-        "Date of the activity \nDD-MM-YYYY": "23-12-2024",
-        "Number of students participated in such activities": "36",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/tsivakrishna_kluniversity_in/ESZLdrfIDS1Jo1ylah9wkRcBTKwVDKr5RF-wt7iqy0CoDA"
+        "Name of the activity": "ODF Campaign",
+        "Date of the activity \nDD-MM-YYYY": "28-03-2025",
+        "Number of students participated in such activities": "14",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/ODF%20Campaign.pdf"
     },
     {
         "Year": "2024-25",
-        "Name of the activity": "Hygiene & Sanitation Quiz competition",
-        "Date of the activity \nDD-MM-YYYY": "24-12-2024",
-        "Number of students participated in such activities": "60",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/tsivakrishna_kluniversity_in/EU9pyxwux4hDk-s4y2L9Uw0BFAlHid5tS7uzoq6iejBLyQ"
+        "Name of the activity": "ODF Awareness Program",
+        "Date of the activity \nDD-MM-YYYY": "28-08-2025",
+        "Number of students participated in such activities": "16",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/ODF.pdf"
     },
     {
         "Year": "2024-25",
-        "Name of the activity": "Life skills workshop",
-        "Date of the activity \nDD-MM-YYYY": "24-12-2024",
-        "Number of students participated in such activities": "60",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/tsivakrishna_kluniversity_in/EeqifajlEkRDvb8vF2BVK-QBNq3K--dolv9Bdxd6ZK7-1g"
+        "Name of the activity": "One Family, One Tree Campaign",
+        "Date of the activity \nDD-MM-YYYY": "16-09-2025",
+        "Number of students participated in such activities": "16",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/One%20Family,%20One%20Tree.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Rainwater Harvesting Workshop (Phase-1)",
+        "Date of the activity \nDD-MM-YYYY": "22-03-2025",
+        "Number of students participated in such activities": "29",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Rainwater%20Harvesting-1.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Rainwater Harvesting Workshop (Phase-2)",
+        "Date of the activity \nDD-MM-YYYY": "28-02-2025",
+        "Number of students participated in such activities": "48",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Rainwater%20Harvesting-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Role of Women in Agriculture Workshop",
+        "Date of the activity \nDD-MM-YYYY": "28-02-2025",
+        "Number of students participated in such activities": "20",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Role%20of%20Women%20in%20Agriculture.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Sanitation Infrastructure Workshop",
+        "Date of the activity \nDD-MM-YYYY": "30-01-2025",
+        "Number of students participated in such activities": "30",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Sanatation%20Infrastructure.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Sanitation and Safe Drinking Water Workshop",
+        "Date of the activity \nDD-MM-YYYY": "04-08-2025",
+        "Number of students participated in such activities": "18",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Sanitation%20and%20safe%20drinking%20water.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Soil Health Workshop",
+        "Date of the activity \nDD-MM-YYYY": "06-02-2024",
+        "Number of students participated in such activities": "24",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Soil%20Health%20Workshop.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Strengthening of Rural Health Program",
+        "Date of the activity \nDD-MM-YYYY": "30-08-2025",
+        "Number of students participated in such activities": "16",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Strengthening%20of%20Rural%20Health.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Stress Management & Anxiety Workshop",
+        "Date of the activity \nDD-MM-YYYY": "17-02-2025",
+        "Number of students participated in such activities": "48",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Stress%20Management%20%26%20Anxiety.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Toilet Construction Workshop",
+        "Date of the activity \nDD-MM-YYYY": "15-03-2025",
+        "Number of students participated in such activities": "30",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Toilet%20Construction.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Toilet Sanitation Workshop",
+        "Date of the activity \nDD-MM-YYYY": "15-02-2024",
+        "Number of students participated in such activities": "50",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Toilet%20Sanitation.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Training on Internet Safety",
+        "Date of the activity \nDD-MM-YYYY": "28-02-2025",
+        "Number of students participated in such activities": "41",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Training%20on%20Internet%20Safety.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Tree Adoption Campaign",
+        "Date of the activity \nDD-MM-YYYY": "05-02-2025",
+        "Number of students participated in such activities": "35",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Tree%20Adoption%20Campaign.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Tree Adoption Campaign (Phase-2)",
+        "Date of the activity \nDD-MM-YYYY": "21-03-2025",
+        "Number of students participated in such activities": "32",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Tree%20Adoption%20Campaign-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Tree Care & Environmental Stewardship",
+        "Date of the activity \nDD-MM-YYYY": "20-09-2025",
+        "Number of students participated in such activities": "24",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Tree%20Care%20%26%20Environmental%20Stewardship.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Tree Care and Maintenance Workshop",
+        "Date of the activity \nDD-MM-YYYY": "14-02-2025",
+        "Number of students participated in such activities": "35",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Tree%20Care%20%26%20Maintenance.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Tree Care and Maintenance Workshop",
+        "Date of the activity \nDD-MM-YYYY": "13-03-2025",
+        "Number of students participated in such activities": "33",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Tree%20Care%20and%20Maintainance.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Tree Care and Maintenance Workshop",
+        "Date of the activity \nDD-MM-YYYY": "08-09-2025",
+        "Number of students participated in such activities": "24",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Tree%20Care%20and%20Maintenance.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Ujjwal Bhavishya Program",
+        "Date of the activity \nDD-MM-YYYY": "30-07-2025",
+        "Number of students participated in such activities": "16",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Ujjwal%20Bhavishya.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Vriksharopan Mahotsav (Phase-1)",
+        "Date of the activity \nDD-MM-YYYY": "05-02-2025",
+        "Number of students participated in such activities": "35",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Vriksharopam%20Mahotsav-1.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Vriksharopan Mahotsav (Phase-2)",
+        "Date of the activity \nDD-MM-YYYY": "14-02-2025",
+        "Number of students participated in such activities": "35",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Vriksharopam%20Mahotsav-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Vriksharopan Mahotsav (Phase-3)",
+        "Date of the activity \nDD-MM-YYYY": "14-03-2025",
+        "Number of students participated in such activities": "21",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Vriksharopam%20Mahotsav-3.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Vruksharopan Abhiyan",
+        "Date of the activity \nDD-MM-YYYY": "13-09-2025",
+        "Number of students participated in such activities": "21",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Vruksharoopan%20Abhiyan.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Water Saving Practices Workshop",
+        "Date of the activity \nDD-MM-YYYY": "24-02-2025",
+        "Number of students participated in such activities": "20",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/Water%20Saving%20Practices.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "World Population Day Celebration",
+        "Date of the activity \nDD-MM-YYYY": "28-07-2025",
+        "Number of students participated in such activities": "25",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2025/World%20Population%20Day.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Rural Agroforestry Workshop",
+        "Date of the activity \nDD-MM-YYYY": "22-07-2024",
+        "Number of students participated in such activities": "35",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Agroforestry.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Workshop on Balanced Nutrition and Healthy Eating Habits",
+        "Date of the activity \nDD-MM-YYYY": "25-09-2024",
+        "Number of students participated in such activities": "66",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Balance%20Nutrition%20%26%20Health.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "Budget healthy meals demonstration",
         "Date of the activity \nDD-MM-YYYY": "26-12-2024",
         "Number of students participated in such activities": "29",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/tsivakrishna_kluniversity_in/EatGLIcl4WVCmZRQZRBED_IBro8f8X_OxIdAtN06__y2ww"
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Budget%20Healthy%20Meals.pdf"
     },
     {
         "Year": "2024-25",
-        "Name of the activity": "Workshop on Rainwater Harvesting techniques (Phase 3)",
-        "Date of the activity \nDD-MM-YYYY": "27-12-2024",
-        "Number of students participated in such activities": "58",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/tsivakrishna_kluniversity_in/EYPYMYYx2n5GkYNJPK34NQoB3KnZ-OBuW4NEL1OoHqJniQ"
+        "Name of the activity": "Clean Water & Sanitation Exhibition",
+        "Date of the activity \nDD-MM-YYYY": "08-10-2024",
+        "Number of students participated in such activities": "69",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Clean%20Water%20%26%20Sanitation.pdf"
     },
     {
         "Year": "2024-25",
-        "Name of the activity": "Water saving practices campaign (Phase-2)",
-        "Date of the activity \nDD-MM-YYYY": "27-12-2024",
-        "Number of students participated in such activities": "48",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/tsivakrishna_kluniversity_in/EbWd4_70ga1Jg4KmLM5S2Z8BUvDdr9SZpCijlsFnOje3aA"
+        "Name of the activity": "Awareness of the effects of climate change in agriculture and celebrate on environment day",
+        "Date of the activity \nDD-MM-YYYY": "25-09-2024",
+        "Number of students participated in such activities": "16",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Climate%20Smart%20Agriculture.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Community Tree Census",
+        "Date of the activity \nDD-MM-YYYY": "23-07-2024",
+        "Number of students participated in such activities": "19",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Community%20Tree%20Census.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Workshops on Compost Making",
+        "Date of the activity \nDD-MM-YYYY": "30-07-2024",
+        "Number of students participated in such activities": "24",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Compost%20Making.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Computer literacy and skill training Program",
+        "Date of the activity \nDD-MM-YYYY": "18-09-2024",
+        "Number of students participated in such activities": "26",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Computer%20Literacy%20%26%20Digital%20Skills.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "First-Aid training workshop (CPR)(Phase-1)",
+        "Date of the activity \nDD-MM-YYYY": "26-07-2024",
+        "Number of students participated in such activities": "15",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/CPR%20Training%20Program.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "Cyber hygiene campaign",
         "Date of the activity \nDD-MM-YYYY": "28-12-2024",
         "Number of students participated in such activities": "29",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/tsivakrishna_kluniversity_in/EcGsxHpBn_hMh49-P248boIBQfkUO_5kdrL2eJ07jq6cUQ"
-    },
-    {
-        "Year": "2024-25",
-        "Name of the activity": "Seminar on Farmers Marketing channels",
-        "Date of the activity \nDD-MM-YYYY": "28-12-2024",
-        "Number of students participated in such activities": "51",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/tsivakrishna_kluniversity_in/Efp-eVLFR_BIi-xXRWEQYisBwM3CV_DKmAhmu-9mGLpg1w"
-    },
- 
-    
-    
-    {
-        "Year": "2024-25",
-        "Name of the activity": "Clean Water & Sanitation Exhibition",
-        "Date of the activity \nDD-MM-YYYY": "08-10-2024",
-        "Number of students participated in such activities": "68",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/personal/brambabu_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fbrambabu%5Fkluniversity%5Fin%2FDocuments%2FSVR%20OCTOBER%20MONTH%20REPORTS%202024%2FClean%20Water%20%26%20Sanitation%20Exhibition%2Epdf%2Epdf%20%281%29%2Epdf%20%281%29%2Epdf%20%281%29%2Epdf&parent=%2Fpersonal%2Fbrambabu%5Fkluniversity%5Fin%2FDocuments%2FSVR%20OCTOBER%20MONTH%20REPORTS%202024&ga=1"
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Cyber%20Hygiene%20Campaign.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "DRAWING COMPETITION",
         "Date of the activity \nDD-MM-YYYY": "01-10-2024",
         "Number of students participated in such activities": "15",
-        // "Web Links": "https://kluniversityin-my.sharepoint.com/personal/brambabu_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fbrambabu%5Fkluniversity%5Fin%2FDocuments%2FSVR%20OCTOBER%20MONTH%20REPORTS%202024%2FDRAWING%20COMPETITION%2Epdf%20%281%29%2Epdf%20%281%29%2Epdf%20%281%29%2Epdf&parent=%2Fpersonal%2Fbrambabu%5Fkluniversity%5Fin%2FDocuments%2FSVR%20OCTOBER%20MONTH%20REPORTS%202024&ga=1"
-        "Web Links": "https://drive.google.com/file/d/1a-wVu3DzQAy8N0K56AJOyA1UHdthuTv4/view?usp=sharing",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Drawing%20Competition.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Education Awareness workshop",
+        "Date of the activity \nDD-MM-YYYY": "24-07-2024",
+        "Number of students participated in such activities": "26",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Education%20Awareness.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Seminar on Farmers Marketing channels",
+        "Date of the activity \nDD-MM-YYYY": "28-12-2024",
+        "Number of students participated in such activities": "51",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Farmers%20Marketing%20Channels.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Program on Youth Involvement in Agriculture",
+        "Date of the activity \nDD-MM-YYYY": "24-09-2024",
+        "Number of students participated in such activities": "16",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Field%20Learning%20Farms.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "First-Aid Training Workshop (CPR) (Phase-4)",
-        "Date of the activity \nDD-MM-YYYY": "16-10-2024",
+        "Date of the activity \nDD-MM-YYYY": "19-08-2024",
+        "Number of students participated in such activities": "38",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/First%20Aid%20CPR-P-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "First-Aid Training Workshop (CPR) (Phase-4)",
+        "Date of the activity \nDD-MM-YYYY": "17-09-2024",
+        "Number of students participated in such activities": "27",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/First%20Aid%20CPR-P-3.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "First-Aid Training Workshop (CPR) (Phase-4)",
+        "Date of the activity \nDD-MM-YYYY": "16-10-2023",
         "Number of students participated in such activities": "28",
-        "Web Links": "https://drive.google.com/file/d/1hhpHpRHeeUVc_AOjj4y8lHas0KmG9uQ1/view?usp=sharing",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/First%20Aid%20CPR-P-4.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "Global Hand Washing Day",
         "Date of the activity \nDD-MM-YYYY": "15-10-2024",
         "Number of students participated in such activities": "69",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/ET1naAl4KbdMs-xpd_fokS4B-to5vfSw5CeUPpxgQdBbhg?e=YAiErc"
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Global%20Hand%20Wash.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "Green School Program (Phase-1)",
         "Date of the activity \nDD-MM-YYYY": "03-10-2024",
         "Number of students participated in such activities": "59",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/personal/brambabu_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fbrambabu%5Fkluniversity%5Fin%2FDocuments%2FSVR%20OCTOBER%20MONTH%20REPORTS%202024%2FGreen%20School%20Program%20%28Phase%2D1%29%2Epdf%2Epdf%20%281%29%2Epdf%20%281%29%2Epdf%20%281%29%2Epdf&parent=%2Fpersonal%2Fbrambabu%5Fkluniversity%5Fin%2FDocuments%2FSVR%20OCTOBER%20MONTH%20REPORTS%202024&ga=1"
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Green%20School%20Program%20P-1.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Health Check-ups on Diabetics and Malnutrition",
+        "Date of the activity \nDD-MM-YYYY": "23-09-2024",
+        "Number of students participated in such activities": "22",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Health%20Checkup.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Hygiene & Sanitation Quiz competition",
+        "Date of the activity \nDD-MM-YYYY": "24-12-2024",
+        "Number of students participated in such activities": "62",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Hygiene%20%26%20Sanitation.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Library Development Program",
+        "Date of the activity \nDD-MM-YYYY": "16-08-2024",
+        "Number of students participated in such activities": "22",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Library%20Development%20P-1.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Life skills workshop",
+        "Date of the activity \nDD-MM-YYYY": "24-12-2024",
+        "Number of students participated in such activities": "62",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Life%20Skill%20P-1.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "Livestock Management Training",
         "Date of the activity \nDD-MM-YYYY": "23-10-2024",
         "Number of students participated in such activities": "45",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/ESvqq7EYkuRCq6cvItGe-rEBa3lqxsY6L8El16PiXqx-UA?e=117SVG"
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Livestock%20Management.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Mobile security workshop",
+        "Date of the activity \nDD-MM-YYYY": "28-08-2024",
+        "Number of students participated in such activities": "28",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Mobile%20Security%20P-1.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Mobile security workshop",
+        "Date of the activity \nDD-MM-YYYY": "29-07-2024",
+        "Number of students participated in such activities": "25",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Mobile%20Security%20P-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "National Farmers Day",
+        "Date of the activity \nDD-MM-YYYY": "23-12-2024",
+        "Number of students participated in such activities": "32",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/National%20Farmers%20Day.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Nutrition & diseases prevention workshop",
+        "Date of the activity \nDD-MM-YYYY": "05-08-2024",
+        "Number of students participated in such activities": "17",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Nutrition%20%26%20Disease%20Prevention.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Water Saving Practices Campaign (Phase-1)",
+        "Date of the activity \nDD-MM-YYYY": "15-08-2024",
+        "Number of students participated in such activities": "58",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/ODF%20Campaign.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Personal hygiene & sanitation awareness workshop",
+        "Date of the activity \nDD-MM-YYYY": "25-07-2024",
+        "Number of students participated in such activities": "16",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Personal%20Hygiene%20and%20Sanitation.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Workshop on Phishing & Malware",
+        "Date of the activity \nDD-MM-YYYY": "23-09-2024",
+        "Number of students participated in such activities": "52",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Phising%20%26%20Malware.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Rainwater Harvesting Techniques Workshop",
+        "Date of the activity \nDD-MM-YYYY": "21-08-2024",
+        "Number of students participated in such activities": "14",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Rain%20Water%20Harvesting%20P-1.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Workshop on Rain Water Harvesting Techniques (Phase-2)",
+        "Date of the activity \nDD-MM-YYYY": "18-10-2023",
+        "Number of students participated in such activities": "28",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Rain%20Water%20Harvesting%20P-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Workshop on Rainwater Harvesting techniques (Phase 3)",
+        "Date of the activity \nDD-MM-YYYY": "27-12-2024",
+        "Number of students participated in such activities": "58",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Rain%20Water%20Harvesting%20P-3.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Safai Abhiyan (Cleanliness Drive) (Phase-2)",
+        "Date of the activity \nDD-MM-YYYY": "07-08-2024",
+        "Number of students participated in such activities": "44",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Safai%20Abhiyan-1.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Safai Abhiyan (Cleanliness Drive) (Phase-1)",
+        "Date of the activity \nDD-MM-YYYY": "23-07-2024",
+        "Number of students participated in such activities": "19",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Safai%20Abhiyan-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Sanitation Awareness Workshop",
+        "Date of the activity \nDD-MM-YYYY": "24-07-2024",
+        "Number of students participated in such activities": "28",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Sanitation%20Workshop.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "SWATCHATHA HI SEVA",
+        "Date of the activity \nDD-MM-YYYY": "15-08-2024",
+        "Number of students participated in such activities": "58",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Swacch%20Bharat.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "SWATCHATHA HI SEVA",
         "Date of the activity \nDD-MM-YYYY": "02-10-2024",
         "Number of students participated in such activities": "74",
-        // "Web Links": "https://kluniversityin-my.sharepoint.com/personal/brambabu_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fbrambabu%5Fkluniversity%5Fin%2FDocuments%2FSVR%20OCTOBER%20MONTH%20REPORTS%202024%2FSWATCHATHA%20HI%20SEVA%2Epdf%20%282%29%20%281%29%2Epdf%2Epdf&parent=%2Fpersonal%2Fbrambabu%5Fkluniversity%5Fin%2FDocuments%2FSVR%20OCTOBER%20MONTH%20REPORTS%202024&ga=1"
-        "Web Links": "https://drive.google.com/file/d/1XZo_lqWZFz09UCQvpSGpcb0GzKLUDM7U/view?usp=sharing",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Swacchata%20Hi%20Seva.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Toilet Design Innovative Challenge",
+        "Date of the activity \nDD-MM-YYYY": "17-09-2024",
+        "Number of students participated in such activities": "27",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Toilet%20Design%20Innovation.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "Training On Internet Safety (Phase-1)",
         "Date of the activity \nDD-MM-YYYY": "22-10-2024",
         "Number of students participated in such activities": "30",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/EfTMaja6lY5Ftwf7QniRIpIBo2XJxWqRuRkmLpRJgDdbMQ?e=F90NUv"
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Training%20on%20Internet%20Safety%20-%20P-1.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Tree Adoption Campaign (Phase-1)",
+        "Date of the activity \nDD-MM-YYYY": "05-09-2024",
+        "Number of students participated in such activities": "20",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Tree%20Adoption%20Campaign%20P-1.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "Tree Adoption Campaign (Phase-2)",
         "Date of the activity \nDD-MM-YYYY": "02-10-2024",
         "Number of students participated in such activities": "74",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/EWcAUddZm5BGiWp2lkeCFScBq1ogc0xZJlFu5_IoigfSpQ?e=L6YV5k"
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Tree%20Adoption%20Campaign%20P-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Tree Care and maintenance seminar (Phase-1)",
+        "Date of the activity \nDD-MM-YYYY": "06-08-2024",
+        "Number of students participated in such activities": "22",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Tree%20Care%20%26%20Maintenance.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Vaccination Drive (Phase-2)",
+        "Date of the activity \nDD-MM-YYYY": "17-08-2024",
+        "Number of students participated in such activities": "18",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Vaccination%20Drive%20P-1.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Vaccination Drive (Phase-2)",
+        "Date of the activity \nDD-MM-YYYY": "16-09-2024",
+        "Number of students participated in such activities": "16",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Vaccination%20Drive%20P-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Vriksharopam Mahotsav (Tree Plantation) (Phase-5)",
+        "Date of the activity \nDD-MM-YYYY": "15-08-2024",
+        "Number of students participated in such activities": "66",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Vruksharoopam%20Mahotsav.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Triksharopam Mahotsav (Tree Plantation) (Phase-3)",
+        "Date of the activity \nDD-MM-YYYY": "05-09-2024",
+        "Number of students participated in such activities": "20",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Vruksharoopam%20Mahotsav%20P-2.pdf"
     },
     {
         "Year": "2024-25",
         "Name of the activity": "Vriksharopam Mahotsav (Tree Plantation) (Phase-4)",
         "Date of the activity \nDD-MM-YYYY": "01-10-2024",
         "Number of students participated in such activities": "74",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/ETqvO7s5cOZFiUiviRAMSRwBXsqa5AjNtvKcarCrXFLDKA?e=yfGXKw"
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Vruksharoopam%20Mahotsav%20P-3.pdf"
     },
     {
         "Year": "2024-25",
-        "Name of the activity": "Workshop on Balanced Nutrition and Healthy Eating Habits",
-        "Date of the activity \nDD-MM-YYYY": "16-10-2024",
-        "Number of students participated in such activities": "65",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/EQY-DaQiXsZOhGd2qVyK3kUBlGXZ6OLKvivl_zS84juJfw?e=06o0JD"
+        "Name of the activity": "Vriksharopam Mahotsav (Tree Plantation) (Phase-5)",
+        "Date of the activity \nDD-MM-YYYY": "23-12-2024",
+        "Number of students participated in such activities": "40",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Vruksharoopam%20Mahotsav%20P-4.pdf"
     },
     {
         "Year": "2024-25",
+        "Name of the activity": "VRIKSHAROPAM MAHOTSAV (Tree Plantation Drive)",
+        "Date of the activity \nDD-MM-YYYY": "22-07-2024",
+        "Number of students participated in such activities": "35",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Vruksharoopam%20Mahotsav%20P-5.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Waste Management Workshop",
+        "Date of the activity \nDD-MM-YYYY": "20-09-2024",
+        "Number of students participated in such activities": "43",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Waste%20Management.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Water Management Workshop",
+        "Date of the activity \nDD-MM-YYYY": "31-07-2024",
+        "Number of students participated in such activities": "41",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Water%20Management.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Water Saving Practices Campaign (Phase-1)",
+        "Date of the activity \nDD-MM-YYYY": "20-08-2024",
+        "Number of students participated in such activities": "40",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Water%20Saving%20Practices%20P-1.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Water saving practices campaign (Phase-2)",
+        "Date of the activity \nDD-MM-YYYY": "27-12-2024",
+        "Number of students participated in such activities": "48",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Water%20Saving%20Practices%20P-2.pdf"
+    },
+    {
+        "Year": "2024-25",
+        "Name of the activity": "Awareness workshop on waterborne diseases",
+        "Date of the activity \nDD-MM-YYYY": "27-07-2024",
+        "Number of students participated in such activities": "22",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Water-borne%20Diseases.pdf"
+    },
+    {
+        "Year": "2023-24",
         "Name of the activity": "Workshop On Agroforestry",
-        "Date of the activity \nDD-MM-YYYY": "25-10-2024",
+        "Date of the activity \nDD-MM-YYYY": "25-10-2023",
         "Number of students participated in such activities": "42",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/Ef7nzuNC23JHmFZZAiFxftYBN1zJWN-JHahCVGJJpsz1_Q?e=KauAxp"
+        "Web Links": "https://www.kluniversity.in/sac/reports/2024/Workshop%20on%20Agroforestry.pdf"
     },
     {
-        "Year": "2024-25",
-        "Name of the activity": "Workshop on Rain Water Harvesting Techniques (Phase-2)",
-        "Date of the activity \nDD-MM-YYYY": "18-10-2024",
-        "Number of students participated in such activities": "28",
-        "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/EYvnvPZ4wjpKsI-A0Hs4pSMBVr6zcuH9Pl7tlxv7gqaB2w?e=Yqj7Fr"
+        "Year": "2023-24",
+        "Name of the activity": "AIDS Awareness Program",
+        "Date of the activity \nDD-MM-YYYY": "11-03-2024",
+        "Number of students participated in such activities": "59",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/AIDS%20Awareness.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Blood Grouping Camp",
+        "Date of the activity \nDD-MM-YYYY": "08-09-2023",
+        "Number of students participated in such activities": "55",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Blood%20Grouping.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Conducting clean drive programme with villagers",
+        "Date of the activity \nDD-MM-YYYY": "01-10-2023",
+        "Number of students participated in such activities": "67",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/CleanDrive.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Clean Village and Green Village",
+        "Date of the activity \nDD-MM-YYYY": "29-12-2023",
+        "Number of students participated in such activities": "62",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Clean%20Village%20and%20Green%20Village.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Drive on Dry waste and wet waste",
+        "Date of the activity \nDD-MM-YYYY": "19-02-2024",
+        "Number of students participated in such activities": "60",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Dry%20Waste%20and%20Wet%20Waste.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Awareness om Effects of Single Use Plastic in Village",
+        "Date of the activity \nDD-MM-YYYY": "29-12-2023",
+        "Number of students participated in such activities": "50",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Effects%20of%20Single%20use%20Plastic.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Health & Hygiene And Drinking Water",
+        "Date of the activity \nDD-MM-YYYY": "22-07-2023",
+        "Number of students participated in such activities": "60",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Health%20%26%20Hygiene.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Awareness on Health Issues and Usages of Medicines",
+        "Date of the activity \nDD-MM-YYYY": "16-06-2023",
+        "Number of students participated in such activities": "60",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Health%20Issues%20and%20Usages%20of%20Medicines.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Mobilised to villagers for Low cost sanitation",
+        "Date of the activity \nDD-MM-YYYY": "14-06-2024",
+        "Number of students participated in such activities": "56",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Low%20Cost%20Sanitation.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Awareness On Rain Water Harvesting",
+        "Date of the activity \nDD-MM-YYYY": "27-03-2024",
+        "Number of students participated in such activities": "55",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Rain%20Water%20Harvesting.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Awareness on solid waste management",
+        "Date of the activity \nDD-MM-YYYY": "07-02-2024",
+        "Number of students participated in such activities": "46",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Solid%20Waste%20Management.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Smart Village Revolution -Extension & Outreach Club",
+        "Date of the activity \nDD-MM-YYYY": "12-02-2024",
+        "Number of students participated in such activities": "36",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Technic%20on%20Maths%20%26%20English.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Promoting Proper Usage Toilets in Rural Areas",
+        "Date of the activity \nDD-MM-YYYY": "07-09-2023",
+        "Number of students participated in such activities": "62",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Usage%20of%20Toilets.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "Voter Awareness Program",
+        "Date of the activity \nDD-MM-YYYY": "06-03-2024",
+        "Number of students participated in such activities": "34",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/Voter%20Awareness.pdf"
+    },
+    {
+        "Year": "2023-24",
+        "Name of the activity": "77th independence day celebrations",
+        "Date of the activity \nDD-MM-YYYY": "14-08-2023 to 15-08-2023",
+        "Number of students participated in such activities": "61",
+        "Web Links": "https://www.kluniversity.in/sac/reports/2023/77th%20Independence%20Day.pdf"
     },
         {
             "Year": "2022-23",
@@ -452,6 +979,13 @@ const newData = [
             "Number of students participated in such activities": "81",
             "Web Links": "https://www.kluniversity.in/iqac-files/SSR-2023/c3/3.6.2/Activities/112.pdf"
         },
+    {
+        "Year": "2022-23",
+        "Name of the activity": "Technical Solutions by Students",
+        "Date of the activity \nDD-MM-YYYY": "05-02-2022",
+        "Number of students participated in such activities": "71",
+        "Web Links": "https://drive.google.com/file/d/1_eBi5x4nwralHW3wQ2G9im-JahLKgRoU/view?usp=sharing"
+    },
         {
             "Year": "2021-22",
             "Name of the activity": "Blood Grouping at Dasullapalem ",
@@ -1305,279 +1839,6 @@ const newData = [
             "Date of the activity \nDD-MM-YYYY": "22.09.2019",
             "Number of students participated in such activities": "85",
             "Web Links": "https://www.kluniversity.in/iqac-files/SSR-2023/c3/3.6.2/Activities/484.pdf"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "VRIKSHAROPAM MAHOTSAV (Tree Plantation Drive)",
-            "Date of the activity \nDD-MM-YYYY": "22.07.2024",
-            "Number of students participated in such activities": "35",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/Ef6tm29AADxEny3h5pVMtgMBbw7s4gewqSJWFXcD4hqW-w?e=v4t6aG"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Rural Agroforestry Workshop",
-            "Date of the activity \nDD-MM-YYYY": "22.07.2024",
-            "Number of students participated in such activities": "35",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/ERx-pbQ6oeVChk87f1qNLoIBj6pHVsFULG826jeWZSIeuw?e=AT80wc"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Community Tree Census",
-            "Date of the activity \nDD-MM-YYYY": "23.07.2024",
-            "Number of students participated in such activities": "20",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/EcQpgjHwKshEtor05IK9fmUBcw3rag47hN34DR499WcjOg?e=h49Xj6"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Safai Abhiyan (Cleanliness Drive) (Phase-1)",
-            "Date of the activity \nDD-MM-YYYY": "23.07.2024",
-            "Number of students participated in such activities": "20",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/Ecypk5DgVdxGgHrQHPCw_aYBnUzodRtSsXlonxM9D2EixA?e=c9SIYL"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Sanitation Awareness Workshop",
-            "Date of the activity \nDD-MM-YYYY": "24.07.2024",
-            "Number of students participated in such activities": "28",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/EYOoX66JUWNOrc-b2fQ4XUUBGMFe3dsozW0ymUp9aQednw?e=fT6X4I"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Education Awareness workshop",
-            "Date of the activity \nDD-MM-YYYY": "24.07.2024",
-            "Number of students participated in such activities": "28",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/EcAxgPw5sJxDldfBo_HpVhIBNaaULj_9OaEsOilWpQzWBg?e=Ih3kPN"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Personal hygiene & sanitation awareness workshop",
-            "Date of the activity \nDD-MM-YYYY": "25.07.2024",
-            "Number of students participated in such activities": "16",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/ESQ1KZGxwAdLrej-hk1BcOwBuLWC6i4RVakV_rBuOkRNOw?e=0MOJ6o"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "First-Aid training workshop (CPR)(Phase-1)",
-            "Date of the activity \nDD-MM-YYYY": "26.07.2024",
-            "Number of students participated in such activities": "23",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/EbP8V2rq_9FIhndFtRtq4JMB9O_x6-z1JQ1R7yKjQgBR8A?e=W0Gj5A"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Awareness workshop on waterborne diseases",
-            "Date of the activity \nDD-MM-YYYY": "27.07.2024",
-            "Number of students participated in such activities": "31",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/EQs1ITQQaHhDsaqqwcjVm0kB-TOicc3RD7t6TbOod1Y5VA?e=8ToJyi"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Mobile security workshop",
-            "Date of the activity \nDD-MM-YYYY": "29.07.2024",
-            "Number of students participated in such activities": "27",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/Ec9uFrsuK9ZEvv5_VxOQ3PgBPpsjRrzNRAKkt8xbbPAZPA?e=SRmCOA"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Workshops on Compost Making",
-            "Date of the activity \nDD-MM-YYYY": "30.07.2024",
-            "Number of students participated in such activities": "29",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/EfAHmvfYmNZAv6vV_k65gEEBEDIBvab83YwypDXUxBq16A?e=lIBIwq"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Water Management Workshop",
-            "Date of the activity \nDD-MM-YYYY": "31.07.2024",
-            "Number of students participated in such activities": "42",
-            "Web Links": "https://klunive:n-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/Ec9XmyFe9bdDhKBdEiYzuDkBK3I69T-ebRgkpUfopy3JBg?e=0gm9Qe"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Nutrition & diseases prevention workshop",
-            "Date of the activity \nDD-MM-YYYY": "05.08.2024",
-            "Number of students participated in such activities": "17",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/Edxaj9eVwgxOiki9-mNjnQkB1qgzdSAiEWCcX7iZ6xqW_Q?e=22dyUC"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Tree Care and maintenance seminar (Phase-1)",
-            "Date of the activity \nDD-MM-YYYY": "06.08.2024",
-            "Number of students participated in such activities": "22",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/Ecs4NwE5Y-9BiEOl3rh4aCQBaqekL-ae0FsrybvXE3qvFQ?e=0hYXbL"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Safai Abhiyan (Cleanliness Drive) (Phase-2)",
-            "Date of the activity \nDD-MM-YYYY": "07.08.2024",
-            "Number of students participated in such activities": "45",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/EVYEhp9VBLlHqXGSOscGl4gB_Mf1kX2EeIXFof8KjSlc2g?e=nn3m9F"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Rainwater Harvesting Techniques Workshop",
-            "Date of the activity \nDD-MM-YYYY": "08.08.2024",
-            "Number of students participated in such activities": "35",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/EeNYkLT3Z99Mk2y5KZZTrfsBmQ2oY3fdXeGrzXJdwn-hVw?e=EBw5Vp"
-        },
-        // {
-        //     "Year": "2023-2024",
-        //     "Name of the activity": "Campus Greening Workshop",
-        //     "Date of the activity \nDD-MM-YYYY": "10.08.2024",
-        //     "Number of students participated in such activities": "35",
-        //     "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/2300040028_kluniversity_in/EXD3bON2H6BNm5c4XBBj-pIBPQ7frO7cGRQQGCdKOABQJQ?e=kDoxlB"
-        // },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Triksharopam Mahotsav (Tree Plantation) (Phase-3)",
-            "Date of the activity \nDD-MM-YYYY": "02-09-2024",
-            "Number of students participated in such activities": "20",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/EXGuJLvtqNVPgY6RrKTX4r0BJudODSkWG2MfQk7WZDNltg?e=R0oRRf"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Tree Adoption Campaign (Phase-1)",
-            "Date of the activity \nDD-MM-YYYY": "03-09-2024",
-            "Number of students participated in such activities": "20",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/ERIC_EzKmyFDrR945clzO9cB1gZOjbjFjRZq1MhRs6GPKQ?e=GSEIQF"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Waste Management Workshop",
-            "Date of the activity \nDD-MM-YYYY": "04-09-2024",
-            "Number of students participated in such activities": "43",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/ERbqK-WEYtxOr5c404rIZtsBHB7Ut1kkknLKQ7X1s3jV7Q?e=zq8D52"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Toilet Design Innovative Challenge",
-            "Date of the activity \nDD-MM-YYYY": "09-09-2024",
-            "Number of students participated in such activities": "27",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/ES0mb8p4peZIm4TzRYAc2sgB9infLi9dMRF7qkOQ2R7srg?e=3TIBIE"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Health Check-ups on Diabetics and Malnutrition",
-            "Date of the activity \nDD-MM-YYYY": "11-09-2024",
-            "Number of students participated in such activities": "22",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/EWTEn_FDjR5Figm_SzKrzuwBDw5YZ69gx9uD9z3xigf7XQ?e=0PzClE"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Vaccination Drive (Phase-2)",
-            "Date of the activity \nDD-MM-YYYY": "16-09-2024",
-            "Number of students participated in such activities": "16",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/EX8uI91-ZEFMkVNQEk89eVEB4T8fiNR6Wg2r4rqjzsNspA?e=ASgP4w"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Water Saving Practices Campaign (Phase-1)",
-            "Date of the activity \nDD-MM-YYYY": "18-09-2024",
-            "Number of students participated in such activities": "26",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/EcdOqMactABAgDNc-wURY6MBEHIjjrUiIK7IzS-59_gGOA?e=BIzcGZ"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Workshop on Phishing & Malware",
-            "Date of the activity \nDD-MM-YYYY": "23-09-2024",
-            "Number of students participated in such activities": "52",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/:b:/g/personal/brambabu_kluniversity_in/EfWnhbOTMZRCggI0AGSVZlkBFvBF0zBVcW93vfqiWfpmVw?e=q3swp0"
-        },
-        {
-            "Year": "2022-23",
-            "Name of the activity": "Technical Solutions by Students",
-            "Date of the activity \nDD-MM-YYYY": "05-02-2022",
-            "Number of students participated in such activities": "71",
-            "Web Links": "https://drive.google.com/file/d/1_eBi5x4nwralHW3wQ2G9im-JahLKgRoU/view?usp=sharing"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Clean water Sanitation",
-            "Date of the activity \nDD-MM-YYYY": "10-08-2024",
-            "Number of students participated in such activities": "71",
-            "Web Links": "https://drive.google.com/file/d/1_eBi5x4nwralHW3wQ2G9im-JahLKgRoU/view?usp=sharing"
-        },
-        {
-            "Year": "2023-24",
-            "Name of the activity": "Green School Program",
-            "Date of the activity \nDD-MM-YYYY": "10-03-2024",
-            "Number of students participated in such activities": "59",
-            "Web Links": "https://drive.google.com/file/d/17hX2HlYy09weiYeI5nJjIQ8T1_Y8HwNC/view?usp=sharing"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "Workshop on stress management",
-            "Date of the activity \nDD-MM-YYYY": "17-02-2025",
-            "Number of students participated in such activities": "48",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2Fworkshop%20on%20Workshop%20On%20Stress%20management%20%26%20Anxiety%2Epdf"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "Workshop on Rain water Harvesting Techniques",
-            "Date of the activity \nDD-MM-YYYY": "28-02-2025",
-            "Number of students participated in such activities": "48",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2Fworkshop%20on%20Rain%20water%20Harvesting%20Techniques%20%281%29%2Epdf"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "Water Saving Practices Campaign",
-            "Date of the activity \nDD-MM-YYYY": "24-02-2025",
-            "Number of students participated in such activities": "20",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2Fwater%20saving%20practices%20campaign%2Epdf"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "Vriksharopam Mahotsav",
-            "Date of the activity \nDD-MM-YYYY": "14-02-2025",
-            "Number of students participated in such activities": "35",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2Fvriksharopam%20Mahostsav%2Epdf"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "Training on Internet safety",
-            "Date of the activity \nDD-MM-YYYY": "28-02-2025",
-            "Number of students participated in such activities": "41",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2Ftraining%20on%20Internet%20safety%2Epdf"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "Toilet sanitation awareness program",
-            "Date of the activity \nDD-MM-YYYY": "15-02-2025",
-            "Number of students participated in such activities": "50",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2FToilet%20sanitation%20Awareness%20programs%2Epdf"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "Role of Women in Agriculture",
-            "Date of the activity \nDD-MM-YYYY": "28-02-2025",
-            "Number of students participated in such activities": "20",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2Fprogram%20on%20Role%20of%20women%20in%20agriculture%20%281%29%20%281%29%2Epdf"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "Library Development Program",
-            "Date of the activity \nDD-MM-YYYY": "15-02-2025",
-            "Number of students participated in such activities": "50",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2FLibrary%20development%20program%2Epdf"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "First-aid training workshop",
-            "Date of the activity \nDD-MM-YYYY": "21-02-2025",
-            "Number of students participated in such activities": "1000",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2FFirst%20%2D%20aid%20Training%20workshop%20%28CPR%29%2Epdf"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "Farm Machinery Demonstration",
-            "Date of the activity \nDD-MM-YYYY": "24-02-2025",
-            "Number of students participated in such activities": "27",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2FFarm%20machinery%20Demonstration%2Epdf"
-        },
-        {
-            "Year": "2024-25",
-            "Name of the activity": "Computer literacy and skill training Program",
-            "Date of the activity \nDD-MM-YYYY": "17-02-2025",
-            "Number of students participated in such activities": "22",
-            "Web Links": "https://kluniversityin-my.sharepoint.com/personal/venkatasatyanarayana_kluniversity_in/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fvenkatasatyanarayana%5Fkluniversity%5Fin%2FDocuments%2F2024%2D25%20SVR%20REPORTS%2Fcomputer%20Literacy%20and%20skills%20Training%2Epdf"
         }
 
 ];

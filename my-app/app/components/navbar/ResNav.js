@@ -81,7 +81,7 @@ const ResNavbar = () => {
                         <Link href='https://sac.kluniversity.in' passHref={true} target='_blank'>KL SAC</Link>
                     </div>
                     <div className="Res-navigation-six">
-                        <Link href='/internship' passHref={true} target='_blank'>Social Internship</Link>
+                        <Link href='https://socialinternship.kluniversity.in' passHref={true} target='_blank'>Social Internship</Link>
                     </div>
                 </div>
             </div>

@@ -82,7 +82,7 @@ const Navbar = () => {
                         <Link className="navbar-options" href="/gallery">Gallery</Link>
                         <Link className="navbar-options" href="/news">News</Link>
                         <Link className='navbar-options' href='https://sac.kluniversity.in' passHref={true} target='_blank'>KL SAC</Link>
-                        <Link className='navbar-options' href='/internship'>Social Internship</Link>
+                        <Link className='navbar-options' href='https://socialinternship.kluniversity.in'>Social Internship</Link>
                     </div>
                 </div>
             </div>
