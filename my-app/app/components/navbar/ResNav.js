@@ -17,7 +17,7 @@ const ResNavbar = () => {
     }
 
 
-  return (
+    return (
         <div className="ResNavbar-Component">
             <div className="ResNav-in">
                 <div className="ResNav-one">
@@ -34,11 +34,11 @@ const ResNavbar = () => {
                             to="home-two"
                             spy={true}
                             smooth={true}
-                            offset={-70} 
+                            offset={-70}
                             duration={500}
                             onClick={handleClick}
                         >
-                        About
+                            About
                         </Scroll>
                     </div>
                     <div className="Res-navigation-two">
@@ -46,11 +46,11 @@ const ResNavbar = () => {
                             to="home-seven"
                             spy={true}
                             smooth={true}
-                            offset={-70} 
+                            offset={-70}
                             duration={500}
                             onClick={handleClick}
                         >
-                        Our Work
+                            Our Work
                         </Scroll>
                     </div>
                     <div className="Res-navigation-three">
@@ -58,11 +58,11 @@ const ResNavbar = () => {
                             to="home-eight"
                             spy={true}
                             smooth={true}
-                            offset={-70} 
+                            offset={-70}
                             duration={500}
                             onClick={handleClick}
                         >
-                        Annual Report
+                            Annual Report
                         </Scroll>
                     </div>
                     <div className="Res-navigation-four">
@@ -70,11 +70,11 @@ const ResNavbar = () => {
                             to="home-nine"
                             spy={true}
                             smooth={true}
-                            offset={-70} 
+                            offset={-70}
                             duration={500}
                             onClick={handleClick}
                         >
-                        Team
+                            Team
                         </Scroll>
                     </div>
                     <div className="Res-navigation-five">
@@ -83,10 +83,13 @@ const ResNavbar = () => {
                     <div className="Res-navigation-six">
                         <Link href='https://socialinternship.kluniversity.in' passHref={true} target='_blank'>Social Internship</Link>
                     </div>
+                    <div className="Res-navigation-seven">
+                        <Link href='/GOP'>GOP</Link>
+                    </div>
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default ResNavbar

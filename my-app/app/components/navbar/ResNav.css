@@ -53,7 +53,7 @@
         transform: translateY(-50%);
     }
 
-     100% {
+    100% {
         transform: translateY(0%);
     }
 }
@@ -85,5 +85,13 @@
 }
 
 .Res-navigation-five {
+    padding: 1rem;
+}
+
+.Res-navigation-six {
+    padding: 1rem;
+}
+
+.Res-navigation-seven {
     padding: 1rem;
 }

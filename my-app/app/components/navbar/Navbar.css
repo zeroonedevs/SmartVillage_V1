@@ -1,71 +1,113 @@
 .NavBar {
-    width: 100%;
-    position: fixed;
-    padding: 2rem 0rem 0rem 0rem;
-    z-index: 99;
-  }
-  
-  .NavBar-in {
-    width: 96%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: .5rem 1rem;
-    /* background-color: rgb(245, 239, 239);
+  width: 100%;
+  position: fixed;
+  padding: 2rem 0rem 0rem 0rem;
+  z-index: 99;
+}
+
+.NavBar-in {
+  width: 96%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 1rem;
+  /* background-color: rgb(245, 239, 239);
     border: 2px solid green; */
-    /* background-color: rgb(0, 128, 0, 0.2); */
-    background-color: rgb(245, 245, 245, 0.7);
-    border: 2px solid green;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 2rem;
-    animation: scrolling .2s linear;
-    backdrop-filter: blur(6px);
+  /* background-color: rgb(0, 128, 0, 0.2); */
+  background-color: rgb(245, 245, 245, 0.7);
+  border: 2px solid green;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 2rem;
+  animation: scrolling .2s linear;
+  backdrop-filter: blur(6px);
+}
+
+@keyframes scrolling {
+  0% {
+    transform: translateY(-40%);
   }
 
-  @keyframes scrolling {
-    0% {
-      transform: translateY(-40%);
-    }
-    100% {
-      transform: translateY(0%);
-    }
+  100% {
+    transform: translateY(0%);
   }
+}
 
-  .NavBar-in-one-in h1 {
-    color: green;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
+.NavBar-in-one-in h1 {
+  color: green;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
 
-  .NavBar-in-one-in span {
-    color: orange;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
+.NavBar-in-one-in span {
+  color: orange;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
 
 
-  .NavBar-in-one {
-    width: 50%;
-  }
-  
-  .NavBar-in-two {
-    width: 70%;
-  }
-  
-  .NavBar-in-two-in {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  
-  .NavBar-in-two-in a.active {
-   
-    color: black;
-  }
+.NavBar-in-one {
+  width: 25%;
+}
 
-  .navbar-options:hover {
-    cursor: pointer;
-    color: green;
-  }
+.NavBar-in-two {
+  width: 75%;
+}
+
+.NavBar-in-two-in {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+}
+
+.NavBar-in-two-in a.active {
+
+  color: black;
+}
+
+.navbar-options:hover {
+  cursor: pointer;
+  color: green;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  min-width: 150px;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+.dropdown-content a {
+  padding: 10px 15px;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: green;
+  color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.NavBar-in-two-in a,
+.NavBar-in-two-in .dropdown {
+  white-space: nowrap;
+}

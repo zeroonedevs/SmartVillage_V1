@@ -14,8 +14,8 @@ const HomeNavbar = () => {
           <div className="HomeNavBar-in-one-in">
             <div className="HomeNavBar-in-one-in-one">
               <Image
-                src={SVRLogo} 
-                className='SVRLogo' 
+                src={SVRLogo}
+                className='SVRLogo'
                 width={200}
                 height={200}
                 alt=""
@@ -25,9 +25,9 @@ const HomeNavbar = () => {
             <div className="HomeNavBar-in-one-in-two">
               <Link href={"https://kluniversity.in"} legacyBehavior className='HomeNavBar-in-one-in-logo'>
                 <a target="_blank" rel="noopener noreferrer">
-                  <Image 
+                  <Image
                     className='HomeNavBar-in-one-in-logo-image'
-                    src={KLLogo} 
+                    src={KLLogo}
                     alt="KL Logo"
                     width={200}
                     height={200}
@@ -44,7 +44,7 @@ const HomeNavbar = () => {
               to="home-seven"
               spy={true}
               smooth={true}
-              offset={-70} 
+              offset={-70}
               duration={500}
             >
               Our Work
@@ -54,7 +54,7 @@ const HomeNavbar = () => {
               to="home-eight"
               spy={true}
               smooth={true}
-              offset={-70} 
+              offset={-70}
               duration={500}
             >
               Annual Report
@@ -64,7 +64,7 @@ const HomeNavbar = () => {
               to="home-eight"
               spy={true}
               smooth={true}
-              offset={-70} 
+              offset={-70}
               duration={500}
             >
               Parameters
@@ -76,10 +76,15 @@ const HomeNavbar = () => {
             <Link className="HomeNavBar-in-two-in-scroll" href="/news">
               News
             </Link>
-            <Link 
+            <Link
               className="HomeNavBar-in-two-in-scroll"
               href='https://sac-kluniversity.vercel.app' passHref={true} target='_blank'>
               KL SAC
+            </Link>
+            <Link
+              className="HomeNavBar-in-two-in-scroll"
+              href='/GOP'>
+              GOP
             </Link>
           </div>
         </div>
