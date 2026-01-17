@@ -2,9 +2,6 @@
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Navbar from "../../../components/navbar/Navbar";
-import ResNavbar from "../../../components/navbar/ResNav";
-import Footer from "../../../components/footer/Footer";
 
 const GOPLogin = () => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -44,10 +41,7 @@ const GOPLogin = () => {
 
     return (
         <div className="w-full min-h-screen bg-green-50 font-[Poppins]">
-            <div className="Navbar block"><Navbar /></div>
-            <div className="Navbar-Res hidden"><ResNavbar /></div>
-
-            <div className="flex flex-col items-center justify-center min-h-screen pt-20 px-4">
+            <div className="flex flex-col items-center justify-center min-h-screen px-4">
                 <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border-t-4 border-green-600">
                     <h1 className="text-2xl font-bold text-center text-green-700 mb-6">
                         Admin Login
@@ -97,7 +91,6 @@ const GOPLogin = () => {
                     </form>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };
