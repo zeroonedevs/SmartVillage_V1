@@ -345,7 +345,41 @@ const GOPRegistration = () => {
                                 </div>
 
                                 {/* Program Brochure Coming Soon */}
-                                {formData.tenure && (
+                                {formData.tenure === '3 Days' ? (
+                                    <div className="space-y-4">
+                                        <div className="p-4 bg-green-50 border border-green-200 rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                            <div className="flex items-center space-x-3">
+                                                <span className="text-2xl">📄</span>
+                                                <div>
+                                                    <h3 className="font-medium text-gray-800">Program Brochure ({formData.tenure})</h3>
+                                                    <p className="text-sm text-gray-600">View details for the 3-day program.</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex space-x-3">
+                                                <a
+                                                    href="/GOP_3days.pdf"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex-1 md:flex-none text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+                                                >
+                                                    View Full
+                                                </a>
+                                                <a
+                                                    href="/GOP_3days.pdf"
+                                                    download="GOP_3days.pdf"
+                                                    className="flex-1 md:flex-none text-center px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition-colors text-sm font-medium"
+                                                >
+                                                    Download
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div className="w-full h-96 border rounded-lg overflow-hidden bg-gray-100 hidden md:block">
+                                            <iframe src="/GOP_3days.pdf" className="w-full h-full" title="GOP 3 Days Brochure">
+                                                <p>Your browser does not support iframes. <a href="/GOP_3days.pdf">Download the PDF</a>.</p>
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                ) : formData.tenure && (
                                     <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg flex items-center space-x-3">
                                         <span className="text-2xl">📄</span>
                                         <div>
@@ -465,7 +499,7 @@ const GOPRegistration = () => {
                             Phone: <a href="tel:+917330747502" className="text-green-600 hover:underline">+91 73307 47502</a>
                         </p>
                         <p>
-                            Email: <a href="mailto:saivijay.ceo@gmail.com" className="text-green-600 hover:underline">saivijay.ceo@gmail.com</a>
+                            Email: <a href="mailto:saivijay.ceo@gmail.com" className="text-green-600 hover:underline">saivijay.ceo@gmail.com</a>, <a href="mailto:director_sac@kluniversity.in" className="text-green-600 hover:underline">director_sac@kluniversity.in</a>
                         </p>
                     </div>
                 </div>
