@@ -11,7 +11,7 @@ const SvgAnimation = () => {
             path.style.strokeDasharray = `${length} ${length}`;
             path.style.strokeDashoffset = length;
             path.getBoundingClientRect(); // Trigger a reflow
-            path.style.transition = path.style.WebkitTransition = 'stroke-dashoffset 4s 0s ease-in-out';
+            path.style.transition = path.style.WebkitTransition = 'stroke-dashoffset 1.5s 0s ease-in-out';
             path.style.strokeDashoffset = '0';
         });
     };
@@ -24,7 +24,7 @@ const SvgAnimation = () => {
             path.style.strokeDasharray = `${length} ${length}`;
             path.style.strokeDashoffset = length;
             path.getBoundingClientRect(); // Trigger a reflow
-            path.style.transition = path.style.WebkitTransition = 'stroke-dashoffset 3s 1s ease-in-out';
+            path.style.transition = path.style.WebkitTransition = 'stroke-dashoffset 1s 0.4s ease-in-out';
             path.style.strokeDashoffset = '0';
         });
     };
@@ -37,7 +37,7 @@ const SvgAnimation = () => {
             path.style.strokeDasharray = `${length} ${length}`;
             path.style.strokeDashoffset = length;
             path.getBoundingClientRect(); // Trigger a reflow
-            path.style.transition = path.style.WebkitTransition = 'stroke-dashoffset 4s 2.5s ease-in-out';
+            path.style.transition = path.style.WebkitTransition = 'stroke-dashoffset 1.5s 1s ease-in-out';
             path.style.strokeDashoffset = '0';
         });
     };

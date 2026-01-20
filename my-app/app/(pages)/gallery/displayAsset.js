@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import ImageSkeleton from '../../components/ImageSkeleton/ImageSkeleton';
 import './page.css';
 
 const MultiImageDisplay = ({ imagePaths }) => {
@@ -17,7 +18,7 @@ const MultiImageDisplay = ({ imagePaths }) => {
       {imagePaths.map((image) => (
         <div key={image.id} className="image-item">
           {!loadedImages[image.id] && (
-            <div className="image-loading">Loading...</div>
+            <ImageSkeleton variant="gallery" />
           )}
           <img 
             src={image.url} 

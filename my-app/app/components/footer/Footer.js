@@ -31,39 +31,22 @@ const Footer = () => {
               <div className="Footer-two-in-two-in">
                 <div className="Footer-two-in-two-in-boxes">
                   <div className="Footer-two-in-two-in-boxes-in">
-                    <h3>Our collaborations with Programs</h3>
+                    <h3>Our Collaborations</h3>
                     <ul>
                       <li>
-                        <Link href="https://drive.google.com/file/d/1a-X9rWklMfXHZz10RdaTmsCVI3cwRdI8/view?usp=share_link" target='_blank' rel="noopener">Goverment of Andhra Pradesh</Link>
+                        <Link href="https://drive.google.com/file/d/1a-X9rWklMfXHZz10RdaTmsCVI3cwRdI8/view?usp=share_link" target='_blank' rel="noopener noreferrer">Government of Andhra Pradesh</Link>
                       </li>
                       <li>
-                        <Link href="https://saanjhi.gov.in" legacyBehavior>
-                          <a target="_blank" rel="noopener noreferrer">Sansad Adarsh Gram Yojana</a>
-                        </Link>
+                        <Link href="https://saanjhi.gov.in" target="_blank" rel="noopener noreferrer">Sansad Adarsh Gram Yojana</Link>
                       </li>
                       <li>
-                        <Link href="http://graam.org.in" legacyBehavior>
-                        <a target="_blank" rel="noopener noreferrer">GRAAM</a>
-                        </Link>
+                        <Link href="http://graam.org.in" target="_blank" rel="noopener noreferrer">GRAAM</Link>
                       </li>
                       <li>
                         <Link href="https://sac.kluniversity.in/" target="_blank" rel="noopener noreferrer">KL SAC</Link>
                       </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="Footer-two-in-two-in-boxes">
-                  <div className="Footer-two-in-two-in-boxes-in">
-                    <h3>Contact Us</h3>
-                    <ul>
                       <li>
-                        <Link href="https://www.instagram.com/klusac_svr?igsh=eDVmZWNpeHR5N2h5" target="_blank" rel="noopener noreferrer"><FaInstagram /> Instagram</Link>
-                      </li>
-                      <li>
-                        <Link href="https://t.me/y23_svr_sac" target="_blank" rel="noopener noreferrer"><FaTelegram /> Telegram</Link>
-                      </li>
-                      <li>
-                        <Link href="https://www.youtube.com/watch?v=q9R8qWt3fmY" target="_blank" rel="noopener noreferrer"><FaYoutube /> Youtube</Link>
+                        <Link href='https://socialinternship.kluniversity.in' target="_blank" rel="noopener noreferrer">Social Internship</Link>
                       </li>
                     </ul>
                   </div>
@@ -82,30 +65,46 @@ const Footer = () => {
                         <ScrollLink to="home-five" offset={-70} smooth={true} duration={600}>Parameters</ScrollLink>
                       </li>
                       <li>
-                        <ScrollLink to="home-eight" offset={-70} smooth={true} duration={600}>Annual Reports</ScrollLink>
-                      </li>
-                      {/* <li>
-                        <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.kluniversity.in/AQAR1819/SV.pdf&ved=2ahUKEwiazc3rrIGIAxUXklYBHfDTB-cQFnoECBUQAQ&usg=AOvVaw2FAQC3fzLhntiGTqlCW4vx" target="_blank" rel="noopener noreferrer">Past Year Reports</a>
-                      </li> */}
-                      <li>
-                        <Link href='https://drive.google.com/file/d/1RdP4R6HnP5pt2cmLxvEKg6uilsyTVWZQ/view?usp=share_link'> Awards List</Link>
+                        <Link href='/gallery'>Gallery</Link>
                       </li>
                       <li>
-                        <Link href='https://drive.google.com/file/d/1hqXfW0VcCbDN8Dz_QDi3UuzMU1h7z96I/view?usp=share_link'>Village Adopted</Link>
+                        <Link href='/news'>News</Link>
                       </li>
                       <li>
-                        <Link href='https://drive.google.com/file/d/1pi69cRuq_VUAc60UQ4v0USRNugUPoQhm/view?usp=share_link'>List of staff</Link>
-                      </li>
-                      <li>
-                        <Link href='/gallery'> Gallery</Link>
-                      </li>
-                      <li>
-                        <Link href='/news'> News</Link>
-                      </li>
-                      <li>
-                        <Link href='/internship'>Social Internship</Link>
+                        <Link href='/GOP'>GOP</Link>
                       </li>
                     </ul>
+                  </div>
+                </div>
+                <div className="Footer-two-in-two-in-boxes">
+                  <div className="Footer-two-in-two-in-boxes-in">
+                    <h3>Resources</h3>
+                    <ul>
+                      <li>
+                        <ScrollLink to="home-eight" offset={-70} smooth={true} duration={600}>Annual Reports</ScrollLink>
+                      </li>
+                      <li>
+                        <Link href='https://drive.google.com/file/d/1RdP4R6HnP5pt2cmLxvEKg6uilsyTVWZQ/view?usp=share_link' target="_blank" rel="noopener noreferrer">Awards List</Link>
+                      </li>
+                      <li>
+                        <Link href='https://drive.google.com/file/d/1hqXfW0VcCbDN8Dz_QDi3UuzMU1h7z96I/view?usp=share_link' target="_blank" rel="noopener noreferrer">Villages Adopted</Link>
+                      </li>
+                      <li>
+                        <Link href='https://drive.google.com/file/d/1pi69cRuq_VUAc60UQ4v0USRNugUPoQhm/view?usp=share_link' target="_blank" rel="noopener noreferrer">List of Staff</Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="Footer-two-in-two-in-boxes">
+                  <div className="Footer-two-in-two-in-boxes-in">
+                    <h3>Contact</h3>
+                    <p className="footer-address">
+                      <strong>KL SAC</strong><br />
+                      K L Deemed to be University<br />
+                      Vaddeswaram, Guntur Dist.<br />
+                      Andhra Pradesh - 522302<br />
+                      <Link href="mailto:sac@kluniversity.in">sac@kluniversity.in</Link>
+                    </p>
                   </div>
                 </div>
               </div>

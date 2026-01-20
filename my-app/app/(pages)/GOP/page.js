@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
-import Navbar from "../../components/navbar/Navbar";
-import ResNavbar from "../../components/navbar/ResNav";
+import Navigation from "../../components/Navigation/Navigation";
 import Footer from "../../components/footer/Footer";
 import { countries } from '../../data/countries';
 
@@ -128,8 +127,7 @@ const GOPRegistration = () => {
 
     return (
         <div className="w-full min-h-screen bg-green-50">
-            <div className="Navbar block"><Navbar /></div>
-            <div className="Navbar-Res hidden"><ResNavbar /></div>
+            <Navigation />
 
             <div className="max-w-4xl mx-auto px-4 py-12 pt-32">
                 <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-green-600">
