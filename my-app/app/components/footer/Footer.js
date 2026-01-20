@@ -114,8 +114,27 @@ const Footer = () => {  const currentYear = new Date().getFullYear();
         </div>
         <div className="Footer-last">
           <div className="Footer-last-in">
-            <p>© {currentYear} Smart Village Revolution. All rights reserved.</p>
-            <p>This site is designed, developed, and maintained by <a href="https://www.linkedin.com/company/zeroonecodeclub/mycompany/">ZeroOne Code Club</a>, Department of Student Activity Center, KLEF(Deemed to be University) | Content owned by Smart Village Revolution.</p>
+            <div className="footer-copyright">
+              <div className="footer-copyright-left">
+                <p className="copyright-text">© {currentYear} Smart Village Revolution. All rights reserved.</p>
+                <p className="footer-credits">
+                  Designed & Developed by <a href="https://www.linkedin.com/company/zeroonecodeclub/mycompany/" target="_blank" rel="noopener noreferrer">ZeroOne Code Club</a>
+                </p>
+              </div>
+              <div className="footer-copyright-right">
+                <div className="footer-social">
+                  <a href="https://www.instagram.com/klusac_svr?igsh=eDVmZWNpeHR5N2h5" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <FaInstagram />
+                  </a>
+                  <a href="https://t.me/y23_svr_sac" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                    <FaTelegram />
+                  </a>
+                  <a href="https://www.youtube.com/watch?v=q9R8qWt3fmY" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    <FaYoutube />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
