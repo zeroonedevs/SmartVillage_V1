@@ -6,6 +6,8 @@ import Model from "./components/modal/modal";
 import { TbExternalLink } from "react-icons/tb";
 import Link from "next/link";
 
+
+
 import HeroSection from "./components/homeHero/page";
 import PlantAnimation from "./components/animation/Plant";
 import Navigation from "./components/Navigation/Navigation";
