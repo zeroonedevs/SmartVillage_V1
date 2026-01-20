@@ -5,9 +5,8 @@ export async function POST(request) {
     try {
         const { username, password } = await request.json();
 
-        // Hardcoded credentials as requested by the user
-        const VALID_USER = 'admin@svr.gop';
-        const VALID_PASS = 'admin123';
+        const VALID_USER = process.env.ADMIN_EMAIL;
+        const VALID_PASS = process.env.ADMIN_PASSWORD;
 
         if (username === VALID_USER && password === VALID_PASS) {
             // Create a response with a success message

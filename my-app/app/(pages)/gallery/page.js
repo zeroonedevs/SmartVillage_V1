@@ -6,6 +6,7 @@ import Footer from "../../components/SmallFooter/footer";
 import "./page.css";
 import { FaArrowLeft } from "react-icons/fa";
 import { galleryImages } from "./image.js";
+import GalleryHeroImage from "../../Assets/GalleryImage.jpeg";
 
 const backToHome = () => {
   window.location.href = "/";
@@ -21,7 +22,6 @@ const App = () => {
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [visibleCount, setVisibleCount] = useState(12);
   const [selectedDomain, setSelectedDomain] = useState("All");
-  const heroImagePath = "gallery/GalleryImage.jpeg";
 
   // Get unique domains from the gallery images
   const domains = ["All", ...Array.from(new Set(galleryImages.map((img) => img.domain)))];
@@ -68,7 +68,7 @@ const App = () => {
     <div className="gallery">
       <div className="gallery-main">
         <div className="hero-image">
-          <HeroImage imagePath={heroImagePath} />
+          <HeroImage imagePath={GalleryHeroImage.src} />
         </div>
         <div className="g-one">
           <div className="g-one-in">

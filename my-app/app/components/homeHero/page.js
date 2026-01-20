@@ -15,7 +15,7 @@ import "./page.css";
 
 const HeroSection = () => {
   const [images, setImages] = useState([]);
-  const [imageInfo, setImageInfo] = useState([]); // State for additional image info
+  const [imageInfo, setImageInfo] = useState([]); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -74,12 +74,8 @@ const HeroSection = () => {
                     src={image.url}
                     alt={`Image ${index}`}
                   />
-                  <div className="swiper-description">
-                    <p>{image.description}</p>
-                  </div>
-                  {/* Add the one-liner info from the separate array */}
                   <div className="image-info">
-                    <p>{imageInfo[index]}</p> {/* Accessing corresponding info */}
+                    <p>{imageInfo[index]}</p> 
                   </div>
                 </div>
               </SwiperSlide>
