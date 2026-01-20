@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
-import Navigation from "../../components/Navigation/Navigation";
+import Link from "next/link";
 import Footer from "../../components/footer/Footer";
 import { countries } from '../../data/countries';
 
@@ -126,10 +126,15 @@ const GOPRegistration = () => {
     };
 
     return (
-        <div className="w-full min-h-screen bg-green-50">
-            <Navigation />
+        <div className="w-full min-h-screen bg-green-50 relative">
+            <Link href="/" className="absolute top-6 left-6 flex items-center space-x-2 text-green-700 hover:text-green-900 transition-colors font-medium z-50">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span>Back to Home</span>
+            </Link>
 
-            <div className="max-w-4xl mx-auto px-4 py-12 pt-32">
+            <div className="max-w-4xl mx-auto px-4 py-12 pt-20 md:pt-24">
                 <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-green-600">
                     <h1 className="text-3xl font-bold text-center text-green-700 mb-2 font-[Poppins]">
                         Global Outreach Program (GOP)
