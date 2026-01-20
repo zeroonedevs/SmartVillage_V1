@@ -27,14 +27,6 @@ img{
   font-family: 'Poppins', sans-serif;
 }
 
-.Navbar-Res {
-  display: none;
-}
-
-.Navbar {
-  display: block;
-}
-
 .home-component {
   width: 100%;
 }
@@ -1038,14 +1030,6 @@ img{
 
     html {
       background-image: none;
-    }
-
-    .Navbar {
-        display: none;
-    }
-
-    .Navbar-Res {
-      display: block;
     }
 
     .hero {

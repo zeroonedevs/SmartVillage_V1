@@ -8,14 +8,13 @@ import Link from "next/link";
 
 import HeroSection from "./components/homeHero/page";
 import PlantAnimation from "./components/animation/Plant";
-import Navbar from "./components/navbar/Navbar";
-import HomeNavbar from "./components/navbar/HomeNavbar";
-import ResNavbar from "./components/navbar/ResNav";
+import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/footer/Footer";
+import ImageSkeleton from "./components/ImageSkeleton/ImageSkeleton";
 
 import "./globals.css";
 
-import SVR_Image_1 from "./Assets/IMG_8078.JPG";
+import SVR_Image_1 from "./Assets/IMG_8078.jpg";
 import SVR_UpdateImage_1 from "./Assets/Updated Images/Agriculture.png";
 import SVR_UpdateImage_2 from "./Assets/Updated Images/Education.png";
 import SVR_UpdateImage_3 from "./Assets/Updated Images/Health .png";
@@ -31,6 +30,7 @@ import SVR_UpdateImage_20 from "./Assets/NewDigi.png";
 import VijaySirUpdated from "./Assets/Updated Images/SAC_Director_Updated.png";
 import President from "./Assets/President.jpeg";
 import Modi from "./Assets/Modi.jpeg";
+import AnnualReportImage from "../public/hero/1president.jpg";
 import communityInfrastructure from "./Assets/communityInfrastructure.png";
 import culturalExchange from "./Assets/culturalExchange.png";
 
@@ -53,9 +53,7 @@ const ImageWithLoading = ({ src, alt, priority = false, ...props }) => {
 };
 
 export default function Home() {
-  const [showNavbar, setShowNavbar] = useState(false);
   const [num, setNum] = useState(1);
-  let scroll = 0;
   //-----------------------For Modal------------------------//
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
@@ -66,28 +64,15 @@ export default function Home() {
   };
   const OpenLink = () => {
     window.open("https://firebasestorage.googleapis.com/v0/b/svrwebsite-1e892.appspot.com/o/PDFS%2FSVR.pdf?alt=media&token=39c8fe16-79c6-495d-b424-611285e88264", "_blank");
-  }
+  };
+  //-----------------------For Modal END------------------------//
 
-  //---------------------for Nav scroll----------------//
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      scroll = window.scrollY;
-      if (window.scrollY > 300) {
-        setShowNavbar(true);
-      } else {
-        setShowNavbar(false);
-      }
-    });
-  }, []);
   const handleClick = (Num) => {
     setNum(Num);
   };
 
   // ---------- Boot Animation ------------
-
   const [showAnimation, setShowAnimation] = useState(true);
-
-  // make this animation only once
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -95,7 +80,6 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, []);
-
   // ---------- Boot Animation END ------------
   
   const handleDomainClick = (domain) => {
@@ -107,10 +91,7 @@ export default function Home() {
   ) : (
     <div className="home-component">
       <div className="home-container">
-        <div className="Navbar">{showNavbar ? <Navbar /> : <HomeNavbar />}</div>
-        <div className="Navbar-Res">
-          <ResNavbar />
-        </div>
+        <Navigation />
 
         <HeroSection />
 
@@ -361,8 +342,16 @@ export default function Home() {
             <div className="home-eight-one">
               <div className="home-eight-one-in">
                 <div className="home-eight-one-in-book">
-                  {/* <Book/> */}
-                  <img src= "https://firebasestorage.googleapis.com/v0/b/svrwebsite-1e892.appspot.com/o/BookFlip%2F1.png?alt=media&token=95cf0077-bf1a-4e73-b426-acce93e5e9ac" alt="" />
+                  <Image 
+                    src={AnnualReportImage}
+                    alt="Annual Report"
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'contain'
+                    }}
+                    priority
+                  />
                 </div>
               </div>
             </div>

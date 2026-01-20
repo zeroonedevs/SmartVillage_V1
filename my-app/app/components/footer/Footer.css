@@ -15,11 +15,10 @@
     padding: 2rem 0rem;
   }
   .Footer-one-in h1 {
-    color: black;
-    font-size: 1.5rem;
+    color: white;
+    font-size: 1.2rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
-    color: white;
   }
   .Footer-two {
     width: 100%;
@@ -73,18 +72,41 @@
   
   .Footer-two-in-two-in-boxes-in h3 {
     font-family: 'Poppins', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     color: orange;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
   }
+
+  .footer-address {
+    color: white;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .footer-address strong {
+    color: orange;
+    font-size: 1rem;
+  }
+
+  .footer-address a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .footer-address a:hover {
+    color: orange;
+  }
+
   .Footer-two-in-two-in-boxes-in ul li {
     list-style: none;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     color: white;
     width: 90%;
-    font-size: 1.3rem;
+    font-size: 0.95rem;
     cursor: pointer;
+    margin-bottom: 0.5rem;
   }
 
   .Footer-two-in-two-in-boxes-in ul li:hover{
