@@ -81,7 +81,7 @@ export default function Home() {
     }
   }, []);
   // ---------- Boot Animation END ------------
-  
+
   const handleDomainClick = (domain) => {
     window.location.href = `/gallery?domain=${encodeURIComponent(domain)}`;
   };
@@ -138,7 +138,7 @@ export default function Home() {
                         <div className="home-three-two-in-two-box-in-two-main">
                           <p>
                             <Link href="https://drive.google.com/file/d/1hqXfW0VcCbDN8Dz_QDi3UuzMU1h7z96I/view?usp=share_link">
-                            <span>Villages Adopted <TbExternalLink /> </span>
+                              <span>Villages Adopted <TbExternalLink /> </span>
                             </Link> by K L University
                             Under Smart Village Revolution Project
                           </p>
@@ -179,8 +179,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-              </div>
-            </div>
+          </div>
+        </div>
 
         <div className="home-two">
           <div className="home-two-in">
@@ -210,7 +210,7 @@ export default function Home() {
                     <div className="home-two-in-one-in-boxes">
                       <div className="home-two-in-one-in-boxes-in">
                         <div className="home-two-in-one-in-boxes-in-box">
-                        <div className="home-two-in-one-in-boxes-in">
+                          <div className="home-two-in-one-in-boxes-in">
                             {[
                               "Health & Hygiene",
                               "Agriculture",
@@ -251,103 +251,103 @@ export default function Home() {
             </div>
           </div>
         </div>
-  <div className="home-seven">
-    <div className="home-seven-in">
-      <div className="home-seven-in-header">
-        <div className="home-seven-in-header-in">
-          <h1>Areas of Work</h1>
-        </div>
-      </div>
-      <div className="home-seven-in-one">
-        <div className="home-seven-in-one-in">
-          <div className="home-seven-in-one-in-boxes">
-            <div className="home-seven-in-one-in-boxes-in">
-              <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Health & Hygiene")}>
-                <div className="home-seven-in-one-in-box-in">
-                  <Image src={SVR_UpdateImage_16} alt="Health & Hygiene" />
-                  <p>Health & Hygiene</p>
-                </div>
+        <div className="home-seven">
+          <div className="home-seven-in">
+            <div className="home-seven-in-header">
+              <div className="home-seven-in-header-in">
+                <h1>Areas of Work</h1>
               </div>
+            </div>
+            <div className="home-seven-in-one">
+              <div className="home-seven-in-one-in">
+                <div className="home-seven-in-one-in-boxes">
+                  <div className="home-seven-in-one-in-boxes-in">
+                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Health & Hygiene")}>
+                      <div className="home-seven-in-one-in-box-in">
+                        <Image src={SVR_UpdateImage_16} alt="Health & Hygiene" />
+                        <p>Health & Hygiene</p>
+                      </div>
+                    </div>
 
-              <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Quality Education")}>
-                <div className="home-seven-in-one-in-box-in">
-                  <Image src={AreasOfWork_Image_1} alt="Quality Education" />
-                  <p>Quality Education</p>
-                </div>
-              </div>
+                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Quality Education")}>
+                      <div className="home-seven-in-one-in-box-in">
+                        <Image src={AreasOfWork_Image_1} alt="Quality Education" />
+                        <p>Quality Education</p>
+                      </div>
+                    </div>
 
-              <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Agriculture")}>
-                <div className="home-seven-in-one-in-box-in">
-                  <Image src={AreasOfWork_Image_9} alt="Agriculture" />
-                  <p>Agriculture</p>
-                </div>
-              </div>
+                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Agriculture")}>
+                      <div className="home-seven-in-one-in-box-in">
+                        <Image src={AreasOfWork_Image_9} alt="Agriculture" />
+                        <p>Agriculture</p>
+                      </div>
+                    </div>
 
-              <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Village Infrastructure")}>
-                <div className="home-seven-in-one-in-box-in">
-                  <Image src={communityInfrastructure} alt="Village Infrastructure" />
-                  <p>Village Infrastructure</p>
-                </div>
-              </div>
+                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Village Infrastructure")}>
+                      <div className="home-seven-in-one-in-box-in">
+                        <Image src={communityInfrastructure} alt="Village Infrastructure" />
+                        <p>Village Infrastructure</p>
+                      </div>
+                    </div>
 
-              <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Social Community Actions")}>
-                <div className="home-seven-in-one-in-box-in">
-                  <Image src={AreasOfWork_Image_4} alt="Social Community Actions" />
-                  <p>Social Community Actions</p>
-                </div>
-              </div>
+                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Social Community Actions")}>
+                      <div className="home-seven-in-one-in-box-in">
+                        <Image src={AreasOfWork_Image_4} alt="Social Community Actions" />
+                        <p>Social Community Actions</p>
+                      </div>
+                    </div>
 
-              <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Women Empowerment")}>
-                <div className="home-seven-in-one-in-box-in">
-                  <Image src={SVR_UpdateImage_13} alt="Women Empowerment" />
-                  <p>Women Empowerment</p>
-                </div>
-              </div>
+                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Women Empowerment")}>
+                      <div className="home-seven-in-one-in-box-in">
+                        <Image src={SVR_UpdateImage_13} alt="Women Empowerment" />
+                        <p>Women Empowerment</p>
+                      </div>
+                    </div>
 
-              <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Livelihood Enhancement")}>
-                <div className="home-seven-in-one-in-box-in">
-                  <Image src={AreasOfWork_Image_8} alt="Livelihood Enhancement" />
-                  <p>Livelihood Enhancement</p>
-                </div>
-              </div>
+                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Livelihood Enhancement")}>
+                      <div className="home-seven-in-one-in-box-in">
+                        <Image src={AreasOfWork_Image_8} alt="Livelihood Enhancement" />
+                        <p>Livelihood Enhancement</p>
+                      </div>
+                    </div>
 
-              <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Digital Literacy")}>
-                <div className="home-seven-in-one-in-box-in">
-                  <Image src={SVR_UpdateImage_20} alt="Digital Literacy" />
-                  <p>Digital Literacy</p>
-                </div>
-              </div>
+                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Digital Literacy")}>
+                      <div className="home-seven-in-one-in-box-in">
+                        <Image src={SVR_UpdateImage_20} alt="Digital Literacy" />
+                        <p>Digital Literacy</p>
+                      </div>
+                    </div>
 
-              <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Green Innovation")}>
-                <div className="home-seven-in-one-in-box-in">
-                  <Image src={AreasOfWork_Image_6} alt="Green Innovation" />
-                  <p>Green Innovation</p>
-                </div>
-              </div>
+                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Green Innovation")}>
+                      <div className="home-seven-in-one-in-box-in">
+                        <Image src={AreasOfWork_Image_6} alt="Green Innovation" />
+                        <p>Green Innovation</p>
+                      </div>
+                    </div>
 
-              <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Cultural Exchange")}>
-                <div className="home-seven-in-one-in-box-in">
-                  <Image src={culturalExchange} alt="Cultural Exchange" />
-                  <p>Cultural Exchange</p>
+                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Cultural Exchange")}>
+                      <div className="home-seven-in-one-in-box-in">
+                        <Image src={culturalExchange} alt="Cultural Exchange" />
+                        <p>Cultural Exchange</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
         <div className="home-eight">
           <div className="home-eight-in">
             <div className="home-eight-one">
               <div className="home-eight-one-in">
                 <div className="home-eight-one-in-book">
-                  <Image 
+                  <Image
                     src={AnnualReportImage}
                     alt="Annual Report"
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
+                    style={{
+                      width: '100%',
+                      height: '100%',
                       objectFit: 'contain'
                     }}
                     priority
@@ -358,39 +358,39 @@ export default function Home() {
             <div className="home-eight-two">
               <div className="home-eight-two-in">
                 <h1>
-                 Overall Annual Reports : Smart Village Revolution
+                  Overall Annual Reports : Smart Village Revolution
                 </h1>
                 <p>
                   Empowering Futures: A Journey of Impact and Growth – Annual
                   Reports of Smart Village Revolution from past years
                 </p>
                 <div className="home-eight-two-in-buttons">
-                      <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1Gt-D_i7NwEHnQ0xRzdhlhJJOpCpJmfde/view" target="_blank" rel="noopener noreferrer">
-                          2018-2020
-                      </a>
-                      <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1sf2RI5RhnJwnAspcmv7qIFEˀ1MgVwaD4v/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-                          2020-2021
-                      </a>
-                      <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1bVyvCPpnf8zdhiZ25AP2sS--UpyurMgB/view" target="_blank" rel="noopener noreferrer">
-                          2021-2022
-                      </a>
-                      <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1weldRzdMTCZsbsKKCwvZ559MB8fROn9_/view" target="_blank" rel="noopener noreferrer">
-                          2022-2023
-                      </a>
-                      <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1fX-LHDcBiq5y2dWYkh8keYELPJ2-l57v/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-                          2023-2024
-                      </a>
-                      <a className="home-eight-two-in-activitie-link" href="/activities" target="_blank" rel="noopener noreferrer">
-                          View Activities
-                      </a>
-                  </div>
+                  <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1Gt-D_i7NwEHnQ0xRzdhlhJJOpCpJmfde/view" target="_blank" rel="noopener noreferrer">
+                    2018-2020
+                  </a>
+                  <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1sf2RI5RhnJwnAspcmv7qIFEˀ1MgVwaD4v/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                    2020-2021
+                  </a>
+                  <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1bVyvCPpnf8zdhiZ25AP2sS--UpyurMgB/view" target="_blank" rel="noopener noreferrer">
+                    2021-2022
+                  </a>
+                  <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1weldRzdMTCZsbsKKCwvZ559MB8fROn9_/view" target="_blank" rel="noopener noreferrer">
+                    2022-2023
+                  </a>
+                  <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1fX-LHDcBiq5y2dWYkh8keYELPJ2-l57v/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                    2023-2024
+                  </a>
+                  <a className="home-eight-two-in-activitie-link" href="/activities" target="_blank" rel="noopener noreferrer">
+                    View Activities
+                  </a>
                 </div>
+              </div>
             </div>
-            </div>
-            <Model 
-            isOpen={isModalOpen} 
-            onClose={handleCloseModal} 
-            pdfUrl="/ReportPDFS/SVR_Book.pdf" 
+          </div>
+          <Model
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            pdfUrl="/ReportPDFS/SVR_Book.pdf"
           />
         </div>
 
@@ -442,11 +442,11 @@ export default function Home() {
                       width={0}
                       height={0}
                       alt="Picture of the author"
-                      // style={{ width: "100%" }}
+                    // style={{ width: "100%" }}
                     />
                     <p>
-                        Shri Narendra Modi <br />
-                       <span>Prime minister of India</span>
+                      Shri Narendra Modi <br />
+                      <span>Prime minister of India</span>
                     </p>
                   </div>
                 </div>
@@ -454,7 +454,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
+
         <div className="home-four message">
           <div className="home-four-in">
             <div className="home-four-header">
@@ -529,7 +529,7 @@ export default function Home() {
                     />
 
                     <p>
-                     Er. P Sai Vijay <br />
+                      Er. P Sai Vijay <br />
                       <span>Director SAC</span>
                     </p>
                   </div>
@@ -566,7 +566,7 @@ export default function Home() {
               <div className="home-five-two-in">
                 <div className="home-five-box-one">
                   <div className="home-ft-box-in">
-                  <div
+                    <div
                       className="home-se-five se-cm"
                       onClick={() => handleClick(5)}
                       id={num === 5 ? "se-active" : ""}
@@ -971,7 +971,7 @@ export default function Home() {
                           </div>
                         </div>
                       </div> */}
-                    </div> 
+                    </div>
                     <div
                       className="home-bt-eight cm-bx-hide"
                       id={num === 8 ? "se-visible" : ""}
