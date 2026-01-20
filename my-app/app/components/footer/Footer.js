@@ -6,7 +6,8 @@ import './Footer.css';
 import Link from 'next/link';   
 import { FaFacebook, FaInstagram, FaYoutube,FaTelegram } from 'react-icons/fa';
 
-const Footer = () => {
+const Footer = () => {  const currentYear = new Date().getFullYear();
+
   return (
     <div className="Footer">
       <div className="Footer-in">
@@ -113,6 +114,7 @@ const Footer = () => {
         </div>
         <div className="Footer-last">
           <div className="Footer-last-in">
+            <p>© {currentYear} Smart Village Revolution. All rights reserved.</p>
             <p>This site is designed, developed, and maintained by <a href="https://www.linkedin.com/company/zeroonecodeclub/mycompany/">ZeroOne Code Club</a>, Department of Student Activity Center, KLEF(Deemed to be University) | Content owned by Smart Village Revolution.</p>
           </div>
         </div>
