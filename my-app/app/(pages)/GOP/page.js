@@ -482,7 +482,7 @@ const GOPRegistration = () => {
                             <button
                                 type="submit"
                                 disabled={status.loading}
-                                className={`px-8 py-3 rounded-full text-lg font-semibold text-white shadow-lg transition-transform transform hover:scale-105 ${status.loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#FFA500] hover:bg-[#e69500]'}`}
+                                className={`px-8 py-3 rounded-full text-lg font-semibold text-white shadow-lg transition-transform transform hover:scale-105 ${status.loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#008000] hover:bg-[#006400]'}`}
                             >
                                 {status.loading ? 'Processing...' : (isReviewing ? 'Confirm & Submit' : 'Review Registration')}
                             </button>
