@@ -1,16 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
+import ImageSkeleton from "../ImageSkeleton/ImageSkeleton";
 import { fetchImages } from "./handleAsset";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import loaderGif from "../../../public/loader.gif";
 import "./page.css";
 
 const HeroSection = () => {
@@ -45,15 +42,7 @@ const HeroSection = () => {
     <div className="hero">
       <div className="hero-in">
         {loading ? (
-          <div className="global-loader">
-            <Image
-              src={loaderGif}
-              alt="Loading"
-              width={100}
-              height={100}
-              style={{ objectFit: "cover", margin: "auto" }}
-            />
-          </div>
+          <ImageSkeleton variant="hero" />
         ) : (
           <Swiper
             spaceBetween={30}

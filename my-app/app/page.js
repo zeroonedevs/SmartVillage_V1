@@ -3,19 +3,18 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import CountUp from "react-countup";
 import Model from "./components/modal/modal";
-import { MdOpenInNew } from "react-icons/md";
-import dynamic from 'next/dynamic';
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { TbExternalLink } from "react-icons/tb";
+import Link from "next/link";
 
 import HeroSection from "./components/homeHero/page";
+import PlantAnimation from "./components/animation/Plant";
+import Navbar from "./components/navbar/Navbar";
+import HomeNavbar from "./components/navbar/HomeNavbar";
+import ResNavbar from "./components/navbar/ResNav";
+import Footer from "./components/footer/Footer";
 
 import "./globals.css";
 
-// Replace dynamic imports with regular imports
 import SVR_Image_1 from "./Assets/IMG_8078.JPG";
 import SVR_UpdateImage_1 from "./Assets/Updated Images/Agriculture.png";
 import SVR_UpdateImage_2 from "./Assets/Updated Images/Education.png";
@@ -24,32 +23,22 @@ import SVR_UpdateImage_5 from "./Assets/Updated Images/Infrastruture.png";
 import SVR_UpdateImage_11 from "./Assets/Updated Images/RenewableEnergy.png";
 import SVR_UpdateImage_12 from "./Assets/Updated Images/WomenEmpowerMent.png";
 import SVR_UpdateImage_13 from "./Assets/Women2.png";
-import SVR_UpdateImage_14 from "./Assets/Digital.png";
 import SVR_UpdateImage_16 from "./Assets/Updated Images/Health_new.png";
 import SVR_UpdateImage_17 from "./Assets/Updated Images/Culture.png";
-import SVR_UpdateImage_18 from "./Assets/Updated Images/Transportation.png";
 import SVR_UpdateImage_19 from "./Assets/Updated Images/LatestCultureAndCommunity.png";
 import SVR_UpdateImage_20 from "./Assets/NewDigi.png";
 
 import VijaySirUpdated from "./Assets/Updated Images/SAC_Director_Updated.png";
-
 import President from "./Assets/President.jpeg";
 import Modi from "./Assets/Modi.jpeg";
 import communityInfrastructure from "./Assets/communityInfrastructure.png";
 import culturalExchange from "./Assets/culturalExchange.png";
-
-import Navbar from "./components/navbar/Navbar";
-import Link from "next/link";
 
 import AreasOfWork_Image_1 from "./Assets/AreasOfWork_Image_1.png";
 import AreasOfWork_Image_4 from "./Assets/AreasOfWork_Image_4.png";
 import AreasOfWork_Image_6 from "./Assets/greenInnovation.png";
 import AreasOfWork_Image_8 from "./Assets/AreasOfWork_Image_8.png";
 import AreasOfWork_Image_9 from "./Assets/AreasOfWork_Image_9.png";
-
-import HomeNavbar from "./components/navbar/HomeNavbar";
-import ResNavbar from "./components/navbar/ResNav";
-import Footer from "./components/footer/Footer";
 
 // Add Image loading optimization
 const ImageWithLoading = ({ src, alt, priority = false, ...props }) => {
@@ -90,33 +79,6 @@ export default function Home() {
       }
     });
   }, []);
-  // -------------------------- For disabling Inspect ---------------//
-  // useEffect(() => {
-  //   // Disable right-click
-  //   const handleContextMenu = (event) => {
-  //     event.preventDefault();
-  //   };
-  //   document.addEventListener('contextmenu', handleContextMenu);
-
-  //   // Disable F12, Ctrl+Shift+I, and other key shortcuts
-  //   const handleKeyDown = (e) => {
-  //     if (
-  //       e.key === 'F12' || 
-  //       (e.ctrlKey && e.shiftKey && e.key === 'I') || 
-  //       (e.ctrlKey && e.shiftKey && e.key === 'C') || 
-  //       (e.ctrlKey && e.key === 'u')
-  //     ) {
-  //       e.preventDefault();
-  //     }
-  //   };
-  //   document.addEventListener('keydown', handleKeyDown);
-  //   return () => {
-  //     document.removeEventListener('contextmenu', handleContextMenu);
-  //     document.removeEventListener('keydown', handleKeyDown);
-  //   };
-  // }, []);
-
-  // Uncomment and restore the handleClick function
   const handleClick = (Num) => {
     setNum(Num);
   };
@@ -129,7 +91,7 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const timer = setTimeout(() => setShowAnimation(false), 1000);
+      const timer = setTimeout(() => setShowAnimation(false), 3000);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -140,30 +102,8 @@ export default function Home() {
     window.location.href = `/gallery?domain=${encodeURIComponent(domain)}`;
   };
 
-  // Add loading state
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadError, setLoadError] = useState(null);
-
-  useEffect(() => {
-    try {
-      setIsLoading(false);
-    } catch (error) {
-      setLoadError(error);
-      setIsLoading(false);
-    }
-  }, []);
-
-  return loadError ? (
-    <div className="error">Something went wrong. Please try again.</div>
-  ) : isLoading ? (
-    <div className="loading">
-      <div className="loading-spinner"></div>
-      <p>Loading...</p>
-    </div>
-  ) : showAnimation ? (
-    <div className="init">
-      <h1>Smart Village Revolution</h1>
-    </div>
+  return showAnimation ? (
+    <PlantAnimation />
   ) : (
     <div className="home-component">
       <div className="home-container">
