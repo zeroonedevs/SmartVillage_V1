@@ -1,16 +1,15 @@
 import { Pool } from 'pg';
 
-// Ideally, this should be in .env.local
-// process.env.DATABASE_URL
-// For now, the user will paste the connection string here directly or we can set it up to read from env.
-// Let's set it up to prefer env but user can hardcode if they insist.
+// Hardcoded database URL for deployment (since we can't set env variables on server)
+// Falls back to env variable for local development
+const DATABASE_URL = process.env.DATABASE_URL || "postgresql://neondb_owner:npg_yhXDxe48bzqO@ep-icy-mode-a15vp7d4-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require";
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.DATABASE_URL?.includes('sslmode=require') ? { rejectUnauthorized: false } : false,
+    connectionString: DATABASE_URL,
+    ssl: DATABASE_URL?.includes('sslmode=require') ? { rejectUnauthorized: false } : false,
 });
 
-console.log(`Database pool initialized using connection string: ${process.env.DATABASE_URL ? 'Filled (masked)' : 'MISSING'}`);
+console.log(`Database pool initialized using connection string: ${DATABASE_URL ? 'Connected ✅' : 'MISSING ❌'}`);
 
 pool.on('connect', () => {
     console.log('Database connected successfully');
