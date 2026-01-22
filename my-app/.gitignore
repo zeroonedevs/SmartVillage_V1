@@ -29,6 +29,10 @@ yarn-error.log*
 .env
 .env*.local
 
+# GOP admin setup (contains credentials)
+lib/gopAdminSetup.js
+GOP_ADMIN_*.md
+
 # vercel
 .vercel
 

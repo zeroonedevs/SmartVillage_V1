@@ -7,7 +7,7 @@ import { Pool } from 'pg';
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: true, // Neon needs SSL
+    ssl: process.env.DATABASE_URL?.includes('sslmode=require') ? { rejectUnauthorized: false } : false,
 });
 
 console.log(`Database pool initialized using connection string: ${process.env.DATABASE_URL ? 'Filled (masked)' : 'MISSING'}`);

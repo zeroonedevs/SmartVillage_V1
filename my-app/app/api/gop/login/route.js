@@ -1,14 +1,46 @@
-
 import { NextResponse } from 'next/server';
+import pool from '../../../../lib/db';
+import bcrypt from 'bcryptjs';
 
 export async function POST(request) {
     try {
         const { username, password } = await request.json();
 
-        const VALID_USER = process.env.ADMIN_EMAIL;
-        const VALID_PASS = process.env.ADMIN_PASSWORD;
+        if (!username || !password) {
+            return NextResponse.json(
+                { success: false, message: 'Username and password are required' },
+                { status: 400 }
+            );
+        }
 
-        if (username === VALID_USER && password === VALID_PASS) {
+        const client = await pool.connect();
+
+        try {
+            // Fetch admin credentials from database
+            const result = await client.query(
+                'SELECT * FROM gop_admin WHERE username = $1 LIMIT 1',
+                [username]
+            );
+
+            if (result.rows.length === 0) {
+                return NextResponse.json(
+                    { success: false, message: 'Invalid credentials' },
+                    { status: 401 }
+                );
+            }
+
+            const admin = result.rows[0];
+
+            // Verify password using bcrypt
+            const isPasswordValid = await bcrypt.compare(password, admin.password_hash);
+
+            if (!isPasswordValid) {
+                return NextResponse.json(
+                    { success: false, message: 'Invalid credentials' },
+                    { status: 401 }
+                );
+            }
+
             // Create a response with a success message
             const response = NextResponse.json({ success: true, message: 'Login successful' }, { status: 200 });
 
@@ -22,13 +54,13 @@ export async function POST(request) {
             });
 
             return response;
-        } else {
-            return NextResponse.json(
-                { success: false, message: 'Invalid credentials' },
-                { status: 401 }
-            );
+
+        } finally {
+            client.release();
         }
+
     } catch (error) {
+        console.error('Login error:', error);
         return NextResponse.json(
             { success: false, message: 'Internal Server Error' },
             { status: 500 }
