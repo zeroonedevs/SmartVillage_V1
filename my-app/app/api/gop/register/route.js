@@ -1,5 +1,7 @@
-import pool from '../../../../lib/db';
+
 import { NextResponse } from 'next/server';
+import dbConnect from '../../../../lib/mongodb';
+import GopRegistration from '../../../../models/GopRegistration';
 
 export async function POST(request) {
     try {
@@ -17,54 +19,30 @@ export async function POST(request) {
             );
         }
 
-        const client = await pool.connect();
+        await dbConnect();
 
-        try {
-            // Ensure table exists (Auto-migration for simplicity)
-            await client.query(`
-        CREATE TABLE IF NOT EXISTS gop_registrations (
-          id SERIAL PRIMARY KEY,
-          org_name VARCHAR(255) NOT NULL,
-          category VARCHAR(100),
-          contact_person VARCHAR(255) NOT NULL,
-          designation VARCHAR(100),
-          contact_email VARCHAR(255) NOT NULL,
-          contact_phone VARCHAR(50) NOT NULL,
-          org_address TEXT,
-          tenure VARCHAR(50),
-          interested_domains TEXT[],
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-      `);
+        const registration = await GopRegistration.create({
+            orgName,
+            category,
+            contactPerson,
+            designation,
+            contactEmail,
+            contactPhone,
+            orgAddress,
+            tenure,
+            interestedDomains
+        });
 
-            // Insert data
-            const query = `
-        INSERT INTO gop_registrations 
-        (org_name, category, contact_person, designation, contact_email, contact_phone, org_address, tenure, interested_domains)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-        RETURNING id;
-      `;
+        return NextResponse.json({
+            success: true,
+            id: registration._id,
+            message: 'Registration successful'
+        });
 
-            const values = [
-                orgName, category, contactPerson, designation,
-                contactEmail, contactPhone, orgAddress, tenure, interestedDomains
-            ];
-
-            const result = await client.query(query, values);
-
-            return NextResponse.json({
-                success: true,
-                id: result.rows[0].id,
-                message: 'Registration successful'
-            });
-
-        } finally {
-            client.release();
-        }
     } catch (error) {
-        console.error('Database Error:', error);
+        console.error('Registration Error:', error);
         return NextResponse.json(
-            { error: 'Internal Server Error' },
+            { error: 'Internal Server Error', details: error.message },
             { status: 500 }
         );
     }

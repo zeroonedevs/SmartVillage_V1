@@ -45,7 +45,3 @@ rules.md
 .windsurf/
 .aider*
 
-# Docker (removed)
-Dockerfile
-.dockerignore
-docker-compose*.yml

@@ -1,6 +1,7 @@
 
 import { NextResponse } from 'next/server';
-import pool from '../../../../lib/db';
+import dbConnect from '../../../../lib/mongodb';
+import GopRegistration from '../../../../models/GopRegistration';
 
 // Helper function to check authentication
 function checkAuth(request) {
@@ -21,13 +22,10 @@ export async function GET(request) {
             );
         }
 
-        const client = await pool.connect();
-        try {
-            const result = await client.query('SELECT * FROM gop_registrations ORDER BY created_at DESC');
-            return NextResponse.json(result.rows, { status: 200 });
-        } finally {
-            client.release();
-        }
+        await dbConnect();
+        const registrations = await GopRegistration.find({}).sort({ createdAt: -1 });
+        return NextResponse.json(registrations, { status: 200 });
+
     } catch (error) {
         console.error('Error fetching GOP registrations:', error);
         return NextResponse.json(
@@ -58,28 +56,21 @@ export async function DELETE(request) {
             );
         }
 
-        const client = await pool.connect();
-        try {
-            // Delete the registration
-            const result = await client.query(
-                'DELETE FROM gop_registrations WHERE id = $1 RETURNING id',
-                [id]
-            );
+        await dbConnect();
+        const deletedRegistration = await GopRegistration.findByIdAndDelete(id);
 
-            if (result.rows.length === 0) {
-                return NextResponse.json(
-                    { error: 'Registration not found' },
-                    { status: 404 }
-                );
-            }
-
+        if (!deletedRegistration) {
             return NextResponse.json(
-                { success: true, message: 'Registration deleted successfully' },
-                { status: 200 }
+                { error: 'Registration not found' },
+                { status: 404 }
             );
-        } finally {
-            client.release();
         }
+
+        return NextResponse.json(
+            { success: true, message: 'Registration deleted successfully' },
+            { status: 200 }
+        );
+
     } catch (error) {
         console.error('Error deleting GOP registration:', error);
         return NextResponse.json(

@@ -1,9 +1,11 @@
+
 import { NextResponse } from 'next/server';
-import pool from '../../../../lib/db';
+import dbConnect from '../../../../lib/mongodb';
+import GopAdmin from '../../../../models/GopAdmin';
 import bcrypt from 'bcryptjs';
 
 /**
- * This endpoint initializes the GOP admin account
+ * This endpoint initializes the GOP admin account in MongoDB
  * Call this once after deployment to set up the admin credentials
  * Protected by a secret key to prevent unauthorized access
  */
@@ -29,40 +31,29 @@ export async function POST(request) {
             );
         }
 
-        const client = await pool.connect();
+        await dbConnect();
 
-        try {
-            // Create admin table if it doesn't exist
-            await client.query(`
-                CREATE TABLE IF NOT EXISTS gop_admin (
-                    id SERIAL PRIMARY KEY,
-                    username VARCHAR(255) UNIQUE NOT NULL,
-                    password_hash VARCHAR(255) NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
-            `);
+        // Hash the password
+        const passwordHash = await bcrypt.hash(password, 10);
 
-            // Hash the password
-            const hashedPassword = await bcrypt.hash(password, 10);
+        // Check if admin exists
+        const existingAdmin = await GopAdmin.findOne({ username });
 
-            // Insert or update admin credentials
-            await client.query(`
-                INSERT INTO gop_admin (username, password_hash) 
-                VALUES ($1, $2)
-                ON CONFLICT (username) 
-                DO UPDATE SET password_hash = $2, updated_at = CURRENT_TIMESTAMP
-            `, [username, hashedPassword]);
-
-            return NextResponse.json({
-                success: true,
-                message: 'Admin account initialized successfully',
-                username: username
+        if (existingAdmin) {
+            existingAdmin.passwordHash = passwordHash;
+            await existingAdmin.save();
+        } else {
+            await GopAdmin.create({
+                username,
+                passwordHash
             });
-
-        } finally {
-            client.release();
         }
+
+        return NextResponse.json({
+            success: true,
+            message: 'Admin account initialized successfully',
+            username: username
+        });
 
     } catch (error) {
         console.error('Admin initialization error:', error);

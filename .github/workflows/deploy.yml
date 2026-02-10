@@ -6,8 +6,46 @@ on:
       - main
 
 jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./my-app
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: ./my-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Check code formatting
+        run: npm run format:check
+
+      - name: Type check
+        run: npm run type-check
+        continue-on-error: true
+
+      - name: Build application
+        run: npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          NODE_ENV: production
+
   deploy:
     runs-on: self-hosted
+    needs: lint-and-build
 
     permissions:
       contents: read
@@ -37,6 +75,9 @@ jobs:
         run: |
           cd /var/www/SmartVillage_V1/my-app
           npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          NODE_ENV: production
 
       - name: Restart PM2
         run: |
