@@ -9,7 +9,7 @@ import Link from "next/link";
 
 
 import HeroSection from "./components/homeHero/page";
-import PlantAnimation from "./components/animation/Plant";
+import Loader from "./components/Loader/Loader";
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/footer/Footer";
 import ImageSkeleton from "./components/ImageSkeleton/ImageSkeleton";
@@ -73,13 +73,29 @@ export default function Home() {
     setNum(Num);
   };
 
-  // ---------- Boot Animation ------------
-  const [showAnimation, setShowAnimation] = useState(true);
+  // ---------- Boot Animation (Only on first visit) ------------
+  const [showAnimation, setShowAnimation] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const timer = setTimeout(() => setShowAnimation(false), 3000);
-      return () => clearTimeout(timer);
+      // Check if this is the first visit (not in sessionStorage)
+      const hasSeenLoader = sessionStorage.getItem('svr_loader_seen');
+      
+      if (!hasSeenLoader) {
+        // First visit - show loader
+        setShowAnimation(true);
+        sessionStorage.setItem('svr_loader_seen', 'true');
+        
+        // Hide loader after animation
+        const timer = setTimeout(() => {
+          setShowAnimation(false);
+        }, 2500);
+        
+        return () => clearTimeout(timer);
+      } else {
+        // Not first visit - don't show loader
+        setShowAnimation(false);
+      }
     }
   }, []);
   // ---------- Boot Animation END ------------
@@ -89,7 +105,7 @@ export default function Home() {
   };
 
   return showAnimation ? (
-    <PlantAnimation />
+    <Loader />
   ) : (
     <div className="home-component">
       <div className="home-container">

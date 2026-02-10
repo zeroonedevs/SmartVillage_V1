@@ -1,12 +1,9 @@
-import { NextResponse } from 'next/server';
-import pool from '../../../../lib/db';
-import bcrypt from 'bcryptjs';
 
-// Hardcoded admin credentials (since we can't access server env variables)
-const HARDCODED_ADMIN = {
-    username: 'admin@svr.kluniversity.in',
-    password: 'Director-sac@123'
-};
+import { NextResponse } from 'next/server';
+import dbConnect from '../../../../lib/mongodb';
+import User from '../../../../models/User';
+import GopAdmin from '../../../../models/GopAdmin';
+import bcrypt from 'bcryptjs';
 
 export async function POST(request) {
     try {
@@ -19,119 +16,113 @@ export async function POST(request) {
             );
         }
 
-        // First, try to check hardcoded credentials (fallback)
-        if (username === HARDCODED_ADMIN.username && password === HARDCODED_ADMIN.password) {
-            const response = NextResponse.json({ success: true, message: 'Login successful' }, { status: 200 });
+        await dbConnect();
 
-            response.cookies.set('gop_admin_session', 'authenticated', {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
-                maxAge: 86400,
-                path: '/',
-            });
+        // First try User model (new system)
+        let user = await User.findOne({ username });
+        let isPasswordValid = false;
+        let role = null;
 
-            return response;
+        if (user) {
+            isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+            if (isPasswordValid) {
+                role = user.role;
+            }
+        } else {
+            // Fallback to GopAdmin (legacy) - migrate to User with admin role
+            const admin = await GopAdmin.findOne({ username });
+            if (admin) {
+                isPasswordValid = await bcrypt.compare(password, admin.passwordHash);
+                if (isPasswordValid) {
+                    // Migrate to User model with admin role
+                    role = 'admin';
+                    try {
+                        // Check if user already exists (race condition protection)
+                        const existingUser = await User.findOne({ username });
+                        if (existingUser) {
+                            user = existingUser;
+                        } else {
+                            user = await User.create({
+                                username: admin.username,
+                                passwordHash: admin.passwordHash,
+                                role: 'admin'
+                            });
+                        }
+                    } catch (migrationError) {
+                        // If migration fails, try to find the user again
+                        user = await User.findOne({ username });
+                        if (!user) {
+                            console.error('Migration error:', migrationError);
+                            throw new Error('Failed to migrate admin account');
+                        }
+                    }
+                }
+            }
         }
 
-        // Try database authentication
-        const client = await pool.connect();
-
-        try {
-            // Ensure admin table exists
-            await client.query(`
-                CREATE TABLE IF NOT EXISTS gop_admin (
-                    id SERIAL PRIMARY KEY,
-                    username VARCHAR(255) UNIQUE NOT NULL,
-                    password_hash VARCHAR(255) NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
-            `);
-
-            // Check if admin exists in database
-            let result = await client.query(
-                'SELECT * FROM gop_admin WHERE username = $1 LIMIT 1',
-                [username]
+        if (!isPasswordValid) {
+            return NextResponse.json(
+                { success: false, message: 'Invalid credentials' },
+                { status: 401 }
             );
-
-            // If no admin exists, initialize with hardcoded credentials
-            if (result.rows.length === 0) {
-                const hashedPassword = await bcrypt.hash(HARDCODED_ADMIN.password, 10);
-                await client.query(
-                    'INSERT INTO gop_admin (username, password_hash) VALUES ($1, $2)',
-                    [HARDCODED_ADMIN.username, hashedPassword]
-                );
-
-                // Re-query to get the newly created admin
-                result = await client.query(
-                    'SELECT * FROM gop_admin WHERE username = $1 LIMIT 1',
-                    [username]
-                );
-            }
-
-            if (result.rows.length === 0) {
-                return NextResponse.json(
-                    { success: false, message: 'Invalid credentials' },
-                    { status: 401 }
-                );
-            }
-
-            const admin = result.rows[0];
-
-            // Verify password using bcrypt
-            const isPasswordValid = await bcrypt.compare(password, admin.password_hash);
-
-            if (!isPasswordValid) {
-                return NextResponse.json(
-                    { success: false, message: 'Invalid credentials' },
-                    { status: 401 }
-                );
-            }
-
-            // Create a response with a success message
-            const response = NextResponse.json({ success: true, message: 'Login successful' }, { status: 200 });
-
-            // Set a cookie to indicate the user is logged in
-            response.cookies.set('gop_admin_session', 'authenticated', {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
-                maxAge: 86400,
-                path: '/',
-            });
-
-            return response;
-
-        } finally {
-            client.release();
         }
+
+        if (!user) {
+            return NextResponse.json(
+                { success: false, message: 'User not found' },
+                { status: 401 }
+            );
+        }
+
+        // Create a response with user info including role
+        const response = NextResponse.json({ 
+            success: true, 
+            message: 'Login successful',
+            role: role || user.role,
+            username: user.username
+        }, { status: 200 });
+
+        // Set cookies for authentication and role
+        response.cookies.set('gop_admin_session', 'authenticated', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 86400,
+            path: '/',
+        });
+
+        response.cookies.set('user_role', role || user.role, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 86400,
+            path: '/',
+        });
+
+        response.cookies.set('username', user.username, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 86400,
+            path: '/',
+        });
+
+        return response;
 
     } catch (error) {
         console.error('Login error:', error);
-
-        // If database fails, fall back to hardcoded credentials
-        const { username, password } = await request.json();
-
-        if (username === HARDCODED_ADMIN.username && password === HARDCODED_ADMIN.password) {
-            const response = NextResponse.json({
-                success: true,
-                message: 'Login successful (fallback mode)'
-            }, { status: 200 });
-
-            response.cookies.set('gop_admin_session', 'authenticated', {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
-                maxAge: 86400,
-                path: '/',
-            });
-
-            return response;
-        }
-
+        console.error('Error details:', {
+            message: error.message,
+            stack: error.stack,
+            name: error.name
+        });
         return NextResponse.json(
-            { success: false, message: 'Internal Server Error', error: error.message },
+            { 
+                success: false, 
+                message: 'Internal Server Error', 
+                error: error.message,
+                details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+            },
             { status: 500 }
         );
     }
