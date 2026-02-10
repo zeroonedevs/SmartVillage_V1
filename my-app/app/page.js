@@ -16,7 +16,7 @@ import ImageSkeleton from "./components/ImageSkeleton/ImageSkeleton";
 
 import "./globals.css";
 
-import SVR_Image_1 from "./Assets/IMG_8078.jpg";
+import SVR_Image_1 from "./Assets/IMG_8078.JPG";
 import SVR_UpdateImage_1 from "./Assets/Updated Images/Agriculture.png";
 import SVR_UpdateImage_2 from "./Assets/Updated Images/Education.png";
 import SVR_UpdateImage_3 from "./Assets/Updated Images/Health .png";
