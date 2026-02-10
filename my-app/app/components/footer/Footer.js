@@ -4,7 +4,7 @@ import Tree from '../../Assets/Tree.png';
 import { Link as ScrollLink } from 'react-scroll';
 import './Footer.css';
 import Link from 'next/link';   
-import { FaFacebook, FaInstagram, FaYoutube,FaTelegram } from 'react-icons/fa';
+import { FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {  const currentYear = new Date().getFullYear();
 
@@ -116,21 +116,12 @@ const Footer = () => {  const currentYear = new Date().getFullYear();
           <div className="Footer-last-in">
             <div className="footer-copyright">
               <div className="footer-copyright-left">
-                <p className="copyright-text">© {currentYear} Smart Village Revolution. All rights reserved.</p>
-                <p className="footer-credits">
-                  Designed & Developed by <a href="https://www.linkedin.com/company/zeroonecodeclub/mycompany/" target="_blank" rel="noopener noreferrer">ZeroOne Code Club</a>
-                </p>
+                <p className="copyright-text">© {currentYear} KLEF - <a href="https://sac.kluniversity.in/" target="_blank" rel="noopener noreferrer">Student Activity Center</a> | <a href="https://www.linkedin.com/company/zeroonecodeclub/" target="_blank" rel="noopener noreferrer">ZeroOne Code Club</a> | Designed & Developed by <a href="https://www.linkedin.com/in/dinesh-korukonda-513855271/" target="_blank" rel="noopener noreferrer">Dinesh Korukonda</a> & <a href="https://www.linkedin.com/in/singananischal/" target="_blank" rel="noopener noreferrer">Nischal Singana</a></p>
               </div>
               <div className="footer-copyright-right">
                 <div className="footer-social">
-                  <a href="https://www.instagram.com/klusac_svr?igsh=eDVmZWNpeHR5N2h5" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                    <FaInstagram />
-                  </a>
-                  <a href="https://t.me/y23_svr_sac" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-                    <FaTelegram />
-                  </a>
-                  <a href="https://www.youtube.com/watch?v=q9R8qWt3fmY" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                    <FaYoutube />
+                  <a href="https://www.instagram.com/svr_kl.sac/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <FaInstagram /> <span>svr_kl.sac</span>
                   </a>
                 </div>
               </div>
