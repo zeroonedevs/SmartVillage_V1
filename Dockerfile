@@ -8,7 +8,7 @@ COPY my-app/package*.json ./
 COPY my-app/bun.lock* ./
 
 # Install dependencies
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
 # Copy source
 COPY my-app/ .
