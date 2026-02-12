@@ -1,29 +1,39 @@
 import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: [true, 'Please provide a username'],
+  userID: {
+    type: Number,
+    required: [true, 'Please provide a User ID'],
     unique: true,
+  },
+  name: {
+    type: String,
+    required: [true, 'Please provide a name'],
     trim: true,
+  },
+  email: {
+    type: String,
+    required: false,
+    lowercase: true,
+    trim: true,
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'staff', 'lead'],
+    required: [true, 'Please provide a role'],
+    default: 'lead',
   },
   passwordHash: {
     type: String,
     required: [true, 'Please provide a password hash'],
   },
-  role: {
+  resetToken: {
     type: String,
-    enum: ['admin', 'faculty', 'student'],
-    required: [true, 'Please provide a role'],
-    default: 'student',
+    default: null,
   },
-  createdAt: {
+  resetTokenExpiry: {
     type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
+    default: null,
   },
 }, { timestamps: true });
 

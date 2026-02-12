@@ -7,7 +7,7 @@ export async function GET() {
   await dbConnect();
 
   try {
-    // Sort by order (asc) first, then createdAt (desc)
+    
     const images = await Gallery.find({}).sort({ order: 1, createdAt: -1 });
     return NextResponse.json({ success: true, data: images });
   } catch (error) {

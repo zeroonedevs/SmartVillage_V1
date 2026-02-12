@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../../../../lib/mongodb';
 import News from '../../../../models/News';
 
-// Helper function to check authentication
+
 function checkAuth(request) {
     const authCookie = request.cookies.get('gop_admin_session');
     if (!authCookie || authCookie.value !== 'authenticated') {
@@ -11,7 +11,7 @@ function checkAuth(request) {
     return true;
 }
 
-// PUT - Update news article
+
 export async function PUT(request, { params }) {
     try {
         if (!checkAuth(request)) {
@@ -57,7 +57,7 @@ export async function PUT(request, { params }) {
     }
 }
 
-// DELETE - Delete news article
+
 export async function DELETE(request, { params }) {
     try {
         if (!checkAuth(request)) {

@@ -3,7 +3,7 @@ import dbConnect from '../../../lib/mongodb';
 import User from '../../../models/User';
 import bcrypt from 'bcryptjs';
 
-// Helper function to check admin authentication
+
 function checkAdminAuth(request) {
     const authCookie = request.cookies.get('gop_admin_session');
     const roleCookie = request.cookies.get('user_role');
@@ -13,7 +13,7 @@ function checkAdminAuth(request) {
     return true;
 }
 
-// GET - List all users
+
 export async function GET(request) {
     try {
         if (!checkAdminAuth(request)) {
@@ -25,7 +25,7 @@ export async function GET(request) {
 
         await dbConnect();
         const users = await User.find({}).select('-passwordHash').sort({ createdAt: -1 });
-        
+
         return NextResponse.json({ success: true, data: users }, { status: 200 });
     } catch (error) {
         console.error('Error fetching users:', error);
@@ -36,7 +36,7 @@ export async function GET(request) {
     }
 }
 
-// POST - Create new user
+
 export async function POST(request) {
     try {
         if (!checkAdminAuth(request)) {
@@ -46,44 +46,48 @@ export async function POST(request) {
             );
         }
 
-        const { username, password, role } = await request.json();
+        const { userID, name, password, role, email } = await request.json();
 
-        if (!username || !password || !role) {
+        if (!userID || !name || !password || !role) {
             return NextResponse.json(
-                { error: 'Username, password, and role are required' },
+                { error: 'UserID, name, password, and role are required' },
                 { status: 400 }
             );
         }
 
-        if (!['admin', 'faculty', 'student'].includes(role)) {
+        if (!['admin', 'staff', 'lead'].includes(role)) {
             return NextResponse.json(
-                { error: 'Invalid role. Must be admin, faculty, or student' },
+                { error: 'Invalid role. Must be admin, staff, or lead' },
                 { status: 400 }
             );
         }
 
         await dbConnect();
 
-        // Check if user already exists
-        const existingUser = await User.findOne({ username });
+        
+        const existingUser = await User.findOne({
+            $or: [{ userID }, { name }]
+        });
         if (existingUser) {
             return NextResponse.json(
-                { error: 'Username already exists' },
+                { error: 'UserID or Name already exists' },
                 { status: 400 }
             );
         }
 
-        // Hash password
+        
         const passwordHash = await bcrypt.hash(password, 10);
 
-        // Create user
+        
         const user = await User.create({
-            username,
+            userID,
+            name,
+            email,
             passwordHash,
             role
         });
 
-        // Return user without password hash
+        
         const userResponse = user.toObject();
         delete userResponse.passwordHash;
 

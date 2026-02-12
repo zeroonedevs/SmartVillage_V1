@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../../../../lib/mongodb';
 import Award from '../../../../models/Award';
 
-// Import existing awards data
+
 const existingAwards = [
     {
         title: "Social Impact Excellence",
@@ -56,7 +56,7 @@ const existingAwards = [
 
 export async function POST(request) {
     try {
-        // Check authentication
+        
         const authCookie = request.cookies.get('gop_admin_session');
         if (!authCookie || authCookie.value !== 'authenticated') {
             return NextResponse.json(
@@ -73,7 +73,7 @@ export async function POST(request) {
 
         for (const awardItem of existingAwards) {
             try {
-                // Check if award already exists (by title and year)
+                
                 const existing = await Award.findOne({
                     title: awardItem.title,
                     year: awardItem.year

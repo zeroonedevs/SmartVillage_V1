@@ -3,7 +3,7 @@ import dbConnect from '../../../../lib/mongodb';
 import News from '../../../../models/News';
 import Award from '../../../../models/Award';
 
-// Import existing news data
+
 const existingNews = [
   {
     title: "Students painting on the walls of MPP school",
@@ -91,7 +91,7 @@ const existingNews = [
   },
 ];
 
-// Import existing awards data
+
 const existingAwards = [
     {
         title: "Social Impact Excellence",
@@ -145,7 +145,7 @@ const existingAwards = [
 
 export async function POST(request) {
     try {
-        // Check authentication
+        
         const authCookie = request.cookies.get('gop_admin_session');
         if (!authCookie || authCookie.value !== 'authenticated') {
             return NextResponse.json(
@@ -156,7 +156,7 @@ export async function POST(request) {
 
         await dbConnect();
 
-        // Migrate News
+        
         let newsImported = 0;
         let newsSkipped = 0;
         const newsErrors = [];
@@ -185,7 +185,7 @@ export async function POST(request) {
             }
         }
 
-        // Migrate Awards
+        
         let awardsImported = 0;
         let awardsSkipped = 0;
         const awardsErrors = [];

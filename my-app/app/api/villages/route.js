@@ -5,7 +5,7 @@ import Village from '../../../models/Village';
 export async function GET() {
     try {
         await dbConnect();
-        const villages = await Village.find({}).sort({ createdAt: -1 }); // Default sort by newest first
+        const villages = await Village.find({}).sort({ createdAt: -1 });
         return NextResponse.json({ success: true, data: villages });
     } catch (error) {
         return NextResponse.json({ success: false, error: 'Failed to fetch villages' }, { status: 500 });

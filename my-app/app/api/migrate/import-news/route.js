@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../../../../lib/mongodb';
 import News from '../../../../models/News';
 
-// Import existing news data
+
 const existingNews = [
   {
     title: "Students painting on the walls of MPP school",
@@ -92,7 +92,7 @@ const existingNews = [
 
 export async function POST(request) {
     try {
-        // Check authentication
+        
         const authCookie = request.cookies.get('gop_admin_session');
         if (!authCookie || authCookie.value !== 'authenticated') {
             return NextResponse.json(
@@ -109,7 +109,7 @@ export async function POST(request) {
 
         for (const newsItem of existingNews) {
             try {
-                // Check if news already exists (by title and date)
+                
                 const existing = await News.findOne({
                     title: newsItem.title,
                     date: newsItem.date
