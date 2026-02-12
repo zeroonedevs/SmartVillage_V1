@@ -56,6 +56,23 @@ const ImageWithLoading = ({ src, alt, priority = false, ...props }) => {
 
 export default function Home() {
   const [num, setNum] = useState(1);
+  const [totalStudents, setTotalStudents] = useState(0);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('/api/stats');
+        const data = await response.json();
+        if (data.success) {
+          setTotalStudents(data.count);
+        }
+      } catch (error) {
+        console.error("Failed to fetch stats", error);
+      }
+    };
+    fetchStats();
+  }, []);
+
   //-----------------------For Modal------------------------//
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
@@ -80,17 +97,17 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       // Check if this is the first visit (not in sessionStorage)
       const hasSeenLoader = sessionStorage.getItem('svr_loader_seen');
-      
+
       if (!hasSeenLoader) {
         // First visit - show loader
         setShowAnimation(true);
         sessionStorage.setItem('svr_loader_seen', 'true');
-        
+
         // Hide loader after animation
         const timer = setTimeout(() => {
           setShowAnimation(false);
         }, 2500);
-        
+
         return () => clearTimeout(timer);
       } else {
         // Not first visit - don't show loader
@@ -167,7 +184,7 @@ export default function Home() {
                       <div className="home-three-two-in-two-box-in">
                         <div className="home-three-two-in-two-box-in-one">
                           <h1>
-                            <CountUp end={13309} />+
+                            <CountUp end={totalStudents} />+
                           </h1>
                         </div>
                         <div className="home-three-two-in-two-box-in-two">

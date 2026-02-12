@@ -23,7 +23,7 @@ export async function PUT(request, { params }) {
             );
         }
 
-        const { id } = params;
+        const { id } = await params;
         const { username, password, role } = await request.json();
 
         await dbConnect();
@@ -88,7 +88,7 @@ export async function DELETE(request, { params }) {
             );
         }
 
-        const { id } = params;
+        const { id } = await params;
 
         await dbConnect();
 

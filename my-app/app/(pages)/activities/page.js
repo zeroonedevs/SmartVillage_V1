@@ -1,33 +1,51 @@
 "use client"
-import React, { useState } from 'react';
-import data from './Updates_Array';
-import './page.css';
+import React, { useState, useEffect } from 'react';
 
 function Page() {
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedYear, setSelectedYear] = useState('');
   const eventsPerPage = 15;
-  const [sortBy, setSortBy] = useState("DATE");
+  const [sortBy, setSortBy] = useState("date");
   const [sortOrder, setSortOrder] = useState('desc');
 
-  // Hard-coded counts
-  const TOTAL_EVENTS = 180;
-  const TOTAL_STUDENTS = 13309;
-  const yearWiseEvents = {
-    "2019-2020": 92,
-    "2020-2021": 36,
-    "2021-2022": 73,
-    "2022-2023": 73,
-    "2023-2024": 86,
-    "2024-2025": 78
+  useEffect(() => {
+    const fetchActivities = async () => {
+      try {
+        const response = await fetch('/api/dashboard/viewactivities');
+        const data = await response.json();
+        if (data.success) {
+          setActivities(data.data);
+        } else {
+          console.error("Failed to fetch activities");
+        }
+      } catch (error) {
+        console.error("Error fetching activities:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchActivities();
+  }, []);
+
+  // Calculate year-wise counts dynamically from fetched data
+  const getEventCount = () => {
+    if (!selectedYear) return activities.length;
+    return activities.filter(activity => activity.year === selectedYear).length;
   };
 
-  // Get event count based on selected year
-  const getEventCount = () => {
-    if (!selectedYear) return TOTAL_EVENTS;
-    // Direct lookup using the full year format
-    return yearWiseEvents[selectedYear] || TOTAL_EVENTS;
+  // Calculate total students dynamically based on selected year
+  const getTotalStudents = () => {
+    const targetActivities = selectedYear
+      ? activities.filter(activity => activity.year === selectedYear)
+      : activities;
+
+    return targetActivities.reduce((sum, activity) => {
+      // Ensure we handle potential string values or missing data safely
+      return sum + (Number(activity.studentsParticipated) || 0);
+    }, 0);
   };
 
   // Function to handle sorting
@@ -40,39 +58,25 @@ function Page() {
     }
   };
 
-  // Function to convert date to a common format for sorting
-  const formatDateForSorting = (date) => {
-    // Handle both "." and "-" separators
-    const parts = date.includes('.') ? date.split('.') : date.split('-');
-    const [day, month, year] = parts;
-    
-    // Ensure year is padded correctly
-    const fullYear = year.length === 2 ? `20${year}` : year;
-    
-    // Return ISO format date string
-    return `${fullYear}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-  };
-
   // Sort the data based on the selected column and order
-  let sortedData = [...data];
+  let sortedData = [...activities];
   if (sortBy) {
     sortedData = sortedData.sort((a, b) => {
-      if (sortBy === 'DATE') {
-        const dateA = formatDateForSorting(a["Date of the activity \nDD-MM-YYYY"]);
-        const dateB = formatDateForSorting(b["Date of the activity \nDD-MM-YYYY"]);
-        return sortOrder === 'asc' ? dateA.localeCompare(dateB) : dateB.localeCompare(dateA);
+      if (sortBy === 'date') {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
       } else {
-        return sortOrder === 'asc' ? String(a[sortBy]).localeCompare(String(b[sortBy])) : String(b[sortBy]).localeCompare(String(a[sortBy]));
+        const valA = a[sortBy] ? String(a[sortBy]) : '';
+        const valB = b[sortBy] ? String(b[sortBy]) : '';
+        return sortOrder === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
       }
     });
   }
 
-  // Add this after sorting the data
-  // console.log('Sorted data:', sortedData.slice(0, 5)); // Show first 5 entries
-
   // Filtered data based on search query and selected year
   const filteredData = sortedData.filter(event =>
-    (selectedYear === '' || event['Year'].includes(selectedYear)) &&
+    (selectedYear === '' || (event.year && event.year.includes(selectedYear))) &&
     Object.values(event).some(value =>
       String(value).toLowerCase().includes(searchQuery.toLowerCase())
     )
@@ -87,103 +91,135 @@ function Page() {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   // Extract unique years from the data for the dropdown options
-  const years = Array.from(new Set(data.map(event => event['Year'])));
+  const years = Array.from(new Set(activities.map(event => event.year))).filter(Boolean).sort().reverse();
+
+  // Helper to format date for display
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    // Format as DD-MM-YYYY
+    return date.toLocaleDateString('en-GB').replace(/\//g, '-');
+  };
+
+  if (loading) {
+    return <div className="flex justify-center items-center py-20 text-gray-600">Loading activities...</div>;
+  }
 
   return (
-    <div className='activities_table'>
-      <div className="activities_table_in">
-        <div className="activities_table_in_HeaderTwo">
-          <div className="activities_table_in_HeaderTwo_in">
-            <div className="activities_table_in_search">
-              <div className="activities_table_in_search_in">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="activities_table_in_Heading">
-              <div className="activities_table_in_Heading_in">
-                <h1>Activities List</h1>
-              </div>
-            </div>
-            <div className="activities_table_in_Options">
-              <div className="activities_table_in_Options_in">
-                <div className='DateOption'>
-                  <select className='DateOption'
-                    id="year"
-                    value={selectedYear}
-                    onChange={e => setSelectedYear(e.target.value)}
-                    >
-                      <option value="">All</option>
-                      {years.map(year => (
-                        <option key={year} value={year}>{year}</option>
-                      ))}
-                    </select>
-                </div>
-                <div className='BackHome'>
-                  <a href="/">Back to Home</a>
-                </div>
-              </div>
-            </div>
+    <div className='w-full'>
+      <div className="w-[98%] mx-auto p-1">
+
+        {/* Header Controls */}
+        <div className="w-full mx-auto flex flex-col md:flex-row justify-between items-center py-4 gap-4">
+
+          {/* Search Box - Left */}
+          <div className="w-full md:w-[20%]">
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              className="border border-green-600 p-2 w-full focus:outline-none focus:ring-1 focus:ring-green-600"
+            />
           </div>
-        </div>
-        <div className="activities_table_in_one">
-          <div className="activities_table_in_one_in">
-            <table>
-              <thead>
-                <tr>
-                  <th>Date &nbsp;</th>
-                  <th>Name of the Activity</th>
-                  <th>Number of Students Participated</th>
-                  <th>Report</th>
-                </tr>
-              </thead>
-              <tbody> 
-                {currentEvents.map((event, index) => (
-                  <tr key={`${event["S.No"]}-${index}`}>
-                    <td>{event["Date of the activity \nDD-MM-YYYY"]}</td>
-                    <td className="activity">{event["Name of the activity"]}</td>
-                    <td className="students-participated">{event["Number of students participated in such activities"]}</td>
-                    <td>
-                      {event["Web Links"] ? (
-                        <a href={event["Web Links"]} target="_blank" rel="noopener noreferrer">
-                          <button>View</button>
-                        </a>
-                      ) : (
-                        'Unavailable'
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="pagination">
-              <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-                Prev
-              </button>
-              <span>
-                Page {currentPage} of {Math.ceil(filteredData.length / eventsPerPage)}
-              </span>
-              <button 
-                onClick={() => paginate(currentPage + 1)} 
-                disabled={currentPage === Math.ceil(filteredData.length / eventsPerPage)}
+
+          {/* Title - Center */}
+          <div className="flex-1 text-center">
+            <h1 className="text-3xl font-extrabold text-black">Activities List</h1>
+          </div>
+
+          {/* Dropdown & Home Button - Right */}
+          <div className="w-full md:w-auto flex gap-2">
+
+            <div className='bg-[#008000] p-1 flex items-center justify-center min-w-[100px]'>
+              <select
+                className='bg-[#008000] text-white outline-none border-none w-full text-center font-semibold cursor-pointer appearance-none'
+                id="year"
+                value={selectedYear}
+                onChange={e => setSelectedYear(e.target.value)}
+                style={{ textAlignLast: 'center' }}
               >
-                Next
-              </button>
-              <div className="activities_table_in_count">
-                <button className="event-count-button">
-                  Events Count: {getEventCount()}
-                </button>
-                <button className="student-count-button">
-                  Total Students: {TOTAL_STUDENTS}
-                </button>
-              </div>
+                <option value="">All</option>
+                {years.map(year => (
+                  <option key={year} value={year}>{year}</option>
+                ))}
+              </select>
             </div>
+
+            <a
+              href="/"
+              className="bg-[#008000] text-white px-4 py-2 font-semibold no-underline hover:bg-green-700 transition-colors whitespace-nowrap"
+            >
+              Back to Home
+            </a>
           </div>
         </div>
+
+        {/* Table Area */}
+        <div className="w-full border border-green-700">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th onClick={() => handleSort('date')} className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[15%] cursor-pointer hover:bg-green-700 transition-colors">Date</th>
+                <th onClick={() => handleSort('name')} className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[55%] text-left cursor-pointer hover:bg-green-700 transition-colors">Name of the Activity</th>
+                <th onClick={() => handleSort('studentsParticipated')} className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[20%] cursor-pointer hover:bg-green-700 transition-colors">Number of Students<br />Participated</th>
+                <th className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[10%]">Report</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentEvents.map((event, index) => (
+                <tr key={event._id || index} className="bg-white hover:bg-gray-50">
+                  <td className="border border-green-700 text-center font-medium p-2 text-black">{formatDate(event.date)}</td>
+                  <td className="border border-green-700 text-left font-medium p-2 text-black">{event.name}</td>
+                  <td className="border border-green-700 text-center font-medium p-2 text-black">{event.studentsParticipated}</td>
+                  <td className="border border-green-700 text-center font-medium p-2 text-black">
+                    {event.reportLink ? (
+                      <a href={event.reportLink} target="_blank" rel="noopener noreferrer" className="text-black hover:underline font-medium">
+                        View
+                      </a>
+                    ) : (
+                      <span className="text-gray-400 italic">--</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Footer Toolbar - Bottom Green Bar */}
+        <div className="flex flex-wrap items-center gap-1 mt-4">
+
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="bg-[#008000] text-white px-4 py-2 font-medium disabled:opacity-50 hover:bg-green-700"
+          >
+            Prev
+          </button>
+
+          <div className="bg-[#008000] text-white px-4 py-2 font-medium">
+            Page {currentPage} of {Math.ceil(filteredData.length / eventsPerPage) || 1}
+          </div>
+
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage >= Math.ceil(filteredData.length / eventsPerPage)}
+            className="bg-[#008000] text-white px-4 py-2 font-medium disabled:opacity-50 hover:bg-green-700"
+          >
+            Next
+          </button>
+
+          <div className="bg-[#008000] text-white px-4 py-2 font-medium">
+            Events Count: {getEventCount()}
+          </div>
+
+          <div className="bg-[#008000] text-white px-4 py-2 font-medium">
+            Total Students: {getTotalStudents()}
+          </div>
+
+        </div>
+
       </div>
     </div>
   );
