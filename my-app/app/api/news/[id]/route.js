@@ -21,7 +21,7 @@ export async function PUT(request, { params }) {
             );
         }
 
-        const { id } = params;
+        const { id } = await params;
         const { title, date, imageUrl, excerpt, link } = await request.json();
 
         await dbConnect();
@@ -67,7 +67,7 @@ export async function DELETE(request, { params }) {
             );
         }
 
-        const { id } = params;
+        const { id } = await params;
 
         await dbConnect();
 

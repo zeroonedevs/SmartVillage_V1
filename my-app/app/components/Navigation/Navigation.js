@@ -32,79 +32,81 @@ const Navigation = () => {
       {/* Desktop Navigation - Only shows after scroll */}
       {isScrolled && (
         <div className="navigation scrolled">
-        <div className="nav-container">
-          <div className="nav-links-container">
-            <h1 className="nav-title-scrolled">
-              Smart Village <span>Revolution</span>
-            </h1>
-            
-            <div className="nav-links">
-              <div className="dropdown">
+          <div className="nav-container">
+            <div className="nav-links-container">
+              <h1 className="nav-title-scrolled">
+                Smart Village <span>Revolution</span>
+              </h1>
+
+              <div className="nav-links">
+                <div className="dropdown">
+                  <Scroll
+                    className="nav-link"
+                    to="home-two"
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
+                  >
+                    About
+                  </Scroll>
+                  <div className="dropdown-content">
+                    <Link href="/mission">Vision & Mission</Link>
+                    <Link href="/objectives">Objectives</Link>
+                    <Link href="/organogram">Organogram</Link>
+                    <Link href="/staff">Staff</Link>
+                    <Link href="/villages">Villages</Link>
+                  </div>
+                </div>
+
                 <Scroll
                   className="nav-link"
-                  to="home-two"
+                  to="home-seven"
                   spy={true}
                   smooth={true}
                   offset={-70}
                   duration={500}
                 >
-                  About
+                  Our Work
                 </Scroll>
-                <div className="dropdown-content">
-                  <Link href="/mission">Vision & Mission</Link>
-                  <Link href="/objectives">Objectives</Link>
-                  <Link href="/organogram">Organogram</Link>
-                </div>
+
+                <Scroll
+                  className="nav-link"
+                  to="home-eight"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  Annual Report
+                </Scroll>
+
+                <Scroll
+                  className="nav-link"
+                  to="home-five"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  Parameters
+                </Scroll>
+
+                <Link className="nav-link" href="/gallery">
+                  Gallery
+                </Link>
+
+                <Link className="nav-link" href="/news">
+                  News
+                </Link>
+
+                <Link className="nav-link" href="/GOP">
+                  GOP
+                </Link>
               </div>
-
-              <Scroll
-                className="nav-link"
-                to="home-seven"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-              >
-                Our Work
-              </Scroll>
-
-              <Scroll
-                className="nav-link"
-                to="home-eight"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-              >
-                Annual Report
-              </Scroll>
-
-              <Scroll
-                className="nav-link"
-                to="home-five"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-              >
-                Parameters
-              </Scroll>
-
-              <Link className="nav-link" href="/gallery">
-                Gallery
-              </Link>
-
-              <Link className="nav-link" href="/news">
-                News
-              </Link>
-
-              <Link className="nav-link" href="/GOP">
-                GOP
-              </Link>
             </div>
           </div>
         </div>
-      </div>
       )}
 
       {/* Mobile Navigation - Always visible */}
@@ -125,6 +127,8 @@ const Navigation = () => {
               <Link href="/mission" onClick={closeMobileMenu}>Vision & Mission</Link>
               <Link href="/objectives" onClick={closeMobileMenu}>Objectives</Link>
               <Link href="/organogram" onClick={closeMobileMenu}>Organogram</Link>
+              <Link href="/staff" onClick={closeMobileMenu}>Staff</Link>
+              <Link href="/villages" onClick={closeMobileMenu}>Villages</Link>
             </div>
 
             <Scroll
