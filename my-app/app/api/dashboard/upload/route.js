@@ -32,8 +32,8 @@ export async function POST(request) {
 
     await s3Client.send(command);
 
-    // Return local proxy URL instead of R2 domain
-    // This allows serving files from private buckets via our /api/files route
+    
+    
     const fileUrl = `/api/files/${fileName}`;
 
     return NextResponse.json({ success: true, fileUrl });

@@ -3,7 +3,7 @@ import dbConnect from '../../../../lib/mongodb';
 import User from '../../../../models/User';
 import bcrypt from 'bcryptjs';
 
-// Helper function to check admin authentication
+
 function checkAdminAuth(request) {
     const authCookie = request.cookies.get('gop_admin_session');
     const roleCookie = request.cookies.get('user_role');
@@ -13,7 +13,7 @@ function checkAdminAuth(request) {
     return true;
 }
 
-// PUT - Update user
+
 export async function PUT(request, { params }) {
     try {
         if (!checkAdminAuth(request)) {
@@ -24,7 +24,7 @@ export async function PUT(request, { params }) {
         }
 
         const { id } = await params;
-        const { username, password, role } = await request.json();
+        const { userID, name, email, password, role } = await request.json();
 
         await dbConnect();
 
@@ -36,20 +36,32 @@ export async function PUT(request, { params }) {
             );
         }
 
-        // Update fields
-        if (username && username !== user.username) {
-            // Check if new username already exists
-            const existingUser = await User.findOne({ username });
+        
+        if (userID && userID !== user.userID) {
+            const existingUser = await User.findOne({ userID });
+            if (existingUser) {
+                return NextResponse.json({ error: 'UserID already exists' }, { status: 400 });
+            }
+            user.userID = userID;
+        }
+
+        if (name && name !== user.name) {
+            
+            const existingUser = await User.findOne({ name });
             if (existingUser) {
                 return NextResponse.json(
-                    { error: 'Username already exists' },
+                    { error: 'Name already exists' },
                     { status: 400 }
                 );
             }
-            user.username = username;
+            user.name = name;
         }
 
-        if (role && ['admin', 'faculty', 'student'].includes(role)) {
+        if (email !== undefined) {
+            user.email = email;
+        }
+
+        if (role && ['admin', 'staff', 'lead'].includes(role)) {
             user.role = role;
         }
 
@@ -59,7 +71,7 @@ export async function PUT(request, { params }) {
 
         await user.save();
 
-        // Return user without password hash
+        
         const userResponse = user.toObject();
         delete userResponse.passwordHash;
 
@@ -78,7 +90,7 @@ export async function PUT(request, { params }) {
     }
 }
 
-// DELETE - Delete user
+
 export async function DELETE(request, { params }) {
     try {
         if (!checkAdminAuth(request)) {
@@ -100,9 +112,9 @@ export async function DELETE(request, { params }) {
             );
         }
 
-        // Prevent deleting yourself
-        const usernameCookie = request.cookies.get('username');
-        if (usernameCookie && usernameCookie.value === user.username) {
+        
+        const userIdCookie = request.cookies.get('user_id');
+        if (userIdCookie && Number(userIdCookie.value) === user.userID) {
             return NextResponse.json(
                 { error: 'Cannot delete your own account' },
                 { status: 400 }

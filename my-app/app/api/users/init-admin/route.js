@@ -3,16 +3,12 @@ import dbConnect from '../../../../lib/mongodb';
 import User from '../../../../models/User';
 import bcrypt from 'bcryptjs';
 
-/**
- * This endpoint initializes the admin user account
- * Call this once after deployment to set up the admin credentials
- * Protected by a secret key to prevent unauthorized access
- */
+
 export async function POST(request) {
     try {
-        const { secret, username, password } = await request.json();
+        const { secret, userID, name, password } = await request.json();
 
-        // Secret key to prevent unauthorized initialization
+        
         const INIT_SECRET = process.env.ADMIN_INIT_SECRET || 'svr-kluniversity-2026';
 
         if (secret !== INIT_SECRET) {
@@ -22,30 +18,32 @@ export async function POST(request) {
             );
         }
 
-        if (!username || !password) {
+        if (!name || !password) {
             return NextResponse.json(
-                { success: false, message: 'Username and password are required' },
+                { success: false, message: 'Name and password are required' },
                 { status: 400 }
             );
         }
 
         await dbConnect();
 
-        // Hash the password
+        
         const passwordHash = await bcrypt.hash(password, 10);
 
-        // Check if admin user exists
-        const existingUser = await User.findOne({ username });
+        
+        const existingUser = await User.findOne({ userID: userID || 1 });
 
         if (existingUser) {
-            // Update existing user to admin role
+            
+            existingUser.name = name;
             existingUser.passwordHash = passwordHash;
             existingUser.role = 'admin';
             await existingUser.save();
         } else {
-            // Create new admin user
+            
             await User.create({
-                username,
+                userID: userID || 1,
+                name: name,
                 passwordHash,
                 role: 'admin'
             });
@@ -54,7 +52,7 @@ export async function POST(request) {
         return NextResponse.json({
             success: true,
             message: 'Admin account initialized successfully',
-            username: username
+            name: name
         });
 
     } catch (error) {

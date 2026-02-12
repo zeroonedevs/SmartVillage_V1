@@ -12,9 +12,11 @@ const UsersTab = () => {
     const router = useRouter();
 
     const [formData, setFormData] = useState({
-        username: '',
+        userID: '',
+        name: '',
+        email: '',
         password: '',
-        role: 'student'
+        role: 'lead'
     });
 
     useEffect(() => {
@@ -59,7 +61,7 @@ const UsersTab = () => {
 
             if (response.ok && data.success) {
                 setUsers([data.data, ...users]);
-                setFormData({ username: '', password: '', role: 'student' });
+                setFormData({ userID: '', name: '', email: '', password: '', role: 'lead' });
                 setShowCreateForm(false);
                 alert('User created successfully!');
             } else {
@@ -79,7 +81,9 @@ const UsersTab = () => {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    username: formData.username,
+                    userID: formData.userID,
+                    name: formData.name,
+                    email: formData.email,
                     password: formData.password || undefined,
                     role: formData.role
                 })
@@ -89,7 +93,7 @@ const UsersTab = () => {
 
             if (response.ok && data.success) {
                 setUsers(users.map(u => u._id === editingUser._id ? data.data : u));
-                setFormData({ username: '', password: '', role: 'student' });
+                setFormData({ userID: '', name: '', email: '', password: '', role: 'lead' });
                 setEditingUser(null);
                 alert('User updated successfully!');
             } else {
@@ -132,7 +136,9 @@ const UsersTab = () => {
     const startEdit = (user) => {
         setEditingUser(user);
         setFormData({
-            username: user.username,
+            userID: user.userID,
+            name: user.name,
+            email: user.email || '',
             password: '',
             role: user.role
         });
@@ -142,7 +148,7 @@ const UsersTab = () => {
     const cancelForm = () => {
         setShowCreateForm(false);
         setEditingUser(null);
-        setFormData({ username: '', password: '', role: 'student' });
+        setFormData({ userID: '', name: '', email: '', password: '', role: 'lead' });
         setError(null);
     };
 
@@ -150,9 +156,9 @@ const UsersTab = () => {
         switch (role) {
             case 'admin':
                 return 'bg-red-100 text-red-700 border-red-200';
-            case 'faculty':
+            case 'staff':
                 return 'bg-blue-100 text-blue-700 border-blue-200';
-            case 'student':
+            case 'lead':
                 return 'bg-green-100 text-green-700 border-green-200';
             default:
                 return 'bg-gray-100 text-gray-700 border-gray-200';
@@ -195,15 +201,39 @@ const UsersTab = () => {
                     <form onSubmit={editingUser ? handleUpdateUser : handleCreateUser} className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-semibold text-gray-700 mb-1">Username</label>
+                                <label className="block text-sm font-semibold text-gray-700 mb-1">User ID</label>
                                 <input
-                                    type="text"
-                                    name="username"
-                                    value={formData.username}
+                                    type="number"
+                                    name="userID"
+                                    value={formData.userID}
                                     onChange={handleInputChange}
                                     className="block w-full rounded-lg border-gray-300 bg-gray-50 p-2.5 text-sm focus:bg-white focus:border-green-500 focus:ring-green-500 border transition-colors"
-                                    placeholder="Enter username"
+                                    placeholder="Enter User ID"
                                     required
+                                    disabled={!!editingUser}
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-1">Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleInputChange}
+                                    className="block w-full rounded-lg border-gray-300 bg-gray-50 p-2.5 text-sm focus:bg-white focus:border-green-500 focus:ring-green-500 border transition-colors"
+                                    placeholder="Enter name"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-1">Email</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
+                                    className="block w-full rounded-lg border-gray-300 bg-gray-50 p-2.5 text-sm focus:bg-white focus:border-green-500 focus:ring-green-500 border transition-colors"
+                                    placeholder="Enter email"
                                 />
                             </div>
                             <div>
@@ -229,8 +259,8 @@ const UsersTab = () => {
                                     className="block w-full rounded-lg border-gray-300 bg-gray-50 p-2.5 text-sm focus:bg-white focus:border-green-500 focus:ring-green-500 border transition-colors"
                                     required
                                 >
-                                    <option value="student">Student</option>
-                                    <option value="faculty">Faculty</option>
+                                    <option value="lead">Lead</option>
+                                    <option value="staff">Staff</option>
                                     <option value="admin">Admin</option>
                                 </select>
                             </div>
@@ -293,7 +323,8 @@ const UsersTab = () => {
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
-                                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Username</th>
+                                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">User ID / Name</th>
+                                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Email</th>
                                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Role</th>
                                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Created</th>
                                     <th className="px-6 py-4 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
@@ -302,7 +333,11 @@ const UsersTab = () => {
                             <tbody className="bg-white divide-y divide-gray-100">
                                 {users.map((user) => (
                                     <tr key={user._id} className="hover:bg-gray-50/80 transition-colors">
-                                        <td className="px-6 py-4 text-sm font-bold text-gray-900">{user.username}</td>
+                                        <td className="px-6 py-4 text-sm">
+                                            <div className="font-bold text-gray-900">{user.name}</div>
+                                            <div className="text-xs text-gray-500">ID: {user.userID}</div>
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-500">{user.email || 'N/A'}</td>
                                         <td className="px-6 py-4 text-sm">
                                             <span className={`px-2.5 py-0.5 rounded-md text-xs font-semibold border ${getRoleBadgeColor(user.role)}`}>
                                                 {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
@@ -325,11 +360,10 @@ const UsersTab = () => {
                                                 <button
                                                     onClick={() => handleDelete(user._id)}
                                                     disabled={deletingId === user._id}
-                                                    className={`p-2 rounded-lg transition-colors ${
-                                                        deletingId === user._id
-                                                            ? 'text-gray-400 cursor-not-allowed'
-                                                            : 'text-red-600 hover:text-red-800 hover:bg-red-50'
-                                                    }`}
+                                                    className={`p-2 rounded-lg transition-colors ${deletingId === user._id
+                                                        ? 'text-gray-400 cursor-not-allowed'
+                                                        : 'text-red-600 hover:text-red-800 hover:bg-red-50'
+                                                        }`}
                                                     title="Delete User"
                                                 >
                                                     {deletingId === user._id ? (
@@ -349,7 +383,7 @@ const UsersTab = () => {
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     );
 };
 

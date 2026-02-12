@@ -11,7 +11,7 @@ export async function POST(request) {
             contactEmail, contactPhone, orgAddress, tenure, interestedDomains
         } = body;
 
-        // Basic validation
+        
         if (!orgName || !contactEmail || !contactPhone) {
             return NextResponse.json(
                 { error: 'Missing required fields' },

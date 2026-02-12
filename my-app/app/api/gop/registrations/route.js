@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../../../../lib/mongodb';
 import GopRegistration from '../../../../models/GopRegistration';
 
-// Helper function to check authentication
+
 function checkAuth(request) {
     const authCookie = request.cookies.get('gop_admin_session');
     if (!authCookie || authCookie.value !== 'authenticated') {
@@ -14,7 +14,7 @@ function checkAuth(request) {
 
 export async function GET(request) {
     try {
-        // Check for authentication cookie
+        
         if (!checkAuth(request)) {
             return NextResponse.json(
                 { error: 'Unauthorized' },
@@ -37,7 +37,7 @@ export async function GET(request) {
 
 export async function DELETE(request) {
     try {
-        // Check for authentication cookie
+        
         if (!checkAuth(request)) {
             return NextResponse.json(
                 { error: 'Unauthorized' },
@@ -45,7 +45,7 @@ export async function DELETE(request) {
             );
         }
 
-        // Get the ID from query parameters
+        
         const { searchParams } = new URL(request.url);
         const id = searchParams.get('id');
 

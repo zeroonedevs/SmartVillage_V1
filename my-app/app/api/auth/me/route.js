@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../../../../lib/mongodb';
 import User from '../../../../models/User';
 
-// Helper function to check authentication (any role)
+
 function checkAuth(request) {
     const authCookie = request.cookies.get('gop_admin_session');
     if (!authCookie || authCookie.value !== 'authenticated') {
@@ -11,7 +11,7 @@ function checkAuth(request) {
     return true;
 }
 
-// GET - Get current user info
+
 export async function GET(request) {
     try {
         if (!checkAuth(request)) {
@@ -21,17 +21,17 @@ export async function GET(request) {
             );
         }
 
-        const usernameCookie = request.cookies.get('username');
-        if (!usernameCookie) {
+        const userIdCookie = request.cookies.get('user_id');
+        if (!userIdCookie) {
             return NextResponse.json(
-                { error: 'Username not found' },
+                { error: 'User ID not found' },
                 { status: 401 }
             );
         }
 
         await dbConnect();
-        const user = await User.findOne({ username: usernameCookie.value }).select('-passwordHash');
-        
+        const user = await User.findOne({ userID: Number(userIdCookie.value) }).select('-passwordHash');
+
         if (!user) {
             return NextResponse.json(
                 { error: 'User not found' },
@@ -39,10 +39,11 @@ export async function GET(request) {
             );
         }
 
-        return NextResponse.json({ 
-            success: true, 
+        return NextResponse.json({
+            success: true,
             data: {
-                username: user.username,
+                name: user.name,
+                userID: user.userID,
                 role: user.role
             }
         }, { status: 200 });

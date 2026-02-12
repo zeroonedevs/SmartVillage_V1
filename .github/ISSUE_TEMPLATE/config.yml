@@ -1,8 +1,0 @@
-blank_issues_enabled: true
-contact_links:
-  - name: 📚 Documentation
-    url: https://github.com/zeroonedevs/SmartVillage_V1/blob/main/README.md
-    about: Please check the documentation for usage instructions
-  - name: 💬 Discussions
-    url: https://github.com/zeroonedevs/SmartVillage_V1/discussions
-    about: Use GitHub Discussions for questions and general discussions

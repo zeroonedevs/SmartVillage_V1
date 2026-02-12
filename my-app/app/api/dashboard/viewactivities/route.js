@@ -30,9 +30,9 @@ export async function DELETE(request) {
       return NextResponse.json({ success: false, message: 'Activity not found' }, { status: 404 });
     }
     
-    // Note: To delete the file from R2, you would need to parse the key from deletedActivity.reportLink
-    // and use DeleteObjectCommand from @aws-sdk/client-s3. 
-    // This is optional based on requirements, but recommended to keep storage clean.
+    
+    
+    
 
     return NextResponse.json({ success: true, data: {} });
   } catch (error) {

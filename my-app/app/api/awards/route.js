@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../../../lib/mongodb';
 import Award from '../../../models/Award';
 
-// Helper function to check authentication
+
 function checkAuth(request) {
     const authCookie = request.cookies.get('gop_admin_session');
     if (!authCookie || authCookie.value !== 'authenticated') {
@@ -11,7 +11,7 @@ function checkAuth(request) {
     return true;
 }
 
-// GET - List all awards
+
 export async function GET(request) {
     try {
         await dbConnect();
@@ -26,7 +26,7 @@ export async function GET(request) {
     }
 }
 
-// POST - Create new award
+
 export async function POST(request) {
     try {
         if (!checkAuth(request)) {

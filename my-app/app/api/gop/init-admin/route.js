@@ -4,17 +4,13 @@ import dbConnect from '../../../../lib/mongodb';
 import GopAdmin from '../../../../models/GopAdmin';
 import bcrypt from 'bcryptjs';
 
-/**
- * This endpoint initializes the GOP admin account in MongoDB
- * Call this once after deployment to set up the admin credentials
- * Protected by a secret key to prevent unauthorized access
- */
+
 export async function POST(request) {
     try {
         const { secret, username, password } = await request.json();
 
-        // Secret key to prevent unauthorized initialization
-        // Set ADMIN_INIT_SECRET in your environment variables
+        
+        
         const INIT_SECRET = process.env.ADMIN_INIT_SECRET || 'svr-kluniversity-2026';
 
         if (secret !== INIT_SECRET) {
@@ -33,10 +29,10 @@ export async function POST(request) {
 
         await dbConnect();
 
-        // Hash the password
+        
         const passwordHash = await bcrypt.hash(password, 10);
 
-        // Check if admin exists
+        
         const existingAdmin = await GopAdmin.findOne({ username });
 
         if (existingAdmin) {

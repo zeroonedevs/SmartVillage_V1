@@ -30,7 +30,7 @@ export async function GET(request, { params }) {
 
     const response = await s3Client.send(command);
 
-    // Convert the stream to a Web Response
+    
     return new NextResponse(response.Body.transformToWebStream(), {
       headers: {
         'Content-Type': response.ContentType || 'application/octet-stream',
