@@ -46,29 +46,29 @@ const Activity = mongoose.models.Activity || mongoose.model('Activity', Activity
 // Handles date ranges by using the start date
 function parseDate(dateString) {
   if (!dateString) return null;
-  
+
   // Handle date ranges (e.g., "14-08-2023 to 15-08-2023")
   let dateToParse = dateString;
   if (dateString.toLowerCase().includes('to')) {
     const parts = dateString.split(/to/i);
     dateToParse = parts[0].trim();
   }
-  
+
   // Replace dots with dashes
   const normalized = dateToParse.replace(/\./g, '-').trim();
-  
+
   // Try DD-MM-YYYY format
   const parts = normalized.split('-');
   if (parts.length === 3) {
     const day = parseInt(parts[0], 10);
     const month = parseInt(parts[1], 10) - 1; // Month is 0-indexed
     const year = parseInt(parts[2], 10);
-    
+
     if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
       return new Date(year, month, day);
     }
   }
-  
+
   return null;
 }
 
@@ -87,9 +87,14 @@ async function importActivities() {
     // Read the Updates_Array.js file
     const filePath = path.join(__dirname, '../app/(pages)/activities/Updates_Array.js');
     console.log(`Reading file: ${filePath}`);
-    
+
+    // Check if file exists first
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`Data file not found at: ${filePath}\nPlease create this file with the 'const newData = [...]' array.`);
+    }
+
     const fileContent = fs.readFileSync(filePath, 'utf8');
-    
+
     // Extract the array data using regex (since it's a JS file)
     const arrayMatch = fileContent.match(/const newData = \[([\s\S]*)\];/);
     if (!arrayMatch) {
@@ -167,7 +172,7 @@ async function importActivities() {
     console.log(`Imported: ${imported}`);
     console.log(`Skipped (already exists): ${skipped}`);
     console.log(`Errors: ${errors}`);
-    
+
     if (errorDetails.length > 0 && errors <= 20) {
       console.log('\nError Details:');
       errorDetails.forEach(err => console.error(`  - ${err}`));

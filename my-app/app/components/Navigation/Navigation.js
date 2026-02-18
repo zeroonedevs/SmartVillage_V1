@@ -92,6 +92,11 @@ const Navigation = () => {
                   Parameters
                 </Scroll>
 
+                <Link className='nav-link' href='/awards'>
+                  Awards
+                </Link>
+
+
                 <Link className="nav-link" href="/gallery">
                   Gallery
                 </Link>
@@ -100,7 +105,7 @@ const Navigation = () => {
                   News
                 </Link>
 
-                <Link className="nav-link" href="/GOP">
+                <Link className="nav-link" href="/gop">
                   GOP
                 </Link>
               </div>
@@ -172,7 +177,7 @@ const Navigation = () => {
               News
             </Link>
 
-            <Link href="/GOP" onClick={closeMobileMenu}>
+            <Link href="/gop" onClick={closeMobileMenu}>
               GOP
             </Link>
           </div>
