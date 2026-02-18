@@ -16,6 +16,9 @@ import StaffTab from './components/StaffTab';
 import VillagesTab from './components/VillagesTab';
 import AnalyticsTab from './components/AnalyticsTab';
 import ChangePasswordModal from './components/ChangePasswordModal';
+import HeroTab from './components/HeroTab';
+import AreasOfWorkTab from './components/AreasOfWorkTab';
+import FocusAreasTab from './components/FocusAreasTab';
 
 
 const SVRDashboard = () => {
@@ -35,7 +38,10 @@ const SVRDashboard = () => {
         'awards': 'Awards & Honors',
         'staff': 'Staff Directory',
         'villages': 'Adapted Villages',
-        'users': 'User Management'
+        'users': 'User Management',
+        'hero': 'Hero Slides Management',
+        'areas-of-work': 'Areas of Work Management',
+        'focus-areas': 'Focus Areas (9-Way) Management'
     };
 
     // Check auth on mount
@@ -142,6 +148,9 @@ const SVRDashboard = () => {
                         {activeTab === 'awards' && (userRole === 'admin' || userRole === 'staff' || userRole === 'lead') && <AwardsTab />}
                         {activeTab === 'staff' && (userRole === 'admin' || userRole === 'staff') && <StaffTab />}
                         {activeTab === 'villages' && (userRole === 'admin' || userRole === 'staff') && <VillagesTab />}
+                        {activeTab === 'hero' && (userRole === 'admin' || userRole === 'staff') && <HeroTab />}
+                        {activeTab === 'areas-of-work' && (userRole === 'admin' || userRole === 'staff') && <AreasOfWorkTab />}
+                        {activeTab === 'focus-areas' && (userRole === 'admin' || userRole === 'staff') && <FocusAreasTab />}
                         {/* Modals */}
                         <ChangePasswordModal
                             isOpen={activeTab === 'settings'}
