@@ -6,41 +6,23 @@ import Model from "./components/modal/modal";
 import { TbExternalLink } from "react-icons/tb";
 import Link from "next/link";
 
+// components
 
-
-import HeroSection from "./components/homeHero/page";
+import HeroSlider from "./components/home/HeroSlider";
+import AreasOfWork from "./components/home/AreasOfWork";
+import FocusAreas from "./components/home/FocusAreas";
 import Loader from "./components/Loader/Loader";
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/footer/Footer";
-import ImageSkeleton from "./components/ImageSkeleton/ImageSkeleton";
 
 import "./globals.css";
 
 import SVR_Image_1 from "./Assets/IMG_8078.JPG";
-import SVR_UpdateImage_1 from "./Assets/Updated Images/Agriculture.png";
-import SVR_UpdateImage_2 from "./Assets/Updated Images/Education.png";
-import SVR_UpdateImage_3 from "./Assets/Updated Images/Health .png";
-import SVR_UpdateImage_5 from "./Assets/Updated Images/Infrastruture.png";
-import SVR_UpdateImage_11 from "./Assets/Updated Images/RenewableEnergy.png";
-import SVR_UpdateImage_12 from "./Assets/Updated Images/WomenEmpowerMent.png";
-import SVR_UpdateImage_13 from "./Assets/Women2.png";
-import SVR_UpdateImage_16 from "./Assets/Updated Images/Health_new.png";
-import SVR_UpdateImage_17 from "./Assets/Updated Images/Culture.png";
-import SVR_UpdateImage_19 from "./Assets/Updated Images/LatestCultureAndCommunity.png";
-import SVR_UpdateImage_20 from "./Assets/NewDigi.png";
 
 import VijaySirUpdated from "./Assets/Updated Images/SAC_Director_Updated.png";
 import President from "./Assets/President.jpeg";
 import Modi from "./Assets/Modi.jpeg";
 import AnnualReportImage from "../public/hero/1president.jpg";
-import communityInfrastructure from "./Assets/communityInfrastructure.png";
-import culturalExchange from "./Assets/culturalExchange.png";
-
-import AreasOfWork_Image_1 from "./Assets/AreasOfWork_Image_1.png";
-import AreasOfWork_Image_4 from "./Assets/AreasOfWork_Image_4.png";
-import AreasOfWork_Image_6 from "./Assets/greenInnovation.png";
-import AreasOfWork_Image_8 from "./Assets/AreasOfWork_Image_8.png";
-import AreasOfWork_Image_9 from "./Assets/AreasOfWork_Image_9.png";
 
 // Add Image loading optimization
 const ImageWithLoading = ({ src, alt, priority = false, ...props }) => {
@@ -55,7 +37,6 @@ const ImageWithLoading = ({ src, alt, priority = false, ...props }) => {
 };
 
 export default function Home() {
-  const [num, setNum] = useState(1);
   const [totalStudents, setTotalStudents] = useState(0);
 
   useEffect(() => {
@@ -86,9 +67,7 @@ export default function Home() {
   };
   //-----------------------For Modal END------------------------//
 
-  const handleClick = (Num) => {
-    setNum(Num);
-  };
+  //-----------------------For Modal END------------------------//
 
   // ---------- Boot Animation (Only on first visit) ------------
   const [showAnimation, setShowAnimation] = useState(false);
@@ -128,7 +107,7 @@ export default function Home() {
       <div className="home-container">
         <Navigation />
 
-        <HeroSection />
+        <HeroSlider />
 
         <div className="home-three">
           <div className="home-three-in">
@@ -286,92 +265,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="home-seven">
-          <div className="home-seven-in">
-            <div className="home-seven-in-header">
-              <div className="home-seven-in-header-in">
-                <h1>Areas of Work</h1>
-              </div>
-            </div>
-            <div className="home-seven-in-one">
-              <div className="home-seven-in-one-in">
-                <div className="home-seven-in-one-in-boxes">
-                  <div className="home-seven-in-one-in-boxes-in">
-                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Health & Hygiene")}>
-                      <div className="home-seven-in-one-in-box-in">
-                        <Image src={SVR_UpdateImage_16} alt="Health & Hygiene" />
-                        <p>Health & Hygiene</p>
-                      </div>
-                    </div>
 
-                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Quality Education")}>
-                      <div className="home-seven-in-one-in-box-in">
-                        <Image src={AreasOfWork_Image_1} alt="Quality Education" />
-                        <p>Quality Education</p>
-                      </div>
-                    </div>
-
-                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Agriculture")}>
-                      <div className="home-seven-in-one-in-box-in">
-                        <Image src={AreasOfWork_Image_9} alt="Agriculture" />
-                        <p>Agriculture</p>
-                      </div>
-                    </div>
-
-                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Village Infrastructure")}>
-                      <div className="home-seven-in-one-in-box-in">
-                        <Image src={communityInfrastructure} alt="Village Infrastructure" />
-                        <p>Village Infrastructure</p>
-                      </div>
-                    </div>
-
-                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Social Community Actions")}>
-                      <div className="home-seven-in-one-in-box-in">
-                        <Image src={AreasOfWork_Image_4} alt="Social Community Actions" />
-                        <p>Social Community Actions</p>
-                      </div>
-                    </div>
-
-                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Women Empowerment")}>
-                      <div className="home-seven-in-one-in-box-in">
-                        <Image src={SVR_UpdateImage_13} alt="Women Empowerment" />
-                        <p>Women Empowerment</p>
-                      </div>
-                    </div>
-
-                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Livelihood Enhancement")}>
-                      <div className="home-seven-in-one-in-box-in">
-                        <Image src={AreasOfWork_Image_8} alt="Livelihood Enhancement" />
-                        <p>Livelihood Enhancement</p>
-                      </div>
-                    </div>
-
-                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Digital Literacy")}>
-                      <div className="home-seven-in-one-in-box-in">
-                        <Image src={SVR_UpdateImage_20} alt="Digital Literacy" />
-                        <p>Digital Literacy</p>
-                      </div>
-                    </div>
-
-                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Green Innovation")}>
-                      <div className="home-seven-in-one-in-box-in">
-                        <Image src={AreasOfWork_Image_6} alt="Green Innovation" />
-                        <p>Green Innovation</p>
-                      </div>
-                    </div>
-
-                    <div className="home-seven-in-one-in-box" onClick={() => handleDomainClick("Cultural Exchange")}>
-                      <div className="home-seven-in-one-in-box-in">
-                        <Image src={culturalExchange} alt="Cultural Exchange" />
-                        <p>Cultural Exchange</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <AreasOfWork />
         <div className="home-eight">
           <div className="home-eight-in">
             <div className="home-eight-one">
@@ -597,524 +492,15 @@ export default function Home() {
             <div className="home-five-one">
               <h1>Focus - 9 Way Principle</h1>
             </div>
-            <div className="home-five-two">
-              <div className="home-five-two-in">
-                <div className="home-five-box-one">
-                  <div className="home-ft-box-in">
-                    <div
-                      className="home-se-five se-cm"
-                      onClick={() => handleClick(5)}
-                      id={num === 5 ? "se-active" : ""}
-                    >
-                      <div className="home-se-five-in se-cm-in">
-                        <p>Health and Hygiene</p>
-                      </div>
-                    </div>
-                    <div
-                      className="home-se-one se-cm"
-                      onClick={() => handleClick(1)}
-                      id={num === 1 ? "se-active" : ""}
-                    >
-                      <div className="home-se-one-in se-cm-in">
-                        <p>Agriculture</p>
-                      </div>
-                    </div>
-                    <div
-                      className="home-se-two se-cm"
-                      onClick={() => handleClick(2)}
-                      id={num === 2 ? "se-active" : ""}
-                    >
-                      <div className="home-se-two-in se-cm-in">
-                        <p>Quality Education</p>
-                      </div>
-                    </div>
-                    <div
-                      className="home-se-three se-cm"
-                      onClick={() => handleClick(3)}
-                      id={num === 3 ? "se-active" : ""}
-                    >
-                      <div className="home-se-three-in se-cm-in">
-                        <p>Village Infrastructure</p>
-                      </div>
-                    </div>
-                    <div
-                      className="home-se-four se-cm"
-                      onClick={() => handleClick(4)}
-                      id={num === 4 ? "se-active" : ""}
-                    >
-                      <div className="home-se-four-in se-cm-in">
-                        <p>Culture and Community</p>
-                      </div>
-                    </div>
-                    <div
-                      className="home-se-six se-cm"
-                      onClick={() => handleClick(6)}
-                      id={num === 6 ? "se-active" : ""}
-                    >
-                      <div className="home-se-six-in se-cm-in">
-                        <p>Energy Availablity and Efficieny</p>
-                      </div>
-                    </div>
-                    {/* <div
-                      className="home-se-seven se-cm"
-                      onClick={() => handleClick(7)}
-                      id={num === 7 ? "se-active" : ""}
-                    >
-                      <div className="home-se-seven-in se-cm-in">
-                        <p>Transportation</p>
-                      </div>
-                    </div> */}
-                    <div
-                      className="home-se-eight se-cm"
-                      onClick={() => handleClick(8)}
-                      id={num === 8 ? "se-active" : ""}
-                    >
-                      <div className="home-se-eight-in se-cm-in">
-                        <p>Green Innovation</p>
-                      </div>
-                    </div>
-                    <div
-                      className="home-se-nine se-cm"
-                      onClick={() => handleClick(9)}
-                      id={num === 9 ? "se-active" : ""}
-                    >
-                      <div className="home-se-nine-in se-cm-in">
-                        <p>Women Empowerment</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="home-five-box-two">
-                  <div className="home-ft-box-two-in">
-                    <div
-                      className="home-bt-one cm-bx-hide"
-                      id={num === 1 ? "se-visible" : ""}
-                    >
-                      <div className="home-bt-one-in">
-                        <div className="home-bt-one-in-header">
-                          <div className="home-bt-one-in-header-in">
-                            <h1>Agriculture</h1>
-                          </div>
-                        </div>
-                        <div className="home-bt-one-in-one">
-                          <div className="home-bt-one-in-one-in">
-                            <div className="home-bt-one-in-one-in-one">
-                              <div className="home-bt-one-in-one-in-one-in">
-                                <p>
-                                  Agriculture in Smart Villages thrives through
-                                  the adoption of precision farming techniques.
-                                  Leveraging technology, farmers make
-                                  data-driven decisions for irrigation,
-                                  fertilization, and pest control. Sustainable
-                                  practices like organic farming and renewable
-                                  energy integration ensure long-term
-                                  environmental health.Providing access to
-                                  modern agricultural practices and tools for
-                                  continuous improvement.{" "}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="home-bt-one-in-one-in-two">
-                              <div className="home-bt-one-in-one-in-two-in">
-                                <Image
-                                  className="home-bt-one-in-one-in-two-in-image"
-                                  src={SVR_UpdateImage_1}
-                                  alt="Picture of the author"
-                                  width={500}
-                                  height={400}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="home-bt-two cm-bx-hide"
-                      id={num === 2 ? "se-visible" : ""}
-                    >
-                      <div className="home-bt-one-in">
-                        <div className="home-bt-one-in-header">
-                          <div className="home-bt-one-in-header-in">
-                            <h1>Quality Education</h1>
-                          </div>
-                        </div>
-                        <div className="home-bt-one-in-one">
-                          <div className="home-bt-one-in-one-in">
-                            <div className="home-bt-one-in-one-in-one">
-                              <div className="home-bt-one-in-one-in-one-in">
-                                <p>
-                                  Access to quality education is pivotal. Smart
-                                  Villages utilize digital learning tools, offer
-                                  training for teachers, and establish schools
-                                  with modern resources. This empowers the
-                                  youth, fostering innovation and preparing them
-                                  for diverse career opportunities. Continuous
-                                  training programs for educators to align
-                                  teaching methods with modern pedagogies.
-                                  Offering vocational training and specialized
-                                  courses to prepare students for diverse
-                                  careers.{" "}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="home-bt-one-in-one-in-two">
-                              <div className="home-bt-one-in-one-in-two-in">
-                                <Image
-                                  className="home-bt-one-in-one-in-two-in-image"
-                                  src={SVR_UpdateImage_2}
-                                  alt="Picture of the author"
-                                  width={500}
-                                  height={400}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="home-bt-three cm-bx-hide"
-                      id={num === 3 ? "se-visible" : ""}
-                    >
-                      <div className="home-bt-one-in">
-                        <div className="home-bt-one-in-header">
-                          <div className="home-bt-one-in-header-in">
-                            <h1>Village Infrastructure</h1>
-                          </div>
-                        </div>
-                        <div className="home-bt-one-in-one">
-                          <div className="home-bt-one-in-one-in">
-                            <div className="home-bt-one-in-one-in-one">
-                              <div className="home-bt-one-in-one-in-one-in">
-                                <p>
-                                  Developing robust infrastructure is vital for
-                                  enhancing accessibility and fostering economic
-                                  growth in rural areas. This includes reliable
-                                  transportation networks linking villages to
-                                  markets and services, sustainable energy
-                                  sources for consistent power, and internet
-                                  connectivity to bridge the digital divide.
-                                  Community centers and waste management systems
-                                  promote social interaction and environmental
-                                  sustainability. Resilient infrastructure
-                                  withstands natural disasters, while housing
-                                  and urban planning ensure safe and comfortable
-                                  living conditions. These efforts collectively
-                                  empower rural communities and drive
-                                  sustainable development.{" "}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="home-bt-one-in-one-in-two">
-                              <div className="home-bt-one-in-one-in-two-in">
-                                <Image
-                                  className="home-bt-one-in-one-in-two-in-image"
-                                  src={SVR_UpdateImage_5}
-                                  alt="Picture of the author"
-                                  width={500}
-                                  height={400}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="home-bt-four cm-bx-hide"
-                      id={num === 4 ? "se-visible" : ""}
-                    >
-                      <div className="home-bt-one-in">
-                        <div className="home-bt-one-in-header">
-                          <div className="home-bt-one-in-header-in">
-                            <h1>Culture and Community</h1>
-                          </div>
-                        </div>
-                        <div className="home-bt-one-in-one">
-                          <div className="home-bt-one-in-one-in">
-                            <div className="home-bt-one-in-one-in-one">
-                              <div className="home-bt-one-in-one-in-one-in">
-                                <p>
-                                  Preserving local traditions while embracing
-                                  progressiveness is pivotal. Community
-                                  engagement in cultural events strengthens
-                                  social cohesion. Supporting local artisans
-                                  promotes heritage. Celebrating diverse
-                                  identities fosters belonging. Cultural
-                                  exchange platforms foster understanding.
-                                  Engaging youth ensures tradition continuity.
-                                  Community centers serve as hubs for education
-                                  and dialogue. This holistic approach nurtures
-                                  heritage, innovation, and inclusivity,
-                                  fostering a vibrant and cohesive community
-                                  deeply rooted in its cultural identity while
-                                  embracing the dynamics of modernity.{" "}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="home-bt-one-in-one-in-two">
-                              <div className="home-bt-one-in-one-in-two-in">
-                                <Image
-                                  className="home-bt-one-in-one-in-two-in-image"
-                                  src={SVR_UpdateImage_19}
-                                  alt="Picture of the author"
-                                  width={500}
-                                  height={400}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="home-bt-five cm-bx-hide"
-                      id={num === 5 ? "se-visible" : ""}
-                    >
-                      <div className="home-bt-one-in">
-                        <div className="home-bt-one-in-header">
-                          <div className="home-bt-one-in-header-in">
-                            <h1>Health and Hygiene</h1>
-                          </div>
-                        </div>
-                        <div className="home-bt-one-in-one">
-                          <div className="home-bt-one-in-one-in">
-                            <div className="home-bt-one-in-one-in-one">
-                              <div className="home-bt-one-in-one-in-one-in">
-                                <p>
-                                  Establishing healthcare facilities with
-                                  essential services and trained professionals,
-                                  along with health education on hygiene and
-                                  disease prevention, ensures community
-                                  wellness. Access to clean water via
-                                  purification systems and sanitation facilities
-                                  improves hygiene. Essential medications and
-                                  vaccines are available, promoting early
-                                  detection through regular screenings. Fitness
-                                  programs and collaborations with local health
-                                  workers foster healthy lifestyles. These
-                                  initiatives, including outreach programs, form
-                                  a comprehensive approach to community health
-                                </p>
-                              </div>
-                            </div>
-                            <div className="home-bt-one-in-one-in-two">
-                              <div className="home-bt-one-in-one-in-two-in">
-                                <Image
-                                  className="home-bt-one-in-one-in-two-in-image"
-                                  src={SVR_UpdateImage_3}
-                                  alt="Picture of the author"
-                                  width={500}
-                                  height={400}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="home-bt-six cm-bx-hide"
-                      id={num === 6 ? "se-visible" : ""}
-                    >
-                      <div className="home-bt-one-in">
-                        <div className="home-bt-one-in-header">
-                          <div className="home-bt-one-in-header-in">
-                            <h1>Energy Availablity and Efficieny</h1>
-                          </div>
-                        </div>
-                        <div className="home-bt-one-in-one">
-                          <div className="home-bt-one-in-one-in">
-                            <div className="home-bt-one-in-one-in-one">
-                              <div className="home-bt-one-in-one-in-one-in">
-                                <p>
-                                  Promoting sustainable agriculture ensures food
-                                  security while minimizing environmental
-                                  impact. Renewable energy adoption, like solar
-                                  power and biogas, fosters clean energy
-                                  solutions. Eco-friendly waste management
-                                  reduces pollution and promotes recycling.
-                                  Sustainable water management conserves
-                                  resources and prevents scarcity. Reforestation
-                                  and conservation efforts preserve
-                                  biodiversity. Education and awareness
-                                  campaigns encourage sustainable living.
-                                  Collaborative efforts with local communities
-                                  drive sustainable development projects,
-                                  fostering a resilient and environmentally
-                                  conscious society.{" "}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="home-bt-one-in-one-in-two">
-                              <div className="home-bt-one-in-one-in-two-in">
-                                <Image
-                                  className="home-bt-one-in-one-in-two-in-image"
-                                  src={SVR_UpdateImage_11}
-                                  alt="Picture of the author"
-                                  width={500}
-                                  height={400}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="home-bt-seven cm-bx-hide"
-                      id={num === 7 ? "se-visible" : ""}
-                    >
-                      {/* <div className="home-bt-one-in">
-                        <div className="home-bt-one-in-header">
-                          <div className="home-bt-one-in-header-in">
-                            <h1>Transportation</h1>
-                          </div>
-                        </div>
-                        <div className="home-bt-one-in-one">
-                          <div className="home-bt-one-in-one-in">
-                            <div className="home-bt-one-in-one-in-one">
-                              <div className="home-bt-one-in-one-in-one-in">
-                                <p>
-                                  Enhancing transportation networks with quality
-                                  roads and bridges facilitates market access.
-                                  Affordable public transit options improve
-                                  villagers' mobility. Reliable systems ensure
-                                  safe commuting and trade. Embracing technology
-                                  enables smart solutions like ride-sharing.
-                                  Eco-friendly transport reduces environmental
-                                  impact. Regular maintenance ensures safety and
-                                  reliability. Connecting remote areas to hubs
-                                  facilitates movement and trade. Tailored
-                                  transport systems meet community needs,
-                                  fostering inclusivity and economic growth
-                                  while prioritizing safety, efficiency, and
-                                  environmental sustainability.
-                                </p>
-                              </div>
-                            </div>
-                            <div className="home-bt-one-in-one-in-two">
-                              <div className="home-bt-one-in-one-in-two-in">
-                                <Image
-                                  className="home-bt-one-in-one-in-two-in-image"
-                                  src={SVR_UpdateImage_18}
-                                  alt="Picture of the author"
-                                ></Image>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> */}
-                    </div>
-                    <div
-                      className="home-bt-eight cm-bx-hide"
-                      id={num === 8 ? "se-visible" : ""}
-                    >
-                      <div className="home-bt-one-in">
-                        <div className="home-bt-one-in-header">
-                          <div className="home-bt-one-in-header-in">
-                            <h1>Green Innovation</h1>
-                          </div>
-                        </div>
-                        <div className="home-bt-one-in-one">
-                          <div className="home-bt-one-in-one-in">
-                            <div className="home-bt-one-in-one-in-one">
-                              <div className="home-bt-one-in-one-in-one-in">
-                                <p>
-                                  Tailored skill programs address community and
-                                  market needs, fostering entrepreneurship
-                                  through training, mentorship, and resource
-                                  access. Micro-enterprises and cooperatives
-                                  strengthen local industries. Financial
-                                  literacy and microfinance support aspiring
-                                  entrepreneurs. Sustainable farming and
-                                  alternative livelihoods diversify incomes.
-                                  Market linkages boost local goods. Vocational
-                                  training and apprenticeships refine
-                                  specialized skills. Innovation initiatives aid
-                                  small businesses and startups. These efforts
-                                  drive economic growth, empower individuals,
-                                  and cultivate resilient communities poised for
-                                  sustainable development.
-                                </p>
-                              </div>
-                            </div>
-                            <div className="home-bt-one-in-one-in-two">
-                              <div className="home-bt-one-in-one-in-two-in">
-                                <Image
-                                  className="home-bt-one-in-one-in-two-in-image"
-                                  src={SVR_UpdateImage_17}
-                                  alt="Picture of the author"
-                                  width={500}
-                                  height={400}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="home-bt-nine cm-bx-hide"
-                      id={num === 9 ? "se-visible" : ""}
-                    >
-                      <div className="home-bt-one-in">
-                        <div className="home-bt-one-in-header">
-                          <div className="home-bt-one-in-header-in">
-                            <h1>Women Empowerment</h1>
-                          </div>
-                        </div>
-                        <div className="home-bt-one-in-one">
-                          <div className="home-bt-one-in-one-in">
-                            <div className="home-bt-one-in-one-in-one">
-                              <div className="home-bt-one-in-one-in-one-in">
-                                <p>
-                                  Tailored education, leadership training, and
-                                  mentorship empower women, fostering community
-                                  engagement and decision-making. Access to
-                                  healthcare, support networks, and legal
-                                  services address their needs comprehensively.
-                                  Entrepreneurship and vocational training
-                                  ensure financial independence. Cultural bias
-                                  is challenged through awareness campaigns.
-                                  These initiatives collectively advance gender
-                                  equality, enabling women to thrive and
-                                  contribute meaningfully. By providing holistic
-                                  support, we empower women to break barriers,
-                                  shape their futures, and become agents of
-                                  positive change in their communities and
-                                  beyond.{" "}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="home-bt-one-in-one-in-two">
-                              <div className="home-bt-one-in-one-in-two-in">
-                                <Image
-                                  className="home-bt-one-in-one-in-two-in-image"
-                                  src={SVR_UpdateImage_12}
-                                  alt="Picture of the author"
-                                  width={500}
-                                  height={400}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <FocusAreas />
           </div>
         </div>
 
         <div className="Footer">
           <Footer />
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 

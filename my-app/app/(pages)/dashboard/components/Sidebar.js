@@ -13,7 +13,10 @@ import {
     Settings,
     LogOut,
     ChevronLeft,
-    ChevronRight
+    ChevronRight,
+    Layout,
+    Briefcase,
+    Target
 } from 'lucide-react';
 
 const Sidebar = ({
@@ -52,6 +55,15 @@ const Sidebar = ({
         },
         {
             id: 'users', label: 'User Management', icon: <UserCog className="h-5 w-5" />
+        },
+        {
+            id: 'hero', label: 'Hero Slides', icon: <Layout className="h-5 w-5" />
+        },
+        {
+            id: 'areas-of-work', label: 'Areas of Work', icon: <Briefcase className="h-5 w-5" />
+        },
+        {
+            id: 'focus-areas', label: 'Focus Areas (9-Way)', icon: <Target className="h-5 w-5" />
         }
     ];
 
