@@ -35,10 +35,10 @@ const Footer = () => {  const currentYear = new Date().getFullYear();
                     <h3>Our Collaborations</h3>
                     <ul>
                       <li>
-                        <Link href="https://drive.google.com/file/d/1a-X9rWklMfXHZz10RdaTmsCVI3cwRdI8/view?usp=share_link" target='_blank' rel="noopener noreferrer">Government of Andhra Pradesh</Link>
+                        <Link href="https://ap.gov.in/#/" target='_blank' rel="noopener noreferrer">Government of Andhra Pradesh</Link>
                       </li>
                       <li>
-                        <Link href="https://saanjhi.gov.in" target="_blank" rel="noopener noreferrer">Sansad Adarsh Gram Yojana</Link>
+                        <Link href="https://saanjhi.dord.gov.in/" target="_blank" rel="noopener noreferrer">Sansad Adarsh Gram Yojana</Link>
                       </li>
                       <li>
                         <Link href="http://graam.org.in" target="_blank" rel="noopener noreferrer">GRAAM</Link>
@@ -85,13 +85,13 @@ const Footer = () => {  const currentYear = new Date().getFullYear();
                         <ScrollLink to="home-eight" offset={-70} smooth={true} duration={600}>Annual Reports</ScrollLink>
                       </li>
                       <li>
-                        <Link href='https://drive.google.com/file/d/1RdP4R6HnP5pt2cmLxvEKg6uilsyTVWZQ/view?usp=share_link' target="_blank" rel="noopener noreferrer">Awards List</Link>
+                        <Link href='/awards' target="_blank" rel="noopener noreferrer">Awards List</Link>
                       </li>
                       <li>
-                        <Link href='https://drive.google.com/file/d/1hqXfW0VcCbDN8Dz_QDi3UuzMU1h7z96I/view?usp=share_link' target="_blank" rel="noopener noreferrer">Villages Adopted</Link>
+                        <Link href='/villages' target="_blank" rel="noopener noreferrer">Villages Adopted</Link>
                       </li>
                       <li>
-                        <Link href='https://drive.google.com/file/d/1pi69cRuq_VUAc60UQ4v0USRNugUPoQhm/view?usp=share_link' target="_blank" rel="noopener noreferrer">List of Staff</Link>
+                        <Link href='/staff' target="_blank" rel="noopener noreferrer">List of Staff</Link>
                       </li>
                     </ul>
                   </div>
@@ -116,7 +116,7 @@ const Footer = () => {  const currentYear = new Date().getFullYear();
           <div className="Footer-last-in">
             <div className="footer-copyright">
               <div className="footer-copyright-left">
-                <p className="copyright-text">© {currentYear} KLEF - <a href="https://sac.kluniversity.in/" target="_blank" rel="noopener noreferrer">Student Activity Center</a> | <a href="https://www.linkedin.com/company/zeroonecodeclub/" target="_blank" rel="noopener noreferrer">ZeroOne Code Club</a> | Designed & Developed by <a href="https://www.linkedin.com/in/dinesh-korukonda-513855271/" target="_blank" rel="noopener noreferrer">Dinesh Korukonda</a> & <a href="https://www.linkedin.com/in/singananischal/" target="_blank" rel="noopener noreferrer">Nischal Singana</a></p>
+                <p className="copyright-text">© {currentYear} KLEF - <a href="https://sac.kluniversity.in/" target="_blank" rel="noopener noreferrer">Student Activity Center</a> | Designed & Developed by <a href="https://www.linkedin.com/company/zeroonecodeclub/" target="_blank" rel="noopener noreferrer">ZeroOne CodeClub</a></p>
               </div>
               <div className="footer-copyright-right">
                 <div className="footer-social">

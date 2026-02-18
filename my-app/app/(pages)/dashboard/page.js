@@ -2,7 +2,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import SmallFooter from "../components/SmallFooter/footer";
+import SmallFooter from "@/app/components/SmallFooter/footer";
 import Sidebar from './components/Sidebar';
 
 // Tab Components
@@ -14,11 +14,12 @@ import NewsTab from './components/NewsTab';
 import AwardsTab from './components/AwardsTab';
 import StaffTab from './components/StaffTab';
 import VillagesTab from './components/VillagesTab';
+import AnalyticsTab from './components/AnalyticsTab';
 import ChangePasswordModal from './components/ChangePasswordModal';
 
 
 const SVRDashboard = () => {
-    const [activeTab, setActiveTab] = useState('activities'); 
+    const [activeTab, setActiveTab] = useState('activities');
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [userRole, setUserRole] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -26,6 +27,7 @@ const SVRDashboard = () => {
 
     // Role-based title mapping
     const tabTitles = {
+        'analytics': 'Analytics Dashboard',
         'registrations': 'GOP Registrations',
         'gallery': 'Gallery Images',
         'activities': 'Activity Reports',
@@ -58,7 +60,7 @@ const SVRDashboard = () => {
 
                         // Set initial landing tab based on role
                         if (role === 'admin') {
-                            setActiveTab('registrations');
+                            setActiveTab('analytics');
                         } else if (role === 'staff') {
                             setActiveTab('gallery');
                         } else if (role === 'lead') {
@@ -96,7 +98,7 @@ const SVRDashboard = () => {
     }
 
     return (
-        <div className="w-full min-h-screen bg-gray-50 font-[Poppins] flex">
+        <div className="w-full min-h-screen bg-gray-50 flex">
             {/* Sidebar Component */}
             <Sidebar
                 sidebarOpen={sidebarOpen}
@@ -116,14 +118,12 @@ const SVRDashboard = () => {
                             <h1 className="text-3xl font-bold text-gray-800 tracking-tight">
                                 {tabTitles[activeTab] || 'Dashboard'}
                             </h1>
-                            <p className="text-gray-500 text-sm mt-1.5 flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                            <p className="text-gray-500 text-sm mt-1.5">
                                 Manage your village infrastructure and records
                             </p>
                         </div>
                         {userRole && (
-                            <div className="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100 flex items-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                            <div className="bg-white px-4 py-2 rounded-md shadow-sm border border-gray-100 flex items-center gap-2">
                                 <span className="text-xs font-bold text-gray-600 uppercase tracking-widest">
                                     Role: {userRole}
                                 </span>
@@ -133,6 +133,7 @@ const SVRDashboard = () => {
 
                     {/* Content Area */}
                     <div className="animate-fade-in-up">
+                        {activeTab === 'analytics' && userRole === 'admin' && <AnalyticsTab />}
                         {activeTab === 'registrations' && userRole === 'admin' && <RegistrationsTab />}
                         {activeTab === 'gallery' && (userRole === 'admin' || userRole === 'staff' || userRole === 'lead') && <GalleryTab />}
                         {activeTab === 'activities' && (userRole === 'admin' || userRole === 'staff' || userRole === 'lead') && <ActivitiesTab />}

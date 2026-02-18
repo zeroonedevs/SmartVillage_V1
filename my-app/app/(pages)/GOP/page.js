@@ -1,63 +1,86 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
 import Link from "next/link";
-import Footer from "../../components/footer/Footer";
 import { countries } from '../../data/countries';
+import {
+    ChevronRight, ChevronLeft, Check, Building2, User, Globe2, FileText,
+    Download, Calendar, ArrowRight, ShieldCheck, Users, Award
+} from 'lucide-react';
+
+// --- Components ---
+const InputField = ({ label, name, value, onChange, type = "text", placeholder, required = true }) => (
+    <div className="group">
+        <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-[#008000] transition-colors">
+            {label} {required && <span className="text-red-500">*</span>}
+        </label>
+        <input
+            type={type}
+            name={name}
+            value={value}
+            onChange={onChange}
+            required={required}
+            placeholder={placeholder}
+            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:border-[#008000] focus:ring-4 focus:ring-green-500/10 transition-all outline-none font-medium text-gray-900 placeholder-gray-400"
+        />
+    </div>
+);
 
 const GOPRegistration = () => {
+    // Form State
     const [formData, setFormData] = useState({
-        orgName: '',
-        category: '',
-        contactPerson: '',
-        designation: '',
-        contactEmail: '',
-        contactPhone: '',
-        countryCode: '+91',
-        isoCode: 'IN',
-        orgAddress: '',
-        tenure: '',
-        tenure: '',
-        interestedDomains: [],
-        otherCategory: ''
+        orgName: '', category: '', contactPerson: '', designation: '',
+        contactEmail: '', contactPhone: '', countryCode: '+91', isoCode: 'IN',
+        orgAddress: '', tenure: '', interestedDomains: [], otherCategory: ''
     });
 
+    // Wizard State
+    const [currentStep, setCurrentStep] = useState(1);
+    const [status, setStatus] = useState({ loading: false, success: null, error: null });
+
+    // UI Helpers
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
-    const [isReviewing, setIsReviewing] = useState(false);
     const dropdownRef = useRef(null);
+    const scrollRef = useRef(null);
 
-    // Filter countries based on search term
+    // Derived State
     const filteredCountries = countries.filter(c =>
         c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         c.dial_code.includes(searchTerm)
     );
 
-    // Close dropdown when clicking outside
+    const steps = [
+        { id: 1, title: "Organization", icon: Building2, desc: "Tell us about your entity" },
+        { id: 2, title: "Representative", icon: User, desc: "Who will lead this?" },
+        { id: 3, title: "Partnership", icon: Globe2, desc: "Scope of collaboration" },
+        { id: 4, title: "Review", icon: FileText, desc: "Final verification" }
+    ];
+
+    const domains = [
+        "Health & Hygiene", "Agriculture", "Quality Education", "Village Infrastructure",
+        "Social Community Actions", "Women Empowerment", "Livelihood Enhancement",
+        "Digital Literacy", "Green Innovation", "Cultural Exchange"
+    ];
+
+    // --- Effects ---
     useEffect(() => {
-        function handleClickOutside(event) {
+        const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setDropdownOpen(false);
             }
-        }
+        };
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const [status, setStatus] = useState({ loading: false, success: null, error: null });
+    // Scroll to top of form on step change (mobile friendliness)
+    useEffect(() => {
+        if (window.innerWidth < 768 && scrollRef.current) {
+            scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [currentStep]);
 
-    const domains = [
-        "Health & Hygiene",
-        "Agriculture",
-        "Quality Education",
-        "Village Infrastructure",
-        "Social Community Actions",
-        "Women Empowerment",
-        "Livelihood Enhancement",
-        "Digital Literacy",
-        "Green Innovation",
-        "Cultural Exchange"
-    ];
-
+    // --- Handlers ---
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -65,45 +88,42 @@ const GOPRegistration = () => {
 
     const handleDomainChange = (domain) => {
         setFormData(prev => {
-            const currentDomains = prev.interestedDomains;
-            if (currentDomains.includes(domain)) {
-                return { ...prev, interestedDomains: currentDomains.filter(d => d !== domain) };
-            } else {
-                return { ...prev, interestedDomains: [...currentDomains, domain] };
-            }
+            const current = prev.interestedDomains;
+            return current.includes(domain)
+                ? { ...prev, interestedDomains: current.filter(d => d !== domain) }
+                : { ...prev, interestedDomains: [...current, domain] };
         });
     };
 
+    const validateStep = (step) => {
+        switch (step) {
+            case 1:
+                const isOther = formData.category === 'Other';
+                if (isOther && !formData.otherCategory) return false;
+                return formData.orgName && formData.category && formData.orgAddress;
+            case 2: return formData.contactPerson && formData.designation && formData.contactEmail && formData.contactPhone;
+            case 3: return formData.tenure && formData.interestedDomains.length > 0;
+            default: return true;
+        }
+    };
+
+    const nextStep = () => {
+        if (validateStep(currentStep)) {
+            setCurrentStep(prev => Math.min(prev + 1, 4));
+        } else {
+            alert("Please complete all required fields.");
+        }
+    };
+
+    const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 1));
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (!formData.tenure) {
-            setStatus({ loading: false, success: null, error: "Please select a preferred tenure duration." });
-            window.scrollTo(0, 0);
-            return;
-        }
-
-        if (formData.interestedDomains.length === 0) {
-            setStatus({ loading: false, success: null, error: "Please select at least one interested domain." });
-            window.scrollTo(0, 0);
-            return;
-        }
-
-        if (!isReviewing) {
-            setStatus({ loading: false, success: null, error: null });
-            setIsReviewing(true);
-            window.scrollTo(0, 0);
-            return;
-        }
-
         setStatus({ loading: true, success: null, error: null });
 
         try {
             const payload = { ...formData };
-            if (payload.category === 'Other') {
-                payload.category = payload.otherCategory;
-            }
-            // Combine phone number with country code
+            if (payload.category === 'Other') payload.category = payload.otherCategory;
             payload.contactPhone = `${payload.countryCode} ${payload.contactPhone}`;
 
             const response = await fetch('/api/gop/register', {
@@ -113,403 +133,298 @@ const GOPRegistration = () => {
             });
 
             if (!response.ok) throw new Error('Registration failed');
-
-            setStatus({ loading: false, success: "Registration successful! We will contact you soon.", error: null });
-            setFormData({
-                orgName: '', category: '', contactPerson: '', designation: '',
-                contactEmail: '', contactPhone: '', countryCode: '+91', isoCode: 'IN', orgAddress: '', tenure: '', interestedDomains: [], otherCategory: ''
-            });
-            setIsReviewing(false);
+            setStatus({ loading: false, success: "Success! Check your email for next steps.", error: null });
         } catch (error) {
-            setStatus({ loading: false, success: null, error: "Something went wrong. Please try again." });
+            setStatus({ loading: false, success: null, error: "Submission failed. Please try again." });
         }
     };
 
+    if (status.success) {
+        return (
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 font-[Poppins]">
+                <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 text-center animate-fade-in-up">
+                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <Check className="w-10 h-10 text-green-600" />
+                    </div>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Registration Complete</h2>
+                    <p className="text-gray-500 mb-8">Thank you for joining the Global Outreach Program. Our team will review your application and contact you shortly.</p>
+                    <Link href="/" className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors w-full">
+                        Return to Home
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="w-full min-h-screen bg-green-50 relative">
-            <Link href="/" className="absolute top-6 left-6 flex items-center space-x-2 text-green-700 hover:text-green-900 transition-colors font-medium z-50">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span>Back to Home</span>
-            </Link>
+        <div className="min-h-screen flex flex-col md:flex-row font-[Poppins] bg-white">
 
-            <div className="max-w-4xl mx-auto px-4 py-12 pt-20 md:pt-24">
-                <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-green-600">
-                    <h1 className="text-3xl font-bold text-center text-green-700 mb-2 font-[Poppins]">
-                        Global Outreach Program (GOP)
-                    </h1>
-                    <p className="text-center text-gray-600 mb-8 font-[Poppins]">
-                        Register your organization to collaborate with Smart Village Revolution
-                    </p>
+            {/* Left Panel - Branding (Fixed on Desktop) */}
+            <div className="relative w-full md:w-5/12 lg:w-4/12 flex-shrink-0 bg-[#001a00] text-white">
+                <div className="absolute inset-0 z-0">
+                    <img src="/hero/1president.jpg" alt="President" className="w-full h-full object-cover opacity-40 mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-[#003300]/90 to-[#001a00]" />
+                </div>
 
-                    {status.success && (
-                        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6 text-center">
-                            {status.success}
+                <div className="relative z-10 flex flex-col h-full p-8 md:p-12 justify-between">
+                    <div>
+                        <Link href="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-12">
+                            <ChevronLeft className="w-5 h-5" /> Back to Home
+                        </Link>
+                        <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-6">Global Outreach Program</h1>
+                        <p className="text-lg text-green-100/90 leading-relaxed font-light">
+                            Join a network of visionary organizations transforming rural landscapes through sustainable innovation.
+                        </p>
+                    </div>
+
+                    <div className="space-y-6 hidden md:block">
+                        <div className="flex items-center gap-4 text-sm font-medium text-green-100/80">
+                            <ShieldCheck className="w-5 h-5 text-green-400" />
+                            <span>Official Partner Verification</span>
                         </div>
-                    )}
-
-                    {status.error && (
-                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 text-center">
-                            {status.error}
+                        <div className="flex items-center gap-4 text-sm font-medium text-green-100/80">
+                            <Users className="w-5 h-5 text-green-400" />
+                            <span>150+ Global Organizations</span>
                         </div>
-                    )}
+                        <div className="flex items-center gap-4 text-sm font-medium text-green-100/80">
+                            <Award className="w-5 h-5 text-green-400" />
+                            <span>Recognized Excellence</span>
+                        </div>
+                    </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-6 font-[Poppins]">
-                        {!isReviewing ? (
-                            <>
-                                {/* Organization Details */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label className="block text-gray-700 font-medium mb-2">Organization Name <span className="text-red-500">*</span></label>
-                                        <input
-                                            type="text"
-                                            name="orgName"
-                                            value={formData.orgName}
-                                            onChange={handleInputChange}
-                                            required
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                                            placeholder="Enter Organization Name"
-                                        />
+                    <div className="pt-8 border-t border-white/10 hidden md:block">
+                        <p className="text-xs text-white/40 uppercase tracking-widest font-bold mb-2">Need Assistance?</p>
+                        <a href="mailto:saivijay.ceo@gmail.com" className="text-white hover:text-green-400 transition-colors font-medium">saivijay.ceo@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+
+            {/* Right Panel - Form (Scrollable) */}
+            <div ref={scrollRef} className="flex-1 bg-white overflow-y-auto min-h-screen">
+                <div className="max-w-3xl mx-auto px-4 py-8 md:py-16 md:px-12">
+
+                    {/* Progress Steps */}
+                    <div className="mb-10">
+                        <div className="flex justify-between items-center relative">
+                            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-100 -z-10"></div>
+                            {steps.map((step) => (
+                                <div key={step.id} className="flex flex-col items-center bg-white px-2">
+                                    <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all duration-300 ${currentStep >= step.id
+                                        ? 'bg-[#008000] border-[#008000] text-white'
+                                        : 'bg-white border-gray-200 text-gray-400'
+                                        }`}>
+                                        {currentStep > step.id ? <Check className="w-4 h-4 md:w-5 md:h-5" /> : step.id}
                                     </div>
-                                    <div>
-                                        <label className="block text-gray-700 font-medium mb-2">Category <span className="text-red-500">*</span></label>
-                                        <select
-                                            name="category"
-                                            value={formData.category}
-                                            onChange={handleInputChange}
-                                            required
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                                        >
-                                            <option value="">Select Category</option>
-                                            <option value="NGO">NGO / Non-Profit</option>
-                                            <option value="Educational Institution">Educational Institution</option>
-                                            <option value="University">University / College</option>
-                                            <option value="Corporate">Corporate / CSR</option>
-                                            <option value="Government">Government Body</option>
-                                            <option value="Research Organization">Research Organization</option>
-                                            <option value="Startup">Startup / Incubator</option>
-                                            <option value="Healthcare">Healthcare Organization</option>
-                                            <option value="Community Group">Community Group / SHG</option>
-                                            <option value="Financial Institution">Financial Institution / Bank</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                        {formData.category === 'Other' && (
-                                            <input
-                                                type="text"
-                                                name="otherCategory"
-                                                value={formData.otherCategory}
-                                                onChange={handleInputChange}
-                                                required
-                                                className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                                                placeholder="Please specify category"
-                                            />
-                                        )}
-                                    </div>
+                                    <span className={`text-[10px] md:text-xs font-bold uppercase mt-2 tracking-wide ${currentStep >= step.id ? 'text-gray-900' : 'text-gray-400'
+                                        }`}>{step.title}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Form Container */}
+                    <form onSubmit={handleSubmit} className="animate-fade-in-up space-y-8">
+
+                        {/* Step 1: Organization */}
+                        {currentStep === 1 && (
+                            <div className="space-y-6">
+                                <div className="mb-6">
+                                    <h2 className="text-2xl font-bold text-gray-900">Organization Identity</h2>
+                                    <p className="text-gray-500">Provide details about your registered entity.</p>
+                                </div>
+                                <InputField
+                                    label="Organization Name"
+                                    name="orgName"
+                                    value={formData.orgName}
+                                    onChange={handleInputChange}
+                                    placeholder="E.g. Green Earth Foundation"
+                                />
+
+                                <div className="group">
+                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Category <span className="text-red-500">*</span></label>
+                                    <select
+                                        name="category"
+                                        value={formData.category}
+                                        onChange={handleInputChange}
+                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:border-[#008000] focus:ring-4 focus:ring-green-500/10 transition-all outline-none font-medium text-gray-900"
+                                    >
+                                        <option value="">Select Category</option>
+                                        {["NGO", "Educational Institution", "Corporate / CSR", "Government Body", "Research Organization", "Startup", "Other"].map(o => (
+                                            <option key={o} value={o}>{o}</option>
+                                        ))}
+                                    </select>
                                 </div>
 
-                                {/* Contact Person */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label className="block text-gray-700 font-medium mb-2">Contact Person Name <span className="text-red-500">*</span></label>
-                                        <input
-                                            type="text"
-                                            name="contactPerson"
-                                            value={formData.contactPerson}
-                                            onChange={handleInputChange}
-                                            required
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                                            placeholder="Full Name"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700 font-medium mb-2">Designation <span className="text-red-500">*</span></label>
-                                        <input
-                                            type="text"
-                                            name="designation"
-                                            value={formData.designation}
-                                            onChange={handleInputChange}
-                                            required
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                                            placeholder="e.g. Director, Manager"
-                                        />
-                                    </div>
-                                </div>
+                                {formData.category === 'Other' && (
+                                    <InputField
+                                        label="Specify Category"
+                                        name="otherCategory"
+                                        value={formData.otherCategory}
+                                        onChange={handleInputChange}
+                                        placeholder="E.g. Social Enterprise"
+                                    />
+                                )}
 
-                                {/* Contact Info */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label className="block text-gray-700 font-medium mb-2">Email Address <span className="text-red-500">*</span></label>
-                                        <input
-                                            type="email"
-                                            name="contactEmail"
-                                            value={formData.contactEmail}
-                                            onChange={handleInputChange}
-                                            required
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                                            placeholder="email@example.com"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700 font-medium mb-2">Phone Number <span className="text-red-500">*</span></label>
-                                        <div className="flex w-full border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-green-500 focus-within:border-transparent transition-all duration-200">
-                                            <div className="relative" ref={dropdownRef}>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                                                    className="h-full px-3 py-2 border-r border-gray-300 rounded-l-lg focus:outline-none bg-gray-50 text-sm flex items-center justify-between whitespace-nowrap min-w-[90px]"
-                                                >
-                                                    <span>
-                                                        {countries.find(c => c.code === formData.isoCode)
-                                                            ? `${countries.find(c => c.code === formData.isoCode).flag} ${formData.countryCode}`
-                                                            : formData.countryCode}
-                                                    </span>
-                                                    <span className="text-gray-400 text-xs ml-2">▼</span>
-                                                </button>
-
-                                                {dropdownOpen && (
-                                                    <div className="absolute top-full left-0 w-[240px] bg-white border border-gray-300 shadow-lg rounded-lg z-50 max-h-64 overflow-y-auto mt-1">
-                                                        <div className="p-2 sticky top-0 bg-white border-b">
-                                                            <input
-                                                                type="text"
-                                                                placeholder="Search country..."
-                                                                className="w-full p-2 border rounded text-sm focus:outline-none focus:border-green-500"
-                                                                value={searchTerm}
-                                                                onChange={(e) => setSearchTerm(e.target.value)}
-                                                                autoFocus
-                                                            />
-                                                        </div>
-                                                        {filteredCountries.map(country => (
-                                                            <div
-                                                                key={country.code}
-                                                                className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm flex items-center space-x-2"
-                                                                onClick={() => {
-                                                                    setFormData(prev => ({ ...prev, countryCode: country.dial_code, isoCode: country.code }));
-                                                                    setDropdownOpen(false);
-                                                                    setSearchTerm("");
-                                                                }}
-                                                            >
-                                                                <span className="text-lg">{country.flag}</span>
-                                                                <span className="font-medium truncate">{country.name}</span>
-                                                                <span className="text-gray-500 text-xs whitespace-nowrap">({country.dial_code})</span>
-                                                            </div>
-                                                        ))}
-                                                        {filteredCountries.length === 0 && (
-                                                            <div className="p-4 text-center text-gray-500 text-sm">No results found</div>
-                                                        )}
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <input
-                                                type="tel"
-                                                name="contactPhone"
-                                                value={formData.contactPhone}
-                                                onChange={handleInputChange}
-                                                required
-                                                className="w-full px-4 py-2 border-none focus:outline-none rounded-r-lg"
-                                                placeholder="9876543210"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Address */}
-                                <div>
-                                    <label className="block text-gray-700 font-medium mb-2">Organization Address <span className="text-red-500">*</span></label>
+                                <div className="group">
+                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Address <span className="text-red-500">*</span></label>
                                     <textarea
                                         name="orgAddress"
                                         value={formData.orgAddress}
                                         onChange={handleInputChange}
-                                        required
                                         rows="3"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                                        placeholder="Full Address"
-                                    ></textarea>
-                                </div>
-
-                                {/* Program Details */}
-                                <div>
-                                    <label className="block text-gray-700 font-medium mb-2">Preferred Tenure <span className="text-red-500">*</span></label>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                        {['3 Days', '5 Days', '7 Days', '10 Days'].map(days => (
-                                            <label key={days} className={`border rounded-lg p-3 text-center cursor-pointer transition-colors ${formData.tenure === days ? 'bg-green-600 text-white border-green-600' : 'bg-white text-gray-700 hover:bg-green-50'}`}>
-                                                <input
-                                                    type="radio"
-                                                    name="tenure"
-                                                    value={days}
-                                                    checked={formData.tenure === days}
-                                                    onChange={handleInputChange}
-                                                    className="hidden"
-                                                />
-                                                {days}
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Program Brochure Coming Soon */}
-                                {formData.tenure === '3 Days' ? (
-                                    <div className="space-y-4">
-                                        <div className="p-4 bg-green-50 border border-green-200 rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                            <div className="flex items-center space-x-3">
-                                                <span className="text-2xl">📄</span>
-                                                <div>
-                                                    <h3 className="font-medium text-gray-800">Program Brochure ({formData.tenure})</h3>
-                                                    <p className="text-sm text-gray-600">View details for the 3-day program.</p>
-                                                </div>
-                                            </div>
-                                            <div className="flex space-x-3">
-                                                <a
-                                                    href="/GOP_3days.pdf"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex-1 md:flex-none text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
-                                                >
-                                                    View Full
-                                                </a>
-                                                <a
-                                                    href="/GOP_3days.pdf"
-                                                    download="GOP_3days.pdf"
-                                                    className="flex-1 md:flex-none text-center px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition-colors text-sm font-medium"
-                                                >
-                                                    Download
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="w-full h-96 border rounded-lg overflow-hidden bg-gray-100 hidden md:block">
-                                            <iframe src="/GOP_3days.pdf" className="w-full h-full" title="GOP 3 Days Brochure">
-                                                <p>Your browser does not support iframes. <a href="/GOP_3days.pdf">Download the PDF</a>.</p>
-                                            </iframe>
-                                        </div>
-                                    </div>
-                                ) : formData.tenure && (
-                                    <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg flex items-center space-x-3">
-                                        <span className="text-2xl">📄</span>
-                                        <div>
-                                            <h3 className="font-medium text-gray-800">Program Brochure</h3>
-                                            <p className="text-sm text-gray-600">Coming Soon! We will add the program brochure here once it is ready.</p>
-                                        </div>
-                                        <span className="ml-auto bg-yellow-200 text-yellow-800 text-xs px-2 py-1 rounded-full font-semibold">COMING SOON</span>
-                                    </div>
-                                )}
-
-                                {/* Domains */}
-                                <div>
-                                    <label className="block text-gray-700 font-medium mb-2">Interested Domains (Select all that apply) <span className="text-red-500">*</span></label>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        {domains.map(domain => (
-                                            <label key={domain} className="flex items-center space-x-3 cursor-pointer p-2 hover:bg-gray-50 rounded">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={formData.interestedDomains.includes(domain)}
-                                                    onChange={() => handleDomainChange(domain)}
-                                                    className="w-5 h-5 text-green-600 rounded border-gray-300 focus:ring-green-500"
-                                                />
-                                                <span className="text-gray-700">{domain}</span>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-                            </>
-                        ) : (
-                            <div className="space-y-6">
-                                <h2 className="text-xl font-bold text-gray-800 border-b pb-2">Review Registration Details</h2>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-base">
-                                    <div>
-                                        <p className="text-gray-500 text-sm">Organization Name</p>
-                                        <p className="font-medium text-lg">{formData.orgName}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-gray-500 text-sm">Category</p>
-                                        <p className="font-medium text-lg">{formData.category === 'Other' ? formData.otherCategory : formData.category}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-gray-500 text-sm">Contact Person</p>
-                                        <p className="font-medium text-lg">{formData.contactPerson}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-gray-500 text-sm">Designation</p>
-                                        <p className="font-medium text-lg">{formData.designation}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-gray-500 text-sm">Contact Email</p>
-                                        <p className="font-medium text-lg">{formData.contactEmail}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-gray-500 text-sm">Contact Phone</p>
-                                        <p className="font-medium text-lg">{formData.countryCode} {formData.contactPhone}</p>
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <p className="text-gray-500 text-sm">Organization Address</p>
-                                        <p className="font-medium text-lg">{formData.orgAddress}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-gray-500 text-sm">Preferred Tenure</p>
-                                        <p className="font-medium text-lg">{formData.tenure}</p>
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <p className="text-gray-500 text-sm">Interested Domains</p>
-                                        <div className="flex flex-wrap gap-2 mt-1">
-                                            {formData.interestedDomains.length > 0 ? (
-                                                formData.interestedDomains.map((d, i) => (
-                                                    <span key={i} className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                                                        {d}
-                                                    </span>
-                                                ))
-                                            ) : (
-                                                <span className="text-gray-400 italic">None selected</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 text-base">
-                                    <p>Please review all details carefully before submitting. You can go back to edit if needed.</p>
+                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:border-[#008000] focus:ring-4 focus:ring-green-500/10 transition-all outline-none font-medium text-gray-900 placeholder-gray-400"
+                                        placeholder="Full registered address..."
+                                    />
                                 </div>
                             </div>
                         )}
 
-                        {/* Submit Buttons */}
-                        <div className="flex justify-center pt-6 space-x-4">
-                            {isReviewing && (
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setIsReviewing(false);
-                                        window.scrollTo(0, 0);
-                                    }}
-                                    className="px-8 py-3 rounded-full text-lg font-semibold text-gray-600 bg-gray-200 hover:bg-gray-300 transition-colors"
-                                >
-                                    Edit Details
+                        {/* Step 2: Representative */}
+                        {currentStep === 2 && (
+                            <div className="space-y-6">
+                                <div className="mb-6">
+                                    <h2 className="text-2xl font-bold text-gray-900">Key Representative</h2>
+                                    <p className="text-gray-500">Who should we mitigate correspondence through?</p>
+                                </div>
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    <InputField label="Full Name" name="contactPerson" value={formData.contactPerson} onChange={handleInputChange} placeholder="John Doe" />
+                                    <InputField label="Designation" name="designation" value={formData.designation} onChange={handleInputChange} placeholder="Director / Manager" />
+                                    <div className="md:col-span-2">
+                                        <InputField label="Email Address" name="contactEmail" type="email" value={formData.contactEmail} onChange={handleInputChange} placeholder="john@company.com" />
+                                    </div>
+                                    <div className="md:col-span-2 space-y-2">
+                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest">Phone Number <span className="text-red-500">*</span></label>
+                                        <div className="flex bg-gray-50 border border-gray-200 rounded-lg focus-within:ring-4 focus-within:ring-green-500/10 focus-within:border-[#008000] focus-within:bg-white transition-all">
+                                            <div className="relative border-r border-gray-200" ref={dropdownRef}>
+                                                <button type="button" onClick={() => setDropdownOpen(!dropdownOpen)} className="h-full px-3 flex items-center gap-2 hover:bg-gray-100 rounded-l-lg transition-colors">
+                                                    <span>{countries.find(c => c.code === formData.isoCode)?.flag}</span>
+                                                    <span className="text-sm font-medium text-gray-700">{formData.countryCode}</span>
+                                                </button>
+                                                {dropdownOpen && (
+                                                    <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 shadow-xl rounded-lg z-50 max-h-60 overflow-y-auto">
+                                                        <div className="p-2 sticky top-0 bg-white border-b z-10">
+                                                            <input type="text" placeholder="Search..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full p-2 text-sm border rounded bg-gray-50 focus:outline-none focus:border-[#008000]" autoFocus />
+                                                        </div>
+                                                        {filteredCountries.map(c => (
+                                                            <div key={c.code} onClick={() => { setFormData(p => ({ ...p, countryCode: c.dial_code, isoCode: c.code })); setDropdownOpen(false); }} className="px-4 py-2 hover:bg-green-50 cursor-pointer flex items-center gap-3 text-sm">
+                                                                <span>{c.flag}</span> <span className="text-gray-700 font-medium">{c.name}</span>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <input type="tel" name="contactPhone" value={formData.contactPhone} onChange={handleInputChange} className="flex-1 px-4 py-3 bg-transparent outline-none font-medium text-gray-900 placeholder-gray-400" placeholder="98765 43210" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Step 3: Partnership */}
+                        {currentStep === 3 && (
+                            <div className="space-y-8">
+                                <div className="mb-6">
+                                    <h2 className="text-2xl font-bold text-gray-900">Partnership Scope</h2>
+                                    <p className="text-gray-500">Define your engagement parameters.</p>
+                                </div>
+
+                                {/* Tenure */}
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Preferred Duration</label>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                        {['3 Days', '5 Days', '7 Days', '10 Days'].map(days => (
+                                            <div key={days} onClick={() => setFormData(p => ({ ...p, tenure: days }))} className={`cursor-pointer border rounded-xl p-4 flex flex-col items-center justify-center gap-2 transition-all ${formData.tenure === days ? 'bg-green-50 border-[#008000] ring-1 ring-[#008000] shadow-sm' : 'bg-white border-gray-200 hover:border-[#008000]/50 hover:bg-gray-50'}`}>
+                                                <Calendar className={`w-5 h-5 ${formData.tenure === days ? 'text-[#008000]' : 'text-gray-400'}`} />
+                                                <span className={`font-bold text-sm ${formData.tenure === days ? 'text-[#008000]' : 'text-gray-700'}`}>{days}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Domains */}
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Focus Areas</label>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        {domains.map(domain => (
+                                            <div key={domain} onClick={() => handleDomainChange(domain)} className={`cursor-pointer p-3.5 rounded-xl border flex items-center justify-between transition-all group ${formData.interestedDomains.includes(domain) ? 'bg-gray-900 border-gray-900 text-white shadow-md' : 'bg-white border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50'}`}>
+                                                <span className="font-medium text-sm">{domain}</span>
+                                                {formData.interestedDomains.includes(domain) && <Check className="w-4 h-4 text-green-400" />}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Step 4: Review */}
+                        {currentStep === 4 && (
+                            <div className="space-y-6">
+                                <div className="mb-6">
+                                    <h2 className="text-2xl font-bold text-gray-900">Final Verification</h2>
+                                    <p className="text-gray-500">Please review your details carefully.</p>
+                                </div>
+
+                                <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 space-y-6">
+                                    <div className="flex justify-between items-start border-b border-gray-200 pb-4">
+                                        <div>
+                                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Organization</h4>
+                                            <p className="font-bold text-gray-900 text-lg">{formData.orgName}</p>
+                                            <p className="text-gray-600 text-sm">{formData.category}</p>
+                                        </div>
+                                        <button type="button" onClick={() => setCurrentStep(1)} className="text-xs text-[#008000] font-bold hover:underline">EDIT</button>
+                                    </div>
+                                    <div className="flex justify-between items-start border-b border-gray-200 pb-4">
+                                        <div>
+                                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Contact</h4>
+                                            <p className="font-bold text-gray-900">{formData.contactPerson}</p>
+                                            <p className="text-gray-600 text-sm">{formData.contactEmail}</p>
+                                            <p className="text-gray-600 text-sm">{formData.contactPhone}</p>
+                                        </div>
+                                        <button type="button" onClick={() => setCurrentStep(2)} className="text-xs text-[#008000] font-bold hover:underline">EDIT</button>
+                                    </div>
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Partnership</h4>
+                                            <div className="flex flex-wrap gap-2 mt-1">
+                                                <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-bold">{formData.tenure}</span>
+                                                {formData.interestedDomains.map(d => (
+                                                    <span key={d} className="px-2 py-1 bg-white border border-gray-200 text-gray-600 rounded text-xs font-medium">{d}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <button type="button" onClick={() => setCurrentStep(3)} className="text-xs text-[#008000] font-bold hover:underline">EDIT</button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Actions */}
+                        <div className="pt-8 flex items-center justify-between border-t border-gray-100 mt-8">
+                            {currentStep > 1 ? (
+                                <button type="button" onClick={prevStep} className="px-6 py-3 rounded-lg font-bold text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors flex items-center gap-2">
+                                    <ChevronLeft className="w-5 h-5" /> Back
                                 </button>
+                            ) : (
+                                <div />
                             )}
+
                             <button
-                                type="submit"
+                                type={currentStep === 4 ? "submit" : "button"}
+                                onClick={currentStep < 4 ? nextStep : undefined}
                                 disabled={status.loading}
-                                className={`px-8 py-3 rounded-full text-lg font-semibold text-white shadow-lg transition-transform transform hover:scale-105 ${status.loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#008000] hover:bg-[#006400]'}`}
+                                className={`px-8 py-3.5 bg-[#008000] text-white rounded-xl font-bold hover:bg-[#006600] transition-all shadow-lg hover:shadow-xl flex items-center gap-2 ${status.loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                             >
-                                {status.loading ? 'Processing...' : (isReviewing ? 'Confirm & Submit' : 'Review Registration')}
+                                {status.loading ? 'Processing...' : (currentStep === 4 ? 'Confirm & Submit' : 'Next Step')}
+                                {currentStep < 4 && <ArrowRight className="w-5 h-5" />}
                             </button>
                         </div>
                     </form>
-
-                    {/* Contact Details Footer */}
-                    <div className="mt-12 border-t pt-8 text-center text-gray-600">
-                        <h3 className="font-bold text-lg mb-2 text-green-800">For Queries, Contact:</h3>
-                        <p className="font-semibold text-gray-800">P SAI VIJAY - DIRECTOR SAC & SVR</p>
-                        <p className="mt-1">
-                            Phone: <a href="tel:+917330747502" className="text-green-600 hover:underline">+91 73307 47502</a>
-                        </p>
-                        <p>
-                            Email: <a href="mailto:saivijay.ceo@gmail.com" className="text-green-600 hover:underline">saivijay.ceo@gmail.com</a>, <a href="mailto:director_sac@kluniversity.in" className="text-green-600 hover:underline">director_sac@kluniversity.in</a>
-                        </p>
-                    </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };
 
 export default GOPRegistration;
+
+

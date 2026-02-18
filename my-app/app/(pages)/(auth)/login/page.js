@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const SVRLogin = () => {
     const [credentials, setCredentials] = useState({ userId: '', password: '' });
@@ -382,7 +383,7 @@ const SVRLogin = () => {
                     Copyright © 2025. All rights reserved by KLEF – SAC
                 </p>
                 <p className="text-[13px] text-[#006600]">
-                    Developed by <span className="font-bold">Dinesh Korukonda</span> of ZeroOne CodeClub of KLEF SAC
+                    Designed & Developed by <Link href="https://www.linkedin.com/in/dinesh-korukonda-513855271/" target="_blank" rel="noopener noreferrer">Dinesh Korukonda</Link> & <Link href="https://www.linkedin.com/in/singananischal/" target="_blank" rel="noopener noreferrer">Nischal Singana</Link>
                 </p>
             </div>
         </div>
