@@ -70,26 +70,21 @@ export default function Home() {
   //-----------------------For Modal END------------------------//
 
   // ---------- Boot Animation (Only on first visit) ------------
-  const [showAnimation, setShowAnimation] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(true);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Check if this is the first visit (not in sessionStorage)
       const hasSeenLoader = sessionStorage.getItem('svr_loader_seen');
 
       if (!hasSeenLoader) {
-        // First visit - show loader
-        setShowAnimation(true);
+        // First visit - show loader for full duration
         sessionStorage.setItem('svr_loader_seen', 'true');
-
-        // Hide loader after animation
         const timer = setTimeout(() => {
           setShowAnimation(false);
         }, 2500);
-
         return () => clearTimeout(timer);
       } else {
-        // Not first visit - don't show loader
+        // Returning visit - hide immediately
         setShowAnimation(false);
       }
     }

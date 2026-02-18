@@ -1,13 +1,9 @@
 .loader-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    background-color: #14532d;
     height: 100vh;
-    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    position: fixed;
+    inset: 0;
     z-index: 9999;
     transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
 }
@@ -18,146 +14,66 @@
 }
 
 .loader-content {
+    height: 100vh;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    text-align: center;
-    gap: 1.5rem;
+    align-items: center;
+    overflow: hidden;
 }
 
-.loader-icon {
-    margin-bottom: 1rem;
-}
-
-.loader-plant {
-    animation: grow 1.5s ease-in-out;
-}
-
-.loader-plant svg {
-    filter: drop-shadow(0 4px 8px rgba(0, 128, 0, 0.2));
-}
-
-.loader-plant .main-stem {
-    stroke-dasharray: 130;
-    stroke-dashoffset: 130;
-    animation: drawStem 1.5s ease-in-out forwards;
-}
-
-.loader-plant .outer-stems {
-    stroke-dasharray: 90;
-    stroke-dashoffset: 90;
-    animation: drawStem 1s ease-in-out 0.4s forwards;
-}
-
-.loader-plant .leaves path {
-    stroke-dasharray: 150;
-    stroke-dashoffset: 150;
-    animation: drawStem 1.5s ease-in-out 1s forwards;
-}
-
-.loader-plant .ground path {
-    stroke-dasharray: 140;
-    stroke-dashoffset: 140;
-    animation: drawStem 1s ease-in-out 0.6s forwards;
-}
-
-@keyframes drawStem {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes grow {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.loader-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #008000;
-    margin: 0;
+.loader-svg {
     font-family: 'Poppins', sans-serif;
-    animation: fadeInUp 0.8s ease-out 0.5s both;
-}
-
-.loader-subtitle {
-    font-size: 1rem;
-    color: #666;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    animation: fadeInUp 0.8s ease-out 0.7s both;
-}
-
-.loader-spinner {
-    margin-top: 1rem;
-    animation: fadeInUp 0.8s ease-out 0.9s both;
-}
-
-.spinner-ring {
-    width: 50px;
-    height: 50px;
-    border: 4px solid #e0e0e0;
-    border-top-color: #008000;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.loader-footer {
     position: absolute;
-    bottom: 20px;
-    font-size: 0.75rem;
-    color: #999;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    animation: fadeIn 1s ease-out 1.2s both;
+    width: 100%;
+    height: 100%;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
+.loader-svg .loader-text {
+    text-transform: uppercase;
+    animation: stroke 4s infinite alternate;
+    stroke-width: 5;
+    stroke: #fff;
+    font-size: 7rem;
+    font-weight: 800;
+}
+
+@keyframes stroke {
+    0% {
+        fill: rgba(72, 138, 20, 0);
+        stroke: #fff;
+        stroke-dashoffset: 100%;
+        stroke-dasharray: 0 60%;
+        stroke-width: 2;
+    }
+    70% {
+        fill: rgba(72, 138, 20, 0);
+        stroke: #fff;
+    }
+    80% {
+        fill: rgba(72, 138, 20, 0);
+        stroke: #fff;
+        stroke-width: 2;
     }
     to {
-        opacity: 1;
+        fill: transparent;
+        stroke-dashoffset: -5%;
+        stroke-dasharray: 50% 0;
+        stroke-width: 2;
+        stroke: #fff;
     }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .loader-title {
-        font-size: 1.5rem;
+@media (max-width: 500px) {
+    .loader-container {
+        height: 100vh;
     }
-    
-    .loader-subtitle {
-        font-size: 0.9rem;
+
+    .loader-content {
+        height: 80vh;
     }
-    
-    .loader-plant svg {
-        width: 80px;
-        height: 90px;
+
+    .loader-svg .loader-text {
+        font-size: 5rem;
     }
 }

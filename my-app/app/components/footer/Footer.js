@@ -3,8 +3,8 @@ import Image from 'next/image';
 import Tree from '../../Assets/Tree.png';
 import { Link as ScrollLink } from 'react-scroll';
 import './Footer.css';
-import Link from 'next/link';   
-import { FaInstagram } from 'react-icons/fa';
+import Link from 'next/link';
+import { FaInstagram, FaLock } from 'react-icons/fa';
 
 const Footer = () => {  const currentYear = new Date().getFullYear();
 
@@ -120,6 +120,9 @@ const Footer = () => {  const currentYear = new Date().getFullYear();
               </div>
               <div className="footer-copyright-right">
                 <div className="footer-social">
+                  <a href="/login">
+                    <FaLock /> <span>Login</span>
+                  </a>
                   <a href="https://www.instagram.com/svr_kl.sac/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                     <FaInstagram /> <span>svr_kl.sac</span>
                   </a>
