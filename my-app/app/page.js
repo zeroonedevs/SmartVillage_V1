@@ -13,6 +13,7 @@ import AreasOfWork from "./components/home/AreasOfWork";
 import FocusAreas from "./components/home/FocusAreas";
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/footer/Footer";
+import PlantPreloader from "./components/animation/Plant";
 
 import "./globals.css";
 
@@ -34,6 +35,8 @@ import President from "./Assets/President.jpeg";
 import Modi from "./Assets/Modi.jpeg";
 import AnnualReportImage from "../public/hero/1president.jpg";
 
+const PLANT_PRELOADER_SESSION_KEY = "svr_plant_preloader_shown";
+
 // Add Image loading optimization
 const ImageWithLoading = ({ src, alt, priority = false, ...props }) => {
   return (
@@ -48,6 +51,26 @@ const ImageWithLoading = ({ src, alt, priority = false, ...props }) => {
 
 export default function Home() {
   const [totalStudents, setTotalStudents] = useState(0);
+  const [preloaderBootstrapped, setPreloaderBootstrapped] = useState(false);
+  const [showPlantPreloader, setShowPlantPreloader] = useState(false);
+
+  useEffect(() => {
+    const seen =
+      typeof window !== "undefined" &&
+      sessionStorage.getItem(PLANT_PRELOADER_SESSION_KEY);
+    setShowPlantPreloader(!seen);
+    setPreloaderBootstrapped(true);
+  }, []);
+
+  useEffect(() => {
+    if (!preloaderBootstrapped || !showPlantPreloader) return;
+    const durationMs = 3000;
+    const t = setTimeout(() => {
+      sessionStorage.setItem(PLANT_PRELOADER_SESSION_KEY, "true");
+      setShowPlantPreloader(false);
+    }, durationMs);
+    return () => clearTimeout(t);
+  }, [preloaderBootstrapped, showPlantPreloader]);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -82,6 +105,23 @@ export default function Home() {
   const handleDomainClick = (domain) => {
     window.location.href = `/gallery?domain=${encodeURIComponent(domain)}`;
   };
+
+  if (!preloaderBootstrapped) {
+    return (
+      <div
+        className="fixed inset-0 z-[2147483646] bg-white"
+        aria-hidden
+      />
+    );
+  }
+
+  if (showPlantPreloader) {
+    return (
+      <div className="fixed inset-0 z-[2147483647] overflow-auto bg-white">
+        <PlantPreloader />
+      </div>
+    );
+  }
 
   return (
     <div className="home-component">

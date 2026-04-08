@@ -383,7 +383,7 @@ const SVRLogin = () => {
                     Copyright © 2025. All rights reserved by KLEF – SAC
                 </p>
                 <p className="text-[13px] text-[#006600]">
-                    Designed & Developed by <Link href="https://www.linkedin.com/in/dinesh-korukonda-513855271/" target="_blank" rel="noopener noreferrer">Dinesh Korukonda</Link> & <Link href="https://www.linkedin.com/in/singananischal/" target="_blank" rel="noopener noreferrer">Nischal Singana</Link>
+                    Designed & Developed by <Link href="https://dineshkorukonda.in" target="_blank" rel="noopener noreferrer">Dinesh Korukonda</Link> & <Link href="https://www.linkedin.com/in/singananischal/" target="_blank" rel="noopener noreferrer">Nischal Singana</Link>
                 </p>
             </div>
         </div>

@@ -1,10 +1,13 @@
 "use client"
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const SvgAnimation = () => {
+    const rootRef = useRef(null);
 
     const drawMainStem = () => {
-        const paths = document.querySelectorAll('.main-stem');
+        const root = rootRef.current;
+        if (!root) return;
+        const paths = root.querySelectorAll('.main-stem');
         paths.forEach(path => {
             const length = path.getTotalLength();
             path.style.transition = path.style.WebkitTransition = 'none';
@@ -17,7 +20,9 @@ const SvgAnimation = () => {
     };
 
     const drawStems = () => {
-        const paths = document.querySelectorAll('.outer-stems');
+        const root = rootRef.current;
+        if (!root) return;
+        const paths = root.querySelectorAll('.outer-stems');
         paths.forEach(path => {
             const length = path.getTotalLength();
             path.style.transition = path.style.WebkitTransition = 'none';
@@ -30,7 +35,9 @@ const SvgAnimation = () => {
     };
 
     const drawLeaves = () => {
-        const paths = document.querySelectorAll('.leaves path');
+        const root = rootRef.current;
+        if (!root) return;
+        const paths = root.querySelectorAll('.leaves path');
         paths.forEach(path => {
             const length = path.getTotalLength();
             path.style.transition = path.style.WebkitTransition = 'none';
@@ -58,14 +65,20 @@ const SvgAnimation = () => {
 
     // JSX for the component
     return (
-        <div onClick={handleClick} style={{
+        <div
+            ref={rootRef}
+            onClick={handleClick}
+            style={{
+            position: 'relative',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100vh',
+            minHeight: '100%',
+            width: '100%',
             backgroundColor: 'white',
-        }}>
+        }}
+        >
              <svg width="237px" height="255px" viewBox="15 0 237 255" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round">
                     <g transform="translate(-589.000000, -2185.000000)" stroke="green" strokeWidth={4}>
