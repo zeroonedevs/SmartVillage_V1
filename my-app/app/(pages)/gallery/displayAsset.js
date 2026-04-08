@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { FaExpand, FaTimes, FaDownload, FaShareAlt } from "react-icons/fa";
+import React, { useState, useEffect } from 'react';
+import { FaExpand, FaTimes, FaDownload, FaShareAlt } from 'react-icons/fa';
 
 const MultiImageDisplay = ({ imagePaths, groupByDomain = false }) => {
   const [fullscreenImage, setFullscreenImage] = useState(null);
@@ -8,27 +8,27 @@ const MultiImageDisplay = ({ imagePaths, groupByDomain = false }) => {
   useEffect(() => {
     if (!fullscreenImage) return;
     const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = prev;
     };
   }, [fullscreenImage]);
 
   // Dynamic Grid Class Helper
-  const getGridClass = (count) => {
-    if (count === 0) return "";
-    if (count === 1) return "grid grid-cols-1 max-w-2xl mx-auto";
-    if (count === 2) return "grid grid-cols-1 sm:grid-cols-2";
-    if (count === 3) return "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3";
-    if (count === 4) return "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
-    return "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5";
+  const getGridClass = count => {
+    if (count === 0) return '';
+    if (count === 1) return 'grid grid-cols-1 max-w-2xl mx-auto';
+    if (count === 2) return 'grid grid-cols-1 sm:grid-cols-2';
+    if (count === 3) return 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3';
+    if (count === 4) return 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
+    return 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5';
   };
 
-  const handleImageLoad = (id) => {
+  const handleImageLoad = id => {
     setLoadedImages(prev => ({ ...prev, [id]: true }));
   };
 
-  const openFullscreen = (image) => {
+  const openFullscreen = image => {
     setFullscreenImage(image);
   };
 
@@ -38,7 +38,7 @@ const MultiImageDisplay = ({ imagePaths, groupByDomain = false }) => {
 
   // Group images by domain if requested
   const groupedImages = imagePaths.reduce((acc, image) => {
-    const domain = image.domain || "Other";
+    const domain = image.domain || 'Other';
     if (!acc[domain]) acc[domain] = [];
     acc[domain].push(image);
     return acc;
@@ -47,7 +47,7 @@ const MultiImageDisplay = ({ imagePaths, groupByDomain = false }) => {
   return (
     <div className="w-full">
       {groupByDomain ? (
-        Object.keys(groupedImages).map((domain) => (
+        Object.keys(groupedImages).map(domain => (
           <div key={domain} className="mb-12">
             <div className="flex items-center gap-4 mb-6">
               <h3 className="text-2xl font-bold text-gray-800 relative pl-4 border-l-4 border-[#008000]">
@@ -61,7 +61,7 @@ const MultiImageDisplay = ({ imagePaths, groupByDomain = false }) => {
 
             {/* Standard Grid Layout */}
             <div className={`${getGridClass(groupedImages[domain].length)} gap-4 w-full`}>
-              {groupedImages[domain].map((image) => (
+              {groupedImages[domain].map(image => (
                 <div
                   key={image.id}
                   className="group relative aspect-square rounded-lg overflow-hidden cursor-pointer bg-gray-100"
@@ -95,7 +95,7 @@ const MultiImageDisplay = ({ imagePaths, groupByDomain = false }) => {
       ) : (
         /* Standard Grid Layout - Flat List */
         <div className={`${getGridClass(imagePaths.length)} gap-4 w-full`}>
-          {imagePaths.map((image) => (
+          {imagePaths.map(image => (
             <div
               key={image.id}
               className="group relative aspect-square rounded-lg overflow-hidden cursor-pointer bg-gray-100"

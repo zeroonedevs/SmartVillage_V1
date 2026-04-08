@@ -1,10 +1,10 @@
-"use client";
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import ImageSkeleton from '../../components/ImageSkeleton/ImageSkeleton';
 import { FaCalendarAlt, FaSearch } from 'react-icons/fa';
-import Footer from "../../components/SmallFooter/footer";
+import Footer from '../../components/SmallFooter/footer';
 
 export default function AwardsPage() {
   const [awards, setAwards] = useState([]);
@@ -25,7 +25,7 @@ export default function AwardsPage() {
             title: award.title,
             year: award.year,
             image: award.image,
-            description: award.description
+            description: award.description,
           }));
           setAwards(mappedAwards);
         }
@@ -39,18 +39,18 @@ export default function AwardsPage() {
     fetchAwards();
   }, []);
 
-  const handleImageLoad = (awardId) => {
+  const handleImageLoad = awardId => {
     setLoadedImages(prev => ({ ...prev, [awardId]: true }));
   };
 
-  const filteredAwards = awards.filter(award =>
-    award.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    award.description.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredAwards = awards.filter(
+    award =>
+      award.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      award.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-gray-200 selection:text-[#008000]">
-
       {/* Modern Hero Header - Matching News Page Style */}
       <div className="bg-[#008000] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
@@ -65,7 +65,8 @@ export default function AwardsPage() {
                 Our Awards & <br /> <span className="text-orange-400">Recognition</span>
               </h1>
               <p className="text-lg text-white max-w-xl leading-relaxed">
-                Celebrating the milestones and honors that define our commitment to the Smart Village Revolution.
+                Celebrating the milestones and honors that define our commitment to the Smart
+                Village Revolution.
               </p>
             </div>
 
@@ -92,19 +93,28 @@ export default function AwardsPage() {
 
       {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20 pb-20">
-
         {/* Navigation / Breadcrumb Area */}
         <div className="flex justify-between items-center mb-10">
           <div className="bg-white p-1 rounded-xl shadow-lg border border-gray-100 inline-flex">
-            <Link href="/" className="px-6 py-2.5 rounded-lg text-gray-600 font-medium hover:bg-gray-50 transition-colors text-sm no-underline">Home</Link>
-            <span className="px-6 py-2.5 rounded-lg bg-green-50 text-[#008000] font-semibold shadow-sm text-sm">Awards</span>
+            <Link
+              href="/"
+              className="px-6 py-2.5 rounded-lg text-gray-600 font-medium hover:bg-gray-50 transition-colors text-sm no-underline"
+            >
+              Home
+            </Link>
+            <span className="px-6 py-2.5 rounded-lg bg-green-50 text-[#008000] font-semibold shadow-sm text-sm">
+              Awards
+            </span>
           </div>
         </div>
 
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="h-96 bg-white rounded-2xl animate-pulse border border-gray-200 shadow-md"></div>
+            {[1, 2, 3].map(i => (
+              <div
+                key={i}
+                className="h-96 bg-white rounded-2xl animate-pulse border border-gray-200 shadow-md"
+              ></div>
             ))}
           </div>
         ) : error ? (
@@ -118,7 +128,7 @@ export default function AwardsPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredAwards.map((award) => (
+            {filteredAwards.map(award => (
               <div
                 key={award.id}
                 className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 flex flex-col h-full hover:-translate-y-1"
@@ -154,7 +164,9 @@ export default function AwardsPage() {
                 {/* Content Section */}
                 <div className="p-6 flex flex-col flex-1">
                   <div className="mb-3">
-                    <span className="text-xs font-bold tracking-wider text-[#008000] uppercase bg-gray-100 px-2 py-1 rounded-md border border-gray-200">Award</span>
+                    <span className="text-xs font-bold tracking-wider text-[#008000] uppercase bg-gray-100 px-2 py-1 rounded-md border border-gray-200">
+                      Award
+                    </span>
                   </div>
 
                   <h2 className="text-xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-[#008000] transition-colors">

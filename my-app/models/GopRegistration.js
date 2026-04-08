@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 
 const GopRegistrationSchema = new mongoose.Schema({
@@ -23,10 +22,7 @@ const GopRegistrationSchema = new mongoose.Schema({
   contactEmail: {
     type: String,
     required: [true, 'Please provide a contact email'],
-    match: [
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please provide a valid email',
-    ],
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please provide a valid email'],
     trim: true,
   },
   contactPhone: {
@@ -52,4 +48,5 @@ const GopRegistrationSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.GopRegistration || mongoose.model('GopRegistration', GopRegistrationSchema);
+export default mongoose.models.GopRegistration ||
+  mongoose.model('GopRegistration', GopRegistrationSchema);

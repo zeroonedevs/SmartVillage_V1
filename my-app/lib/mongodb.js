@@ -31,7 +31,7 @@ async function dbConnect() {
       maxPoolSize: 10,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((m) => m);
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then(m => m);
   }
 
   try {

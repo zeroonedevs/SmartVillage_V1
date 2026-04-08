@@ -1,6 +1,6 @@
-"use client"
+'use client';
 import React, { useState, useEffect } from 'react';
-import Link from "next/link";
+import Link from 'next/link';
 
 function Page() {
   const [activities, setActivities] = useState([]);
@@ -9,7 +9,7 @@ function Page() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedYear, setSelectedYear] = useState('');
   const eventsPerPage = 15;
-  const [sortBy, setSortBy] = useState("date");
+  const [sortBy, setSortBy] = useState('date');
   const [sortOrder, setSortOrder] = useState('desc');
 
   useEffect(() => {
@@ -20,10 +20,10 @@ function Page() {
         if (data.success) {
           setActivities(data.data);
         } else {
-          console.error("Failed to fetch activities");
+          console.error('Failed to fetch activities');
         }
       } catch (error) {
-        console.error("Error fetching activities:", error);
+        console.error('Error fetching activities:', error);
       } finally {
         setLoading(false);
       }
@@ -50,7 +50,7 @@ function Page() {
   };
 
   // Function to handle sorting
-  const handleSort = (column) => {
+  const handleSort = column => {
     if (sortBy === column) {
       setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc');
     } else {
@@ -76,11 +76,12 @@ function Page() {
   }
 
   // Filtered data based on search query and selected year
-  const filteredData = sortedData.filter(event =>
-    (selectedYear === '' || (event.year && event.year.includes(selectedYear))) &&
-    Object.values(event).some(value =>
-      String(value).toLowerCase().includes(searchQuery.toLowerCase())
-    )
+  const filteredData = sortedData.filter(
+    event =>
+      (selectedYear === '' || (event.year && event.year.includes(selectedYear))) &&
+      Object.values(event).some(value =>
+        String(value).toLowerCase().includes(searchQuery.toLowerCase())
+      )
   );
 
   // Calculate the index of the first and last events of the current page
@@ -92,10 +93,13 @@ function Page() {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   // Extract unique years from the data for the dropdown options
-  const years = Array.from(new Set(activities.map(event => event.year))).filter(Boolean).sort().reverse();
+  const years = Array.from(new Set(activities.map(event => event.year)))
+    .filter(Boolean)
+    .sort()
+    .reverse();
 
   // Helper to format date for display
-  const formatDate = (dateString) => {
+  const formatDate = dateString => {
     if (!dateString) return '';
     const date = new Date(dateString);
     // Format as DD-MM-YYYY
@@ -103,16 +107,18 @@ function Page() {
   };
 
   if (loading) {
-    return <div className="flex justify-center items-center py-20 text-gray-600">Loading activities...</div>;
+    return (
+      <div className="flex justify-center items-center py-20 text-gray-600">
+        Loading activities...
+      </div>
+    );
   }
 
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <div className="w-[98%] mx-auto p-1">
-
         {/* Header Controls */}
         <div className="w-full mx-auto flex flex-col md:flex-row justify-between items-center py-4 gap-4">
-
           {/* Search Box - Left */}
           <div className="w-full md:w-[20%]">
             <input
@@ -131,10 +137,9 @@ function Page() {
 
           {/* Dropdown & Home Button - Right */}
           <div className="w-full md:w-auto flex gap-2">
-
-            <div className='bg-[#008000] p-1 flex items-center justify-center min-w-[100px]'>
+            <div className="bg-[#008000] p-1 flex items-center justify-center min-w-[100px]">
               <select
-                className='bg-[#008000] text-white outline-none border-none w-full text-center font-semibold cursor-pointer appearance-none'
+                className="bg-[#008000] text-white outline-none border-none w-full text-center font-semibold cursor-pointer appearance-none"
                 id="year"
                 value={selectedYear}
                 onChange={e => setSelectedYear(e.target.value)}
@@ -142,7 +147,9 @@ function Page() {
               >
                 <option value="">All</option>
                 {years.map(year => (
-                  <option key={year} value={year}>{year}</option>
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
                 ))}
               </select>
             </div>
@@ -161,21 +168,51 @@ function Page() {
           <table className="w-full border-collapse">
             <thead>
               <tr>
-                <th onClick={() => handleSort('date')} className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[15%] cursor-pointer hover:bg-green-700 transition-colors">Date</th>
-                <th onClick={() => handleSort('name')} className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[55%] text-left cursor-pointer hover:bg-green-700 transition-colors">Name of the Activity</th>
-                <th onClick={() => handleSort('studentsParticipated')} className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[20%] cursor-pointer hover:bg-green-700 transition-colors">Number of Students<br />Participated</th>
-                <th className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[10%]">Report</th>
+                <th
+                  onClick={() => handleSort('date')}
+                  className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[15%] cursor-pointer hover:bg-green-700 transition-colors"
+                >
+                  Date
+                </th>
+                <th
+                  onClick={() => handleSort('name')}
+                  className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[55%] text-left cursor-pointer hover:bg-green-700 transition-colors"
+                >
+                  Name of the Activity
+                </th>
+                <th
+                  onClick={() => handleSort('studentsParticipated')}
+                  className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[20%] cursor-pointer hover:bg-green-700 transition-colors"
+                >
+                  Number of Students
+                  <br />
+                  Participated
+                </th>
+                <th className="bg-[#008000] text-white font-bold p-3 border border-green-700 w-[10%]">
+                  Report
+                </th>
               </tr>
             </thead>
             <tbody>
               {currentEvents.map((event, index) => (
                 <tr key={event._id || index} className="bg-white hover:bg-gray-50">
-                  <td className="border border-green-700 text-center font-medium p-2 text-black">{formatDate(event.date)}</td>
-                  <td className="border border-green-700 text-left font-medium p-2 text-black">{event.name}</td>
-                  <td className="border border-green-700 text-center font-medium p-2 text-black">{event.studentsParticipated}</td>
+                  <td className="border border-green-700 text-center font-medium p-2 text-black">
+                    {formatDate(event.date)}
+                  </td>
+                  <td className="border border-green-700 text-left font-medium p-2 text-black">
+                    {event.name}
+                  </td>
+                  <td className="border border-green-700 text-center font-medium p-2 text-black">
+                    {event.studentsParticipated}
+                  </td>
                   <td className="border border-green-700 text-center font-medium p-2 text-black">
                     {event.reportLink ? (
-                      <a href={event.reportLink} target="_blank" rel="noopener noreferrer" className="text-black hover:underline font-medium">
+                      <a
+                        href={event.reportLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-black hover:underline font-medium"
+                      >
                         View
                       </a>
                     ) : (
@@ -190,7 +227,6 @@ function Page() {
 
         {/* Footer Toolbar - Bottom Green Bar */}
         <div className="flex flex-wrap items-center gap-1 mt-4">
-
           <button
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
@@ -218,9 +254,7 @@ function Page() {
           <div className="bg-[#008000] text-white px-4 py-2 font-medium">
             Total Students: {getTotalStudents()}
           </div>
-
         </div>
-
       </div>
     </div>
   );

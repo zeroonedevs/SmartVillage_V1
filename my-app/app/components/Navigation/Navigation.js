@@ -1,9 +1,9 @@
-"use client";
+'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Link as Scroll } from "react-scroll";
-import { FaBars } from "react-icons/fa6";
-import { IoClose } from "react-icons/io5";
+import { Link as Scroll } from 'react-scroll';
+import { FaBars } from 'react-icons/fa6';
+import { IoClose } from 'react-icons/io5';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -92,10 +92,9 @@ const Navigation = () => {
                   Parameters
                 </Scroll>
 
-                <Link className='nav-link' href='/awards'>
+                <Link className="nav-link" href="/awards">
                   Awards
                 </Link>
-
 
                 <Link className="nav-link" href="/gallery">
                   Gallery
@@ -129,11 +128,21 @@ const Navigation = () => {
           <div className="mobile-menu-content">
             <div className="mobile-menu-section">
               <h3>About</h3>
-              <Link href="/mission" onClick={closeMobileMenu}>Vision & Mission</Link>
-              <Link href="/objectives" onClick={closeMobileMenu}>Objectives</Link>
-              <Link href="/organogram" onClick={closeMobileMenu}>Organogram</Link>
-              <Link href="/staff" onClick={closeMobileMenu}>Staff</Link>
-              <Link href="/villages" onClick={closeMobileMenu}>Villages</Link>
+              <Link href="/mission" onClick={closeMobileMenu}>
+                Vision & Mission
+              </Link>
+              <Link href="/objectives" onClick={closeMobileMenu}>
+                Objectives
+              </Link>
+              <Link href="/organogram" onClick={closeMobileMenu}>
+                Organogram
+              </Link>
+              <Link href="/staff" onClick={closeMobileMenu}>
+                Staff
+              </Link>
+              <Link href="/villages" onClick={closeMobileMenu}>
+                Villages
+              </Link>
             </div>
 
             <Scroll
