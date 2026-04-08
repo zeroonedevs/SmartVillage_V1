@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '../../../../lib/mongodb';
 import User from '../../../../models/User';
-import { sendResetEmail } from '../../../../lib/mail';
+import { sendResetEmail, isMailConfigured } from '../../../../lib/mail';
 
 export async function POST(request) {
     try {
@@ -12,6 +12,17 @@ export async function POST(request) {
         }
 
         email = email.toLowerCase().trim();
+
+        if (!isMailConfigured()) {
+            console.error('Forgot password: EMAIL_USER / EMAIL_PASS not set');
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: 'Password reset email is not configured. Please contact the administrator.',
+                },
+                { status: 503 }
+            );
+        }
 
         await dbConnect();
 
@@ -36,7 +47,7 @@ export async function POST(request) {
             await sendResetEmail(user.email, resetToken);
             return NextResponse.json({ success: true, message: 'Reset code sent to your registered email.' });
         } catch (mailError) {
-            console.error('Mail Error:', mailError);
+            console.error('Mail Error:', mailError?.message, mailError?.code, mailError?.response);
             return NextResponse.json({ success: false, message: 'Failed to send email. Please try again later.' }, { status: 500 });
         }
 

@@ -1,13 +1,63 @@
 import nodemailer from 'nodemailer';
 
-export const sendResetEmail = async (email, token) => {
-    const transporter = nodemailer.createTransport({
+/**
+ * Env (pick one setup):
+ *
+ * Gmail / known providers:
+ *   EMAIL_USER, EMAIL_PASS
+ *   EMAIL_SERVICE=gmail (default)
+ *
+ * Custom SMTP (recommended for KL / org mail):
+ *   EMAIL_USER, EMAIL_PASS
+ *   SMTP_HOST, SMTP_PORT (default 587), SMTP_SECURE=false
+ */
+
+export function isMailConfigured() {
+    return !!(process.env.EMAIL_USER && process.env.EMAIL_PASS);
+}
+
+export function getMailConfigurationStatus() {
+    const hasUser = !!process.env.EMAIL_USER;
+    const hasPass = !!process.env.EMAIL_PASS;
+    const mode = process.env.SMTP_HOST ? 'smtp' : 'service';
+    return {
+        configured: hasUser && hasPass,
+        mode,
+        missing: [
+            !hasUser && 'EMAIL_USER',
+            !hasPass && 'EMAIL_PASS',
+        ].filter(Boolean),
+        smtpHostSet: !!process.env.SMTP_HOST,
+    };
+}
+
+export function createMailTransport() {
+    const user = process.env.EMAIL_USER;
+    const pass = process.env.EMAIL_PASS;
+
+    if (!user || !pass) {
+        throw new Error('EMAIL_USER and EMAIL_PASS must be set');
+    }
+
+    if (process.env.SMTP_HOST) {
+        const port = Number(process.env.SMTP_PORT || 587);
+        const secure = process.env.SMTP_SECURE === 'true' || port === 465;
+        return nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port,
+            secure,
+            auth: { user, pass },
+        });
+    }
+
+    return nodemailer.createTransport({
         service: process.env.EMAIL_SERVICE || 'gmail',
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
+        auth: { user, pass },
     });
+}
+
+export const sendResetEmail = async (email, token) => {
+    const transporter = createMailTransport();
 
     const mailOptions = {
         from: `"Smart Village Revolution" <${process.env.EMAIL_USER}>`,

@@ -1,4 +1,4 @@
-name: Deploy to Ubuntu Server
+name: CD
 
 on:
   push:
@@ -33,11 +33,13 @@ jobs:
           cd /var/www/SmartVillage_V1/my-app
           npm install --legacy-peer-deps
 
-      - name: Type check
-        continue-on-error: true
+      - name: Build application
         run: |
           cd /var/www/SmartVillage_V1/my-app
-          npm run type-check
+          npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          NODE_ENV: production
 
       - name: Restart PM2
         run: |
