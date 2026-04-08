@@ -17,7 +17,18 @@ import Footer from "./components/footer/Footer";
 
 import "./globals.css";
 
-import SVR_Image_1 from "./Assets/img_8078.jpg";
+import SVR_Image_1 from "./Assets/President.jpeg";
+import SVR_UpdateImage_1 from "./Assets/Updated Images/Agriculture.png";
+import SVR_UpdateImage_2 from "./Assets/Updated Images/Education.png";
+import SVR_UpdateImage_3 from "./Assets/Updated Images/Health .png";
+import SVR_UpdateImage_5 from "./Assets/Updated Images/Infrastruture.png";
+import SVR_UpdateImage_11 from "./Assets/Updated Images/RenewableEnergy.png";
+import SVR_UpdateImage_12 from "./Assets/Updated Images/WomenEmpowerMent.png";
+import SVR_UpdateImage_13 from "./Assets/Women2.png";
+import SVR_UpdateImage_16 from "./Assets/Updated Images/Health_new.png";
+import SVR_UpdateImage_17 from "./Assets/Updated Images/Culture.png";
+import SVR_UpdateImage_19 from "./Assets/Updated Images/LatestCultureAndCommunity.png";
+import SVR_UpdateImage_20 from "./Assets/NewDigi.png";
 
 import VijaySirUpdated from "./Assets/Updated Images/SAC_Director_Updated.png";
 import President from "./Assets/President.jpeg";
