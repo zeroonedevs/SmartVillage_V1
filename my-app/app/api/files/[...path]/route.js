@@ -13,14 +13,14 @@ const s3Client = new S3Client({
 export async function GET(request, { params }) {
   try {
     const resolvedParams = await params;
-    console.log('Proxy Params:', resolvedParams); 
+    console.log('Proxy Params:', resolvedParams);
     const { path } = resolvedParams;
-    
+
     if (!path) {
-        console.error('Path is undefined in params');
-        return new NextResponse('Invalid Path', { status: 400 });
+      console.error('Path is undefined in params');
+      return new NextResponse('Invalid Path', { status: 400 });
     }
-    
+
     const key = path.join('/');
 
     const command = new GetObjectCommand({
@@ -30,7 +30,6 @@ export async function GET(request, { params }) {
 
     const response = await s3Client.send(command);
 
-    
     return new NextResponse(response.Body.transformToWebStream(), {
       headers: {
         'Content-Type': response.ContentType || 'application/octet-stream',

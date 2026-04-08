@@ -1,28 +1,31 @@
 import mongoose from 'mongoose';
 
-const HeroSchema = new mongoose.Schema({
+const HeroSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required: [true, 'Please provide a title'],
+      type: String,
+      required: [true, 'Please provide a title'],
     },
     subtitle: {
-        type: String,
+      type: String,
     },
     image: {
-        type: String,
-        required: [true, 'Please provide an image URL'],
+      type: String,
+      required: [true, 'Please provide an image URL'],
     },
     link: {
-        type: String,
+      type: String,
     },
     order: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,
     },
     isActive: {
-        type: Boolean,
-        default: true,
+      type: Boolean,
+      default: true,
     },
-}, { timestamps: true });
+  },
+  { timestamps: true }
+);
 
 export default mongoose.models.Hero || mongoose.model('Hero', HeroSchema);

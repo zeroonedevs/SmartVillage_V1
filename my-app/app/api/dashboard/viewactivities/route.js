@@ -1,4 +1,3 @@
-
 import { NextResponse } from 'next/server';
 import dbConnect from '../../../../lib/mongodb';
 import Activity from '../../../../models/Activity';
@@ -21,7 +20,10 @@ export async function DELETE(request) {
     const { id } = await request.json();
 
     if (!id) {
-        return NextResponse.json({ success: false, message: "Activity ID is required" }, { status: 400 });
+      return NextResponse.json(
+        { success: false, message: 'Activity ID is required' },
+        { status: 400 }
+      );
     }
 
     const deletedActivity = await Activity.findByIdAndDelete(id);
@@ -29,10 +31,6 @@ export async function DELETE(request) {
     if (!deletedActivity) {
       return NextResponse.json({ success: false, message: 'Activity not found' }, { status: 404 });
     }
-    
-    
-    
-    
 
     return NextResponse.json({ success: true, data: {} });
   } catch (error) {
