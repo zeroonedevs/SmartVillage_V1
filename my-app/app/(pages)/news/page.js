@@ -1,8 +1,8 @@
-"use client";
+'use client';
 import React, { useEffect, useState } from 'react';
 import { FaArrowUp, FaSearch, FaCalendarAlt, FaArrowRight, FaNewspaper } from 'react-icons/fa';
-import Link from "next/link";
-import Footer from "../../components/SmallFooter/footer";
+import Link from 'next/link';
+import Footer from '../../components/SmallFooter/footer';
 
 export default function NewsPage() {
   const [newsArticles, setNewsArticles] = useState([]);
@@ -46,17 +46,20 @@ export default function NewsPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  const filteredArticles = newsArticles.filter(article =>
-    article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    article.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredArticles = newsArticles.filter(
+    article =>
+      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      article.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-gray-200 selection:text-green-800">
       {/* Floating Back to Top */}
-      <div className={`fixed bottom-8 right-8 z-50 transition-all duration-500 transform ${showScrollToTop ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+      <div
+        className={`fixed bottom-8 right-8 z-50 transition-all duration-500 transform ${showScrollToTop ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+      >
         <button
           onClick={scrollToTop}
           className="bg-[#008000] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-[#008000] hover:shadow-green-900/30 transition-all duration-300 group"
@@ -79,7 +82,8 @@ export default function NewsPage() {
                 Our Stories & <br /> <span className="text-orange-400">Achievements</span>
               </h1>
               <p className="text-lg text-white max-w-xl leading-relaxed">
-                Discover the latest updates, community milestones, and transformative initiatives driving the Smart Village Revolution.
+                Discover the latest updates, community milestones, and transformative initiatives
+                driving the Smart Village Revolution.
               </p>
             </div>
 
@@ -106,20 +110,29 @@ export default function NewsPage() {
 
       {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20 pb-20">
-
         {/* Navigation / Breadcrumb Area */}
         <div className="flex justify-between items-center mb-10">
           <div className="bg-white p-1 rounded-xl shadow-lg border border-gray-100 inline-flex">
-            <Link href="/" className="px-6 py-2.5 rounded-lg text-gray-600 font-medium hover:bg-gray-50 transition-colors text-sm">Home</Link>
-            <span className="px-6 py-2.5 rounded-lg bg-gray-100 text-[#008000] font-semibold shadow-sm text-sm">News</span>
+            <Link
+              href="/"
+              className="px-6 py-2.5 rounded-lg text-gray-600 font-medium hover:bg-gray-50 transition-colors text-sm"
+            >
+              Home
+            </Link>
+            <span className="px-6 py-2.5 rounded-lg bg-gray-100 text-[#008000] font-semibold shadow-sm text-sm">
+              News
+            </span>
           </div>
         </div>
 
         {loading ? (
           // Skeleton Loading Grid
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="bg-white rounded-2xl p-4 shadow-sm h-96 animate-pulse border border-gray-100/50">
+            {[1, 2, 3, 4, 5, 6].map(i => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl p-4 shadow-sm h-96 animate-pulse border border-gray-100/50"
+              >
                 <div className="w-full h-48 bg-gray-200 rounded-xl mb-4"></div>
                 <div className="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
                 <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
@@ -131,14 +144,17 @@ export default function NewsPage() {
         ) : error ? (
           <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl shadow-sm border border-red-100">
             <div className="bg-red-50 p-4 rounded-full mb-4">
-              <FaNewspaper className="w-8 h-8 text-red-400" /> {/* Kept Icon here for error state context only */}
+              <FaNewspaper className="w-8 h-8 text-red-400" />{' '}
+              {/* Kept Icon here for error state context only */}
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Oops! Something went wrong</h3>
             <p className="text-gray-500">{error}</p>
           </div>
         ) : filteredArticles.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100">
-            <p className="text-gray-500 text-lg">No matches found for "{searchQuery}". Try a different keyword.</p>
+            <p className="text-gray-500 text-lg">
+              No matches found for "{searchQuery}". Try a different keyword.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -166,7 +182,9 @@ export default function NewsPage() {
                 {/* Content */}
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="mb-3">
-                    <span className="text-xs font-bold tracking-wider text-[#008000] uppercase bg-gray-100 px-2 py-1 rounded-md border border-gray-200">News</span>
+                    <span className="text-xs font-bold tracking-wider text-[#008000] uppercase bg-gray-100 px-2 py-1 rounded-md border border-gray-200">
+                      News
+                    </span>
                   </div>
 
                   <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 leading-tight group-hover:text-[#008000] transition-colors">

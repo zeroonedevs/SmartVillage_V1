@@ -1,11 +1,10 @@
-"use client"
-import Link from 'next/link'
-import { FaEye, FaBullseye, FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+'use client';
+import Link from 'next/link';
+import { FaEye, FaBullseye, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 export default function MissionPage() {
   return (
     <div className="w-full min-h-screen bg-white font-sans text-gray-800">
-
       {/* Hero Section */}
       <div className="bg-[#008000] text-white py-16 px-4 relative overflow-hidden">
         <div className="max-w-7xl mx-auto relative z-10 text-center">
@@ -23,14 +22,16 @@ export default function MissionPage() {
 
       {/* Breadcrumb / Nav */}
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <Link href="/" className="inline-flex items-center text-[#008000] font-medium hover:underline gap-2 transition-colors">
+        <Link
+          href="/"
+          className="inline-flex items-center text-[#008000] font-medium hover:underline gap-2 transition-colors"
+        >
           <FaArrowLeft /> Back to Home
         </Link>
       </div>
 
       {/* Content Section */}
       <div className="max-w-7xl mx-auto px-4 pb-20 space-y-16">
-
         {/* Vision Block */}
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="w-full md:w-1/3 flex justify-center">
@@ -43,9 +44,9 @@ export default function MissionPage() {
               Our Vision
             </h2>
             <p className="text-xl text-gray-700 leading-relaxed font-light">
-              "To develop model villages with progressive and dynamic features,
-              while ensuring the holistic development of students through active community
-              engagement and real-time projects."
+              "To develop model villages with progressive and dynamic features, while ensuring the
+              holistic development of students through active community engagement and real-time
+              projects."
             </p>
           </div>
         </div>
@@ -74,7 +75,6 @@ export default function MissionPage() {
             </div>
           </div>
         </div>
-
       </div>
 
       {/* Footer CTA */}
@@ -84,12 +84,14 @@ export default function MissionPage() {
             <span className="text-gray-500 font-medium">Next Section</span>
             <h3 className="text-xl font-bold text-gray-800">Our Objectives</h3>
           </div>
-          <Link href="/objectives" className="px-8 py-3 bg-[#008000] text-white rounded-lg font-bold hover:bg-green-700 shadow-md transition-all flex items-center gap-2">
+          <Link
+            href="/objectives"
+            className="px-8 py-3 bg-[#008000] text-white rounded-lg font-bold hover:bg-green-700 shadow-md transition-all flex items-center gap-2"
+          >
             Continue <FaArrowRight />
           </Link>
         </div>
       </div>
-
     </div>
-  )
+  );
 }

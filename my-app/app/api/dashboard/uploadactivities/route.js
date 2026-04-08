@@ -1,4 +1,3 @@
-
 import { NextResponse } from 'next/server';
 import dbConnect from '../../../../lib/mongodb';
 import Activity from '../../../../models/Activity';

@@ -32,8 +32,6 @@ export async function POST(request) {
 
     await s3Client.send(command);
 
-    
-    
     const fileUrl = `/api/files/${fileName}`;
 
     return NextResponse.json({ success: true, fileUrl });
