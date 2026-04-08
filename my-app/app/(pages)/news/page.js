@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { FaArrowUp, FaSearch, FaCalendarAlt, FaArrowRight } from 'react-icons/fa';
+import { FaArrowUp, FaSearch, FaCalendarAlt, FaArrowRight, FaNewspaper } from 'react-icons/fa';
+import Link from "next/link";
 import Footer from "../../components/SmallFooter/footer";
 
 export default function NewsPage() {
@@ -109,7 +110,7 @@ export default function NewsPage() {
         {/* Navigation / Breadcrumb Area */}
         <div className="flex justify-between items-center mb-10">
           <div className="bg-white p-1 rounded-xl shadow-lg border border-gray-100 inline-flex">
-            <a href="/" className="px-6 py-2.5 rounded-lg text-gray-600 font-medium hover:bg-gray-50 transition-colors text-sm">Home</a>
+            <Link href="/" className="px-6 py-2.5 rounded-lg text-gray-600 font-medium hover:bg-gray-50 transition-colors text-sm">Home</Link>
             <span className="px-6 py-2.5 rounded-lg bg-gray-100 text-[#008000] font-semibold shadow-sm text-sm">News</span>
           </div>
         </div>

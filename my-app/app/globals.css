@@ -258,7 +258,7 @@ a {
   justify-content: space-between;
 }
 .home-two-in-one-in-one {
-  width: 60%;
+  width: 70%;
   padding: 2rem 1rem;
 }
 
@@ -270,13 +270,13 @@ a {
   color: black;
 }
 .home-two-in-one-in-two {
-  width: 40%;
+  width: 30%;
   padding: 2rem 1rem;
-
 }
 .home-two-in-one-in-two-in {
   display: flex;
   justify-content: flex-end;
+  align-items: flex-start;
   width: 100%;
 }
 
@@ -284,6 +284,9 @@ a {
   border-radius: 1rem;
   border: 1px solid black;
   width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: cover;
 }
 
 .home-two-in-one-in-boxes {
@@ -1072,6 +1075,7 @@ a {
 
     .home-two-in-one-in-two-in-image {
       width: 100%;
+      max-width: 100%;
     }
 
 

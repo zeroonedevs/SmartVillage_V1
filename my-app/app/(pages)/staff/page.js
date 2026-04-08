@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import Link from "next/link";
 
 function StaffPage() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -64,12 +65,12 @@ function StaffPage() {
 
                     {/* Back Button */}
                     <div className="w-full md:w-auto">
-                        <a
+                        <Link
                             href="/"
                             className="bg-[#008000] text-white px-4 py-2 font-semibold no-underline hover:bg-green-700 transition-colors whitespace-nowrap block text-center"
                         >
                             Back to Home
-                        </a>
+                        </Link>
                     </div>
                 </div>
 

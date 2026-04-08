@@ -11,7 +11,6 @@ import Link from "next/link";
 import HeroSlider from "./components/home/HeroSlider";
 import AreasOfWork from "./components/home/AreasOfWork";
 import FocusAreas from "./components/home/FocusAreas";
-import Loader from "./components/Loader/Loader";
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/footer/Footer";
 
@@ -80,35 +79,11 @@ export default function Home() {
 
   //-----------------------For Modal END------------------------//
 
-  // ---------- Boot Animation (Only on first visit) ------------
-  const [showAnimation, setShowAnimation] = useState(true);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const hasSeenLoader = sessionStorage.getItem('svr_loader_seen');
-
-      if (!hasSeenLoader) {
-        // First visit - show loader for full duration
-        sessionStorage.setItem('svr_loader_seen', 'true');
-        const timer = setTimeout(() => {
-          setShowAnimation(false);
-        }, 2500);
-        return () => clearTimeout(timer);
-      } else {
-        // Returning visit - hide immediately
-        setShowAnimation(false);
-      }
-    }
-  }, []);
-  // ---------- Boot Animation END ------------
-
   const handleDomainClick = (domain) => {
     window.location.href = `/gallery?domain=${encodeURIComponent(domain)}`;
   };
 
-  return showAnimation ? (
-    <Loader />
-  ) : (
+  return (
     <div className="home-component">
       <div className="home-container">
         <Navigation />

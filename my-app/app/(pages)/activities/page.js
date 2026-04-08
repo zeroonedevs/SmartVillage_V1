@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import Link from "next/link";
 
 function Page() {
   const [activities, setActivities] = useState([]);
@@ -146,12 +147,12 @@ function Page() {
               </select>
             </div>
 
-            <a
+            <Link
               href="/"
               className="bg-[#008000] text-white px-4 py-2 font-semibold no-underline hover:bg-green-700 transition-colors whitespace-nowrap"
             >
               Back to Home
-            </a>
+            </Link>
           </div>
         </div>
 

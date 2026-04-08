@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaExpand, FaTimes, FaDownload, FaShareAlt } from "react-icons/fa";
 
 const MultiImageDisplay = ({ imagePaths, groupByDomain = false }) => {
   const [fullscreenImage, setFullscreenImage] = useState(null);
   const [loadedImages, setLoadedImages] = useState({});
+
+  useEffect(() => {
+    if (!fullscreenImage) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [fullscreenImage]);
 
   // Dynamic Grid Class Helper
   const getGridClass = (count) => {
@@ -21,12 +30,10 @@ const MultiImageDisplay = ({ imagePaths, groupByDomain = false }) => {
 
   const openFullscreen = (image) => {
     setFullscreenImage(image);
-    document.body.style.overflow = "hidden";
   };
 
   const closeFullscreen = () => {
     setFullscreenImage(null);
-    document.body.style.overflow = "auto";
   };
 
   // Group images by domain if requested
