@@ -21,7 +21,11 @@ const nextConfig = {
   },
   experimental: {
     optimizeCss: false,
+    // Faster resolves for large icon/chart packages (fewer modules per import graph)
+    optimizePackageImports: ['lucide-react', 'recharts'],
   },
+  // Dev uses Turbopack by default (see package.json). Production build uses --turbopack.
+  // Static assets use lowercase extensions (e.g. img_8078.jpg) so no Webpack-only rules are required.
 }
 
 module.exports = nextConfig
