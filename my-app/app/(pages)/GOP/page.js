@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
 import Link from "next/link";
+import { toast } from "sonner";
 import { countries } from '../../data/countries';
 import {
     ChevronRight, ChevronLeft, Check, Building2, User, Globe2, FileText,
@@ -111,7 +112,7 @@ const GOPRegistration = () => {
         if (validateStep(currentStep)) {
             setCurrentStep(prev => Math.min(prev + 1, 4));
         } else {
-            alert("Please complete all required fields.");
+            toast.warning("Please complete all required fields.");
         }
     };
 

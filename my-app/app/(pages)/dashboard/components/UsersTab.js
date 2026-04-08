@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner";
 
 const UsersTab = () => {
     const [users, setUsers] = useState([]);
@@ -63,7 +64,7 @@ const UsersTab = () => {
                 setUsers([data.data, ...users]);
                 setFormData({ userID: '', name: '', email: '', password: '', role: 'lead' });
                 setShowCreateForm(false);
-                alert('User created successfully!');
+                toast.success('User created successfully!');
             } else {
                 setError(data.error || 'Failed to create user');
             }
@@ -95,7 +96,7 @@ const UsersTab = () => {
                 setUsers(users.map(u => u._id === editingUser._id ? data.data : u));
                 setFormData({ userID: '', name: '', email: '', password: '', role: 'lead' });
                 setEditingUser(null);
-                alert('User updated successfully!');
+                toast.success('User updated successfully!');
             } else {
                 setError(data.error || 'Failed to update user');
             }
@@ -127,7 +128,7 @@ const UsersTab = () => {
 
             setUsers(users.filter(u => u._id !== id));
         } catch (err) {
-            alert(err.message || 'Failed to delete user');
+            toast.error(err.message || 'Failed to delete user');
         } finally {
             setDeletingId(null);
         }

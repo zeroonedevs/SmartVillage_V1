@@ -2,6 +2,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner";
 
 const GalleryTab = () => {
     const [images, setImages] = useState([]);
@@ -56,7 +57,7 @@ const GalleryTab = () => {
             
             // Check file type - only images allowed
             if (!file.type.startsWith('image/')) {
-                alert('Only image files are allowed. Please select an image file.');
+                toast.error('Only image files are allowed. Please select an image file.');
                 e.target.value = ''; // Reset input
                 setSelectedFile(null);
                 return;
@@ -64,7 +65,7 @@ const GalleryTab = () => {
             
             // Check file size - max 4MB
             if (file.size > 4 * 1024 * 1024) {
-                alert('File size exceeds 4MB. Please choose a smaller file.');
+                toast.error('File size exceeds 4MB. Please choose a smaller file.');
                 e.target.value = ''; // Reset input
                 setSelectedFile(null);
                 return;
@@ -116,7 +117,7 @@ const GalleryTab = () => {
                 setSelectedFile(null);
                 // Reset file input
                 document.getElementById('gallery-upload').value = '';
-                alert('Image uploaded successfully!');
+                toast.success('Image uploaded successfully!');
             } else {
                  throw new Error(saveData.error || 'Failed to save image data');
             }
@@ -140,10 +141,10 @@ const GalleryTab = () => {
             if (data.success) {
                 setImages(images.filter(img => img._id !== id));
             } else {
-                alert(data.error || 'Failed to delete image');
+                toast.error(data.error || 'Failed to delete image');
             }
         } catch (err) {
-            alert('Error deleting image');
+            toast.error('Error deleting image');
         }
     };
 

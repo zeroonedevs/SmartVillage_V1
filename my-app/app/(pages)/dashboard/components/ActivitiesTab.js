@@ -2,6 +2,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner";
 
 const ActivitiesTab = () => {
     const [activities, setActivities] = useState([]);
@@ -49,7 +50,7 @@ const ActivitiesTab = () => {
             
             // Check file type - only PDF allowed
             if (file.type !== 'application/pdf') {
-                alert('Only PDF files are allowed. Please select a PDF file.');
+                toast.error('Only PDF files are allowed. Please select a PDF file.');
                 e.target.value = ''; // Reset input
                 setSelectedFile(null);
                 return;
@@ -57,7 +58,7 @@ const ActivitiesTab = () => {
             
             // Check file size - max 3MB
             if (file.size > 3 * 1024 * 1024) {
-                alert('File size exceeds 3MB. Please choose a smaller file.');
+                toast.error('File size exceeds 3MB. Please choose a smaller file.');
                 e.target.value = ''; // Reset input
                 setSelectedFile(null);
                 return;
@@ -80,10 +81,10 @@ const ActivitiesTab = () => {
             if (data.success) {
                 setActivities(activities.filter(a => a._id !== id));
             } else {
-                alert(data.message || 'Failed to delete');
+                toast.error(data.message || 'Failed to delete');
             }
         } catch (err) {
-            alert('Error deleting activity');
+            toast.error('Error deleting activity');
         } finally {
             setDeletingId(null);
         }
@@ -133,7 +134,7 @@ const ActivitiesTab = () => {
                 setFormData({ name: '', date: '', studentsParticipated: '' });
                 setSelectedFile(null);
                 document.getElementById('report-upload').value = '';
-                alert('Activity added successfully!');
+                toast.success('Activity added successfully!');
             }
         } catch (err) {
             console.error(err);

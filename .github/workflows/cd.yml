@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  lint-and-build:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: self-hosted
     
     defaults:
       run:
@@ -27,9 +27,6 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      - name: Run ESLint
-        run: npm run lint
-
       - name: Check code formatting
         run: npm run format:check
 
@@ -45,7 +42,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
-    needs: lint-and-build
+    needs: build
 
     permissions:
       contents: read

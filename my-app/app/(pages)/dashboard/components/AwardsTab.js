@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner";
 
 const AwardsTab = () => {
     const [awards, setAwards] = useState([]);
@@ -47,13 +48,13 @@ const AwardsTab = () => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
             if (!file.type.startsWith('image/')) {
-                alert('Only image files are allowed.');
+                toast.error('Only image files are allowed.');
                 e.target.value = '';
                 setSelectedFile(null);
                 return;
             }
             if (file.size > 4 * 1024 * 1024) {
-                alert('File size exceeds 4MB. Please choose a smaller file.');
+                toast.error('File size exceeds 4MB. Please choose a smaller file.');
                 e.target.value = '';
                 setSelectedFile(null);
                 return;
@@ -124,7 +125,7 @@ const AwardsTab = () => {
                 setEditingAward(null);
                 setShowCreateForm(false);
                 document.getElementById('award-image-upload').value = '';
-                alert(editingAward ? 'Award updated successfully!' : 'Award added successfully!');
+                toast.success(editingAward ? 'Award updated successfully!' : 'Award added successfully!');
             } else {
                 throw new Error(saveData.error || 'Failed to save award');
             }
@@ -147,10 +148,10 @@ const AwardsTab = () => {
             if (data.success) {
                 setAwards(awards.filter(a => a._id !== id));
             } else {
-                alert(data.error || 'Failed to delete');
+                toast.error(data.error || 'Failed to delete');
             }
         } catch (err) {
-            alert('Error deleting award');
+            toast.error('Error deleting award');
         } finally {
             setDeletingId(null);
         }
@@ -193,7 +194,9 @@ const AwardsTab = () => {
             const data = await response.json();
 
             if (response.ok && data.success) {
-                alert(`Migration completed!\nImported: ${data.imported}\nSkipped (already exists): ${data.skipped}\nTotal: ${data.total}`);
+                toast.success('Migration completed', {
+                    description: `Imported: ${data.imported} · Skipped: ${data.skipped} · Total: ${data.total}`,
+                });
                 // Refresh the awards list
                 fetchAwards();
             } else {

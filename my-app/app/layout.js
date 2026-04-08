@@ -1,5 +1,6 @@
 import { Poppins } from 'next/font/google'
 import './globals.css'
+import ToasterClient from './components/ToasterClient'
 
 
 const poppins = Poppins({
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
     <html>
       <body className={poppins.className}>
         {children}
+        <ToasterClient />
       </body>
     </html>
   )

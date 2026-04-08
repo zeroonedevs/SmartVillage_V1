@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner";
 
 const AreasOfWorkTab = () => {
     const [areas, setAreas] = useState([]);
@@ -48,7 +49,7 @@ const AreasOfWorkTab = () => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
             if (!file.type.startsWith('image/')) {
-                alert('Only image files are allowed.');
+                toast.error('Only image files are allowed.');
                 e.target.value = '';
                 setSelectedFile(null);
                 return;
@@ -110,7 +111,7 @@ const AreasOfWorkTab = () => {
                     setAreas([...areas, saveData.data].sort((a, b) => a.order - b.order));
                 }
                 cancelForm();
-                alert(editingArea ? 'Area updated successfully!' : 'Area added successfully!');
+                toast.success(editingArea ? 'Area updated successfully!' : 'Area added successfully!');
             } else {
                 throw new Error(saveData.error || 'Failed to save area');
             }
@@ -131,10 +132,10 @@ const AreasOfWorkTab = () => {
             if (data.success) {
                 setAreas(areas.filter(a => a._id !== id));
             } else {
-                alert(data.error);
+                toast.error(data.error);
             }
         } catch (err) {
-            alert('Error deleting area');
+            toast.error('Error deleting area');
         } finally {
             setDeletingId(null);
         }

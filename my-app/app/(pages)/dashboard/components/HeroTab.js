@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner";
 
 const HeroTab = () => {
     const [slides, setSlides] = useState([]);
@@ -48,13 +49,13 @@ const HeroTab = () => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
             if (!file.type.startsWith('image/')) {
-                alert('Only image files are allowed.');
+                toast.error('Only image files are allowed.');
                 e.target.value = '';
                 setSelectedFile(null);
                 return;
             }
             if (file.size > 5 * 1024 * 1024) {
-                alert('File size exceeds 5MB. Please choose a smaller file.');
+                toast.error('File size exceeds 5MB. Please choose a smaller file.');
                 e.target.value = '';
                 setSelectedFile(null);
                 return;
@@ -120,7 +121,7 @@ const HeroTab = () => {
                     setSlides([...slides, saveData.data].sort((a, b) => a.order - b.order));
                 }
                 cancelForm();
-                alert(editingSlide ? 'Hero slide updated successfully!' : 'Hero slide added successfully!');
+                toast.success(editingSlide ? 'Hero slide updated successfully!' : 'Hero slide added successfully!');
             } else {
                 throw new Error(saveData.error || 'Failed to save hero slide');
             }
@@ -143,10 +144,10 @@ const HeroTab = () => {
             if (data.success) {
                 setSlides(slides.filter(s => s._id !== id));
             } else {
-                alert(data.error || 'Failed to delete');
+                toast.error(data.error || 'Failed to delete');
             }
         } catch (err) {
-            alert('Error deleting slide');
+            toast.error('Error deleting slide');
         } finally {
             setDeletingId(null);
         }

@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner";
 
 const NewsTab = () => {
     const [news, setNews] = useState([]);
@@ -48,13 +49,13 @@ const NewsTab = () => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
             if (!file.type.startsWith('image/')) {
-                alert('Only image files are allowed.');
+                toast.error('Only image files are allowed.');
                 e.target.value = '';
                 setSelectedFile(null);
                 return;
             }
             if (file.size > 4 * 1024 * 1024) {
-                alert('File size exceeds 4MB. Please choose a smaller file.');
+                toast.error('File size exceeds 4MB. Please choose a smaller file.');
                 e.target.value = '';
                 setSelectedFile(null);
                 return;
@@ -168,7 +169,7 @@ const NewsTab = () => {
                 setEditingNews(null);
                 setShowCreateForm(false);
                 document.getElementById('news-image-upload').value = '';
-                alert(editingNews ? 'News article updated successfully!' : 'News article added successfully!');
+                toast.success(editingNews ? 'News article updated successfully!' : 'News article added successfully!');
             } else {
                 throw new Error(saveData.error || 'Failed to save news article');
             }
@@ -191,10 +192,10 @@ const NewsTab = () => {
             if (data.success) {
                 setNews(news.filter(n => n._id !== id));
             } else {
-                alert(data.error || 'Failed to delete');
+                toast.error(data.error || 'Failed to delete');
             }
         } catch (err) {
-            alert('Error deleting news article');
+            toast.error('Error deleting news article');
         } finally {
             setDeletingId(null);
         }
@@ -238,7 +239,9 @@ const NewsTab = () => {
             const data = await response.json();
 
             if (response.ok && data.success) {
-                alert(`Migration completed!\nImported: ${data.imported}\nSkipped (already exists): ${data.skipped}\nTotal: ${data.total}`);
+                toast.success('Migration completed', {
+                    description: `Imported: ${data.imported} · Skipped: ${data.skipped} · Total: ${data.total}`,
+                });
                 // Refresh the news list
                 fetchNews();
             } else {

@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner";
 
 const FocusAreasTab = () => {
     const [focusAreas, setFocusAreas] = useState([]);
@@ -101,7 +102,7 @@ const FocusAreasTab = () => {
                     setFocusAreas([...focusAreas, saveData.data].sort((a, b) => a.order - b.order));
                 }
                 cancelForm();
-                alert(editingArea ? 'Focus area updated!' : 'Focus area added!');
+                toast.success(editingArea ? 'Focus area updated!' : 'Focus area added!');
             } else {
                 throw new Error(saveData.error || 'Failed to save focus area');
             }
@@ -119,10 +120,10 @@ const FocusAreasTab = () => {
             if (res.ok) {
                 setFocusAreas(focusAreas.filter(a => a._id !== id));
             } else {
-                alert('Failed to delete');
+                toast.error('Failed to delete');
             }
         } catch (err) {
-            alert('Error deleting');
+            toast.error('Error deleting');
         }
     };
 

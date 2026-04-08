@@ -1,6 +1,7 @@
 
 "use client";
 import React, { useEffect, useState } from 'react';
+import { toast } from "sonner";
 import { useRouter } from 'next/navigation';
 
 const RegistrationsTab = () => {
@@ -65,7 +66,7 @@ const RegistrationsTab = () => {
             // Remove the deleted item from the list
             setRegistrations(registrations.filter(reg => reg._id !== id));
         } catch (err) {
-            alert(err.message || 'Failed to delete registration');
+            toast.error(err.message || 'Failed to delete registration');
         } finally {
             setDeletingId(null);
         }
