@@ -17,7 +17,7 @@ import Footer from "./components/footer/Footer";
 
 import "./globals.css";
 
-import SVR_Image_1 from "./Assets/IMG_8078.JPG";
+import SVR_Image_1 from "./Assets/img_8078.jpg";
 
 import VijaySirUpdated from "./Assets/Updated Images/SAC_Director_Updated.png";
 import President from "./Assets/President.jpeg";

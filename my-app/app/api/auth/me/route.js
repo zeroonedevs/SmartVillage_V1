@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../../../../lib/mongodb';
 import User from '../../../../models/User';
 
+export const dynamic = 'force-dynamic';
 
 function checkAuth(request) {
     const authCookie = request.cookies.get('gop_admin_session');
@@ -22,15 +23,23 @@ export async function GET(request) {
         }
 
         const userIdCookie = request.cookies.get('user_id');
-        if (!userIdCookie) {
+        if (!userIdCookie?.value) {
             return NextResponse.json(
                 { error: 'User ID not found' },
                 { status: 401 }
             );
         }
 
+        const uid = Number(userIdCookie.value);
+        if (Number.isNaN(uid)) {
+            return NextResponse.json(
+                { error: 'Invalid session' },
+                { status: 401 }
+            );
+        }
+
         await dbConnect();
-        const user = await User.findOne({ userID: Number(userIdCookie.value) }).select('-passwordHash');
+        const user = await User.findOne({ userID: uid }).select('-passwordHash');
 
         if (!user) {
             return NextResponse.json(

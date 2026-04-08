@@ -48,9 +48,10 @@ const SVRDashboard = () => {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                // Auth Role-based Check: Fetch user info to get role
-                const response = await fetch('/api/auth/me', {
-                    credentials: 'include'
+                const url = `${window.location.origin}/api/auth/me`;
+                const response = await fetch(url, {
+                    credentials: 'include',
+                    cache: 'no-store',
                 });
 
                 if (response.status === 401) {
@@ -58,21 +59,26 @@ const SVRDashboard = () => {
                     return;
                 }
 
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.success && data.data) {
-                        const role = data.data.role;
-                        setUserRole(role);
+                if (!response.ok) {
+                    console.error('Auth check failed:', response.status, await response.text().catch(() => ''));
+                    router.push('/login');
+                    return;
+                }
 
-                        // Set initial landing tab based on role
-                        if (role === 'admin') {
-                            setActiveTab('analytics');
-                        } else if (role === 'staff') {
-                            setActiveTab('gallery');
-                        } else if (role === 'lead') {
-                            setActiveTab('activities');
-                        }
+                const data = await response.json();
+                if (data.success && data.data) {
+                    const role = data.data.role;
+                    setUserRole(role);
+
+                    if (role === 'admin') {
+                        setActiveTab('analytics');
+                    } else if (role === 'staff') {
+                        setActiveTab('gallery');
+                    } else if (role === 'lead') {
+                        setActiveTab('activities');
                     }
+                } else {
+                    router.push('/login');
                 }
             } catch (error) {
                 console.error('Auth check failed:', error);

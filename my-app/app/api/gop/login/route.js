@@ -79,29 +79,20 @@ export async function POST(request) {
         }, { status: 200 });
 
         
-        response.cookies.set('gop_admin_session', 'authenticated', {
+        const cookieBase = {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            // 'lax' works reliably after login redirects; 'strict' can drop cookies in some browser flows
+            sameSite: 'lax',
             maxAge: 86400,
             path: '/',
-        });
+        };
 
-        response.cookies.set('user_role', role || user.role, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-            maxAge: 86400,
-            path: '/',
-        });
+        response.cookies.set('gop_admin_session', 'authenticated', cookieBase);
 
-        response.cookies.set('user_id', String(user.userID), {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-            maxAge: 86400,
-            path: '/',
-        });
+        response.cookies.set('user_role', role || user.role, cookieBase);
+
+        response.cookies.set('user_id', String(user.userID), cookieBase);
 
         return response;
 

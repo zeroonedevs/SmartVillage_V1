@@ -21,28 +21,11 @@ const nextConfig = {
   },
   experimental: {
     optimizeCss: false,
+    // Faster resolves for large icon/chart packages (fewer modules per import graph)
+    optimizePackageImports: ['lucide-react', 'recharts'],
   },
-  // Webpack config to handle uppercase image extensions
-  webpack: (config) => {
-    // Handle uppercase image extensions (.JPG, .JPEG, .PNG, etc.)
-    // This ensures case-insensitive matching for image files
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test && rule.test.toString().includes('jpg|jpeg')
-    );
-    
-    if (fileLoaderRule) {
-      // Update existing rule to be case-insensitive
-      fileLoaderRule.test = /\.(jpg|jpeg|png|gif|webp|avif|svg|JPG|JPEG|PNG|GIF|WEBP|AVIF|SVG)$/i;
-    } else {
-      // Add rule if it doesn't exist
-      config.module.rules.push({
-        test: /\.(jpg|jpeg|png|gif|webp|avif|svg|JPG|JPEG|PNG|GIF|WEBP|AVIF|SVG)$/i,
-        type: 'asset/resource',
-      });
-    }
-    
-    return config;
-  },
+  // Dev uses Turbopack by default (see package.json). Production build uses --turbopack.
+  // Static assets use lowercase extensions (e.g. img_8078.jpg) so no Webpack-only rules are required.
 }
 
 module.exports = nextConfig
