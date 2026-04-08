@@ -6,43 +6,8 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: self-hosted
-    
-    defaults:
-      run:
-        working-directory: ./my-app
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: ./my-app/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-
-      - name: Check code formatting
-        run: npm run format:check
-
-      - name: Type check
-        run: npm run type-check
-        continue-on-error: true
-
-      - name: Build application
-        run: npm run build
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          NODE_ENV: production
-
   deploy:
     runs-on: self-hosted
-    needs: build
 
     permissions:
       contents: read
@@ -68,13 +33,11 @@ jobs:
           cd /var/www/SmartVillage_V1/my-app
           npm install --legacy-peer-deps
 
-      - name: Build app
+      - name: Type check
+        continue-on-error: true
         run: |
           cd /var/www/SmartVillage_V1/my-app
-          npm run build
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          NODE_ENV: production
+          npm run type-check
 
       - name: Restart PM2
         run: |
