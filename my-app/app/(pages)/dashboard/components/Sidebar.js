@@ -16,6 +16,7 @@ import {
   Layout,
   Briefcase,
   Target,
+  LogOut,
 } from 'lucide-react';
 
 const NAV_GROUPS = [
@@ -62,7 +63,7 @@ function isItemAllowedForRole(tabId, userRole) {
   return false;
 }
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen, activeTab, setActiveTab, userRole, onOpenSettings }) => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen, activeTab, setActiveTab, userRole, onOpenSettings, onLogout }) => {
   const visibleItems = ALL_NAV_ITEMS.filter(item => isItemAllowedForRole(item.id, userRole));
 
   const renderNavButton = item => {
@@ -114,7 +115,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, activeTab, setActiveTab, userRol
         {visibleItems.map(renderNavButton)}
       </nav>
 
-      <div className="p-3 border-t border-gray-200 bg-white">
+      <div className="p-3 border-t border-gray-200 bg-white space-y-2">
         <button
           type="button"
           onClick={onOpenSettings}
@@ -127,6 +128,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, activeTab, setActiveTab, userRol
         >
           <Settings className="h-[18px] w-[18px] shrink-0" strokeWidth={2} />
           {sidebarOpen && <span className="font-normal">Account & security</span>}
+        </button>
+        <button
+          type="button"
+          onClick={onLogout}
+          title={!sidebarOpen ? 'Log out' : undefined}
+          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-none border text-sm border-gray-300 bg-gray-100 text-black ${!sidebarOpen ? 'justify-center px-2' : ''}`}
+        >
+          <LogOut className="h-[18px] w-[18px] shrink-0" strokeWidth={2} />
+          {sidebarOpen && <span className="font-normal">Log out</span>}
         </button>
       </div>
     </div>
