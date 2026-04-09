@@ -13,57 +13,54 @@ import nodemailer from 'nodemailer';
  */
 
 export function isMailConfigured() {
-    return !!(process.env.EMAIL_USER && process.env.EMAIL_PASS);
+  return !!(process.env.EMAIL_USER && process.env.EMAIL_PASS);
 }
 
 export function getMailConfigurationStatus() {
-    const hasUser = !!process.env.EMAIL_USER;
-    const hasPass = !!process.env.EMAIL_PASS;
-    const mode = process.env.SMTP_HOST ? 'smtp' : 'service';
-    return {
-        configured: hasUser && hasPass,
-        mode,
-        missing: [
-            !hasUser && 'EMAIL_USER',
-            !hasPass && 'EMAIL_PASS',
-        ].filter(Boolean),
-        smtpHostSet: !!process.env.SMTP_HOST,
-    };
+  const hasUser = !!process.env.EMAIL_USER;
+  const hasPass = !!process.env.EMAIL_PASS;
+  const mode = process.env.SMTP_HOST ? 'smtp' : 'service';
+  return {
+    configured: hasUser && hasPass,
+    mode,
+    missing: [!hasUser && 'EMAIL_USER', !hasPass && 'EMAIL_PASS'].filter(Boolean),
+    smtpHostSet: !!process.env.SMTP_HOST,
+  };
 }
 
 export function createMailTransport() {
-    const user = process.env.EMAIL_USER;
-    const pass = process.env.EMAIL_PASS;
+  const user = process.env.EMAIL_USER;
+  const pass = process.env.EMAIL_PASS;
 
-    if (!user || !pass) {
-        throw new Error('EMAIL_USER and EMAIL_PASS must be set');
-    }
+  if (!user || !pass) {
+    throw new Error('EMAIL_USER and EMAIL_PASS must be set');
+  }
 
-    if (process.env.SMTP_HOST) {
-        const port = Number(process.env.SMTP_PORT || 587);
-        const secure = process.env.SMTP_SECURE === 'true' || port === 465;
-        return nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port,
-            secure,
-            auth: { user, pass },
-        });
-    }
-
+  if (process.env.SMTP_HOST) {
+    const port = Number(process.env.SMTP_PORT || 587);
+    const secure = process.env.SMTP_SECURE === 'true' || port === 465;
     return nodemailer.createTransport({
-        service: process.env.EMAIL_SERVICE || 'gmail',
-        auth: { user, pass },
+      host: process.env.SMTP_HOST,
+      port,
+      secure,
+      auth: { user, pass },
     });
+  }
+
+  return nodemailer.createTransport({
+    service: process.env.EMAIL_SERVICE || 'gmail',
+    auth: { user, pass },
+  });
 }
 
 export const sendResetEmail = async (email, token) => {
-    const transporter = createMailTransport();
+  const transporter = createMailTransport();
 
-    const mailOptions = {
-        from: `"Smart Village Revolution" <${process.env.EMAIL_USER}>`,
-        to: email,
-        subject: 'Password Reset Request - SVR Portal',
-        html: `
+  const mailOptions = {
+    from: `"Smart Village Revolution" <${process.env.EMAIL_USER}>`,
+    to: email,
+    subject: 'Password Reset Request - SVR Portal',
+    html: `
       <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
         <h2 style="color: #008000;">Smart Village Revolution Portal</h2>
         <p>You requested a password reset. Please use the following code to reset your password:</p>
@@ -76,7 +73,7 @@ export const sendResetEmail = async (email, token) => {
         <p style="font-size: 12px; color: #888;">© 2024 Smart Village Revolution. All rights reserved.</p>
       </div>
     `,
-    };
+  };
 
-    await transporter.sendMail(mailOptions);
+  await transporter.sendMail(mailOptions);
 };

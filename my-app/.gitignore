@@ -38,7 +38,6 @@ GOP_ADMIN_*.md
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 # AI assistant files
 agents.md

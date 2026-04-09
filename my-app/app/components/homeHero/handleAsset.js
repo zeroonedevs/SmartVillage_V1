@@ -4,20 +4,20 @@ export const fetchImages = async () => {
   const localImages = [
     {
       url: '/hero/1president.jpg',
-      description: 'Smart Village Revolution Leadership'
+      description: 'Smart Village Revolution Leadership',
     },
     {
       url: '/hero/Adarsh_Gram.jpg',
-      description: 'Adarsh Gram Initiative'
+      description: 'Adarsh Gram Initiative',
     },
     {
       url: '/hero/hero11.jpeg',
-      description: 'Community Development'
+      description: 'Community Development',
     },
     {
       url: '/hero/hero6.jpg',
-      description: 'Village Transformation'
-    }
+      description: 'Village Transformation',
+    },
   ];
 
   // Return a promise to maintain the same async API
