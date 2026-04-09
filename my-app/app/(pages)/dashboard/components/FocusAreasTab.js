@@ -146,16 +146,27 @@ const FocusAreasTab = () => {
     setSelectedFile(null);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-20">
+        <div className="animate-spin rounded-full h-11 w-11 border-2 border-green-600 border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {showCreateForm && (
-        <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-          <h3 className="text-xl font-bold mb-6">
-            {editingArea ? 'Edit Focus Area' : 'Add Focus Area'}
+        <div className="dash-panel p-6 sm:p-8">
+          <h3 className="dash-section-title mb-1">
+            {editingArea ? 'Edit focus area' : 'Add focus area'}
           </h3>
-          {error && <div className="text-red-500 mb-4">{error}</div>}
+          <p className="dash-section-desc mb-5">Image and details for the 9-way focus area.</p>
+          {error && (
+            <div className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-4 py-2 mb-4">
+              {error}
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
@@ -163,7 +174,7 @@ const FocusAreasTab = () => {
                 value={formData.title}
                 onChange={handleInputChange}
                 placeholder="Title"
-                className="border p-2 rounded w-full"
+                className="dash-form-input"
                 required
               />
               <input
@@ -172,7 +183,7 @@ const FocusAreasTab = () => {
                 value={formData.order}
                 onChange={handleInputChange}
                 placeholder="Order (1-9)"
-                className="border p-2 rounded w-full"
+                className="dash-form-input"
                 required
               />
               <textarea
@@ -180,27 +191,31 @@ const FocusAreasTab = () => {
                 value={formData.description}
                 onChange={handleInputChange}
                 placeholder="Description"
-                className="border p-2 rounded w-full col-span-2"
+                className="dash-form-input col-span-2 min-h-[88px]"
                 rows="3"
                 required
               />
               <div className="col-span-2">
-                <label className="block mb-2 text-sm font-semibold">Image</label>
-                <input type="file" onChange={handleFileChange} className="w-full" />
+                <label className="block mb-2 text-sm font-medium text-slate-700">Image</label>
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-green-50 file:px-3 file:py-2 file:text-sm file:font-medium file:text-green-800"
+                />
               </div>
             </div>
-            <div className="flex gap-4 pt-4">
+            <div className="flex flex-wrap gap-3 pt-2">
               <button
                 type="submit"
-                className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
+                className="inline-flex items-center justify-center rounded-lg bg-green-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-800 disabled:opacity-60"
                 disabled={uploading}
               >
-                {uploading ? 'Saving...' : 'Save'}
+                {uploading ? 'Saving…' : 'Save'}
               </button>
               <button
                 type="button"
                 onClick={cancelForm}
-                className="bg-gray-200 text-gray-700 px-6 py-2 rounded"
+                className="rounded-lg border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               >
                 Cancel
               </button>
@@ -209,31 +224,35 @@ const FocusAreasTab = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-        <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-          <h3 className="text-lg font-bold">Focus Areas (9-Way Principle)</h3>
+      <div className="dash-panel overflow-hidden">
+        <div className="dash-panel-head">
+          <div>
+            <h3 className="dash-section-title">Focus areas (9-way)</h3>
+            <p className="dash-section-desc">Manage the nine focus areas shown on the site.</p>
+          </div>
           {!showCreateForm && (
             <button
+              type="button"
               onClick={() => setShowCreateForm(true)}
-              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+              className="shrink-0 rounded-lg bg-green-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800"
             >
-              Add New
+              Add new
             </button>
           )}
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full border-collapse text-left text-sm">
             <thead>
-              <tr className="bg-gray-50 border-b">
-                <th className="p-4 font-semibold text-gray-600">Order</th>
-                <th className="p-4 font-semibold text-gray-600">Image</th>
-                <th className="p-4 font-semibold text-gray-600">Title</th>
-                <th className="p-4 font-semibold text-gray-600 text-right">Actions</th>
+              <tr className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="p-4 text-left">Order</th>
+                <th className="p-4 text-left">Image</th>
+                <th className="p-4 text-left">Title</th>
+                <th className="p-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-slate-100">
               {focusAreas.map(item => (
-                <tr key={item._id} className="border-b hover:bg-gray-50">
+                <tr key={item._id} className="hover:bg-slate-50/80">
                   <td className="p-4">{item.order}</td>
                   <td className="p-4">
                     <img src={item.image} className="h-10 w-10 rounded object-cover" alt="" />

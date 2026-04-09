@@ -92,8 +92,8 @@ const RegistrationsTab = () => {
 
   if (registrations.length === 0) {
     return (
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-16 text-center">
-        <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="dash-panel p-12 sm:p-16 text-center">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-50 text-green-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"
@@ -109,43 +109,43 @@ const RegistrationsTab = () => {
             />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-gray-800 mb-1">No Registrations Yet</h3>
-        <p className="text-gray-500">New GOP registrations will appear here once submitted.</p>
+        <h3 className="text-base font-semibold text-slate-900 mb-1">No Registrations Yet</h3>
+        <p className="text-sm text-slate-500">New GOP registrations will appear here once submitted.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-      <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+    <div className="dash-panel overflow-hidden">
+      <div className="dash-panel-head">
         <div>
-          <h2 className="text-lg font-bold text-gray-800">Registration List</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Manage all submitted GOP registrations</p>
+          <h2 className="text-base font-semibold text-slate-900">Registration List</h2>
+          <p className="dash-section-desc">Manage all submitted GOP registrations</p>
         </div>
-        <span className="bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-sm font-semibold shadow-sm border border-green-200">
+        <span className="inline-flex items-center rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-semibold text-green-800">
           Total: {registrations.length}
         </span>
       </div>
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-slate-200 text-sm">
+          <thead className="bg-slate-50">
             <tr>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Date
               </th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Organization
               </th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Contact
               </th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Details
               </th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Interests
               </th>
-              <th className="px-6 py-4 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Actions
               </th>
             </tr>

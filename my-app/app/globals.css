@@ -36,6 +36,47 @@ a {
     background-color 0.2s ease;
 }
 
+/* Global button reset requested: green text, bold labels, no radius, no hover effect */
+button,
+input[type='button'],
+input[type='submit'],
+input[type='reset'] {
+  border-radius: 0 !important;
+  color: inherit !important;
+  font-weight: 400 !important;
+  transition: none !important;
+}
+
+button:hover,
+button:focus,
+button:active,
+input[type='button']:hover,
+input[type='button']:focus,
+input[type='button']:active,
+input[type='submit']:hover,
+input[type='submit']:focus,
+input[type='submit']:active,
+input[type='reset']:hover,
+input[type='reset']:focus,
+input[type='reset']:active {
+  border-radius: 0 !important;
+  color: inherit !important;
+  font-weight: 400 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Keep dashboard sidebar text/icons black while retaining global button rules elsewhere */
+.dashboard-sidebar button,
+.dashboard-sidebar button:hover,
+.dashboard-sidebar button:focus,
+.dashboard-sidebar button:active,
+.dashboard-sidebar button span,
+.dashboard-sidebar button svg {
+  color: #000000 !important;
+}
+
 .home-component {
   width: 100%;
 }
@@ -1303,4 +1344,37 @@ a {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 80%;
   max-width: 800px;
+}
+
+/* Dashboard admin UI — white + green, consistent panels & type */
+@layer components {
+  .dash-app input,
+  .dash-app textarea,
+  .dash-app select {
+    user-select: text !important;
+  }
+
+  .dash-panel {
+    @apply rounded-xl border border-slate-200/90 bg-white shadow-sm;
+  }
+
+  .dash-panel-head {
+    @apply px-5 py-4 border-b border-slate-100 bg-slate-50/90 flex flex-wrap items-center justify-between gap-3;
+  }
+
+  .dash-section-title {
+    @apply text-base font-semibold text-slate-900 tracking-tight;
+  }
+
+  .dash-section-desc {
+    @apply text-sm text-slate-500 mt-0.5;
+  }
+
+  .dash-form-input {
+    @apply block w-full rounded-lg border border-slate-200 bg-white py-2.5 px-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm transition-colors focus:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-500/20;
+  }
+
+  .dash-form-input-muted {
+    @apply block w-full rounded-lg border border-slate-200 bg-slate-50 py-2.5 px-3 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:border-green-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/20;
+  }
 }

@@ -190,7 +190,7 @@ const HeroTab = () => {
     <div className="space-y-8">
       {/* Create/Edit Form */}
       {showCreateForm && (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div className="dash-panel p-6 sm:p-8">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-bold text-gray-800">
               {editingSlide ? 'Edit Hero Slide' : 'Add New Hero Slide'}
@@ -350,10 +350,10 @@ const HeroTab = () => {
       )}
 
       {/* List */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
+      <div className="dash-panel overflow-hidden">
+        <div className="dash-panel-head">
           <div>
-            <h3 className="text-lg font-bold text-gray-800">Hero Slides</h3>
+            <h3 className="text-base font-semibold text-slate-900">Hero Slides</h3>
             <p className="text-sm text-gray-500">Manage home page banner slides</p>
           </div>
           {!showCreateForm && (

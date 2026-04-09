@@ -78,15 +78,16 @@ const StaffTab = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-      <h2 className="text-xl font-bold text-gray-800 mb-6">Staff Management</h2>
+    <div className="dash-panel p-5 sm:p-6">
+      <h2 className="dash-section-title mb-1">Staff directory</h2>
+      <p className="dash-section-desc mb-6">Add or remove staff shown on the public site.</p>
 
       {/* Add Staff Form */}
       <form
         onSubmit={handleSubmit}
-        className="mb-8 p-6 bg-gray-50 rounded-xl border border-gray-200"
+        className="mb-6 rounded-xl border border-slate-200 bg-slate-50/80 p-5"
       >
-        <h3 className="text-lg font-semibold mb-4 text-gray-700">Add New Staff Member</h3>
+        <h3 className="text-sm font-semibold text-slate-800 mb-4">Add staff member</h3>
         {error && <p className="text-red-500 mb-4 text-sm">{error}</p>}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -96,7 +97,7 @@ const StaffTab = () => {
             placeholder="Staff Name"
             value={formData.name}
             onChange={handleChange}
-            className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="dash-form-input-muted"
             required
           />
           <input
@@ -105,7 +106,7 @@ const StaffTab = () => {
             placeholder="Designation"
             value={formData.designation}
             onChange={handleChange}
-            className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="dash-form-input-muted"
             required
           />
         </div>
@@ -113,34 +114,33 @@ const StaffTab = () => {
         <div className="mt-4 flex justify-end">
           <button
             type="submit"
-            className="px-6 py-2 bg-[#008000] text-white font-bold rounded-lg hover:bg-green-700 transition-colors shadow-sm"
+            className="rounded-lg bg-green-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-800"
           >
-            Add Staff Member
+            Add staff member
           </button>
         </div>
       </form>
 
       {/* Staff List Table */}
       {loading ? (
-        <div className="text-center py-10">Loading...</div>
+        <div className="flex justify-center py-12">
+          <div className="h-10 w-10 animate-spin rounded-full border-2 border-green-600 border-t-transparent" />
+        </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+        <div className="overflow-x-auto rounded-lg border border-slate-200">
+          <table className="w-full text-left border-collapse text-sm">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200 text-gray-600 text-sm uppercase tracking-wider">
+              <tr className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 <th className="p-4 font-semibold">Name</th>
                 <th className="p-4 font-semibold">Designation</th>
                 <th className="p-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700 text-sm">
+            <tbody className="divide-y divide-slate-100 text-slate-700">
               {staffList.length > 0 ? (
                 staffList.map(staff => (
-                  <tr
-                    key={staff._id}
-                    className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                  >
-                    <td className="p-4 font-medium text-gray-900">{staff.name}</td>
+                  <tr key={staff._id} className="hover:bg-slate-50/80 transition-colors">
+                    <td className="p-4 font-medium text-slate-900">{staff.name}</td>
                     <td className="p-4">{staff.designation}</td>
                     <td className="p-4 text-right">
                       <button

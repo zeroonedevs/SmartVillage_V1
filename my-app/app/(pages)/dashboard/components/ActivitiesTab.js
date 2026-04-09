@@ -146,7 +146,7 @@ const ActivitiesTab = () => {
   return (
     <div className="space-y-8">
       {/* Add Activity Form */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+      <div className="dash-panel p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 bg-green-50 rounded-lg text-green-600">
             <svg
@@ -298,10 +298,10 @@ const ActivitiesTab = () => {
       </div>
 
       {/* Activities List */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
+      <div className="dash-panel overflow-hidden">
+        <div className="dash-panel-head">
           <div>
-            <h3 className="text-lg font-bold text-gray-800">Activity Reports</h3>
+            <h3 className="text-base font-semibold text-slate-900">Activity Reports</h3>
             <p className="text-sm text-gray-500">History of all activities</p>
           </div>
           <span className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-bold">

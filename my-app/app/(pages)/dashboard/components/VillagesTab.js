@@ -79,15 +79,16 @@ const VillagesTab = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-      <h2 className="text-xl font-bold text-gray-800 mb-6">Adapted Villages</h2>
+    <div className="dash-panel p-5 sm:p-6">
+      <h2 className="dash-section-title mb-1">Adapted villages</h2>
+      <p className="dash-section-desc mb-6">Villages featured in the adapted villages section.</p>
 
       {/* Add Village Form */}
       <form
         onSubmit={handleSubmit}
-        className="mb-8 p-6 bg-gray-50 rounded-xl border border-gray-200"
+        className="mb-6 rounded-xl border border-slate-200 bg-slate-50/80 p-5"
       >
-        <h3 className="text-lg font-semibold mb-4 text-gray-700">Add New Village</h3>
+        <h3 className="text-sm font-semibold text-slate-800 mb-4">Add village</h3>
         {error && <p className="text-red-500 mb-4 text-sm">{error}</p>}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -97,7 +98,7 @@ const VillagesTab = () => {
             placeholder="Village Name"
             value={formData.name}
             onChange={handleChange}
-            className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="dash-form-input-muted"
             required
           />
           <input
@@ -106,7 +107,7 @@ const VillagesTab = () => {
             placeholder="Mandal"
             value={formData.mandal}
             onChange={handleChange}
-            className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="dash-form-input-muted"
             required
           />
           <input
@@ -115,7 +116,7 @@ const VillagesTab = () => {
             placeholder="District"
             value={formData.district}
             onChange={handleChange}
-            className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="dash-form-input-muted"
             required
           />
         </div>
@@ -123,35 +124,34 @@ const VillagesTab = () => {
         <div className="mt-4 flex justify-end">
           <button
             type="submit"
-            className="px-6 py-2 bg-[#008000] text-white font-bold rounded-lg hover:bg-green-700 transition-colors shadow-sm"
+            className="rounded-lg bg-green-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-800"
           >
-            Add Village
+            Add village
           </button>
         </div>
       </form>
 
       {/* Village List Table */}
       {loading ? (
-        <div className="text-center py-10">Loading...</div>
+        <div className="flex justify-center py-12">
+          <div className="h-10 w-10 animate-spin rounded-full border-2 border-green-600 border-t-transparent" />
+        </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+        <div className="overflow-x-auto rounded-lg border border-slate-200">
+          <table className="w-full text-left border-collapse text-sm">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200 text-gray-600 text-sm uppercase tracking-wider">
+              <tr className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 <th className="p-4 font-semibold">Name</th>
                 <th className="p-4 font-semibold">Mandal</th>
                 <th className="p-4 font-semibold">District</th>
                 <th className="p-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700 text-sm">
+            <tbody className="divide-y divide-slate-100 text-slate-700">
               {villageList.length > 0 ? (
                 villageList.map(village => (
-                  <tr
-                    key={village._id}
-                    className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                  >
-                    <td className="p-4 font-medium text-gray-900">{village.name}</td>
+                  <tr key={village._id} className="hover:bg-slate-50/80 transition-colors">
+                    <td className="p-4 font-medium text-slate-900">{village.name}</td>
                     <td className="p-4">{village.mandal}</td>
                     <td className="p-4">{village.district}</td>
                     <td className="p-4 text-right">

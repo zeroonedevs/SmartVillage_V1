@@ -36,8 +36,8 @@ const ROLE_COLORS = { admin: '#166534', staff: '#16a34a', lead: '#86efac' };
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-3">
-        <p className="text-sm font-semibold text-gray-700 mb-1">{label}</p>
+      <div className="bg-white border border-slate-200 rounded-lg shadow-md p-3">
+        <p className="text-sm font-semibold text-slate-800 mb-1">{label}</p>
         {payload.map((entry, index) => (
           <p key={index} className="text-sm" style={{ color: entry.color }}>
             {entry.name}: <span className="font-bold">{entry.value?.toLocaleString()}</span>
@@ -218,16 +218,16 @@ const AnalyticsTab = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-700"></div>
+        <div className="animate-spin rounded-full h-11 w-11 border-2 border-green-600 border-t-transparent" />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-xl">
-        <p className="font-semibold">Error loading analytics</p>
-        <p className="text-sm mt-1">{error}</p>
+      <div className="dash-panel border-red-200 bg-red-50/90 text-red-800 px-5 py-4">
+        <p className="text-sm font-semibold">Error loading analytics</p>
+        <p className="text-sm mt-1 text-red-700">{error}</p>
       </div>
     );
   }
@@ -254,27 +254,29 @@ const AnalyticsTab = () => {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Section 1: Overview Stat Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
         {statCards.map(card => (
           <div
             key={card.key}
-            className={`rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 ${
-              card.color ? 'bg-green-600 text-white' : 'bg-white'
+            className={`dash-panel p-5 flex items-center gap-4 ${
+              card.color ? 'bg-green-700 text-white border-green-600' : ''
             }`}
           >
             <div
-              className={`p-3 rounded-xl ${card.color ? 'bg-white/20 text-white' : 'bg-green-50 text-green-600'}`}
+              className={`p-3 rounded-xl shrink-0 ${card.color ? 'bg-white/20 text-white' : 'bg-green-50 text-green-700'}`}
             >
               {statCardIcons[card.key]}
             </div>
-            <div>
-              <p className={`text-3xl font-bold ${card.color ? 'text-white' : 'text-gray-800'}`}>
+            <div className="min-w-0">
+              <p
+                className={`text-2xl font-bold tabular-nums tracking-tight ${card.color ? 'text-white' : 'text-slate-900'}`}
+              >
                 {card.value?.toLocaleString()}
               </p>
               <p
-                className={`text-sm font-medium ${card.color ? 'text-green-100' : 'text-gray-500'}`}
+                className={`text-sm font-medium leading-snug ${card.color ? 'text-green-100' : 'text-slate-500'}`}
               >
                 {card.label}
               </p>
@@ -285,16 +287,14 @@ const AnalyticsTab = () => {
 
       {/* Section 2: Student Participation Trends */}
       {data.studentParticipationByMonth.length > 0 && (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-green-50 rounded-lg text-green-600">
+        <div className="dash-panel p-5 sm:p-6">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="p-2 bg-green-50 rounded-lg text-green-700 shrink-0">
               {statCardIcons.totalStudents}
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-800">Student Participation Trends</h3>
-              <p className="text-sm text-gray-500">
-                Monthly student participation across all activities
-              </p>
+              <h3 className="dash-section-title">Student participation trends</h3>
+              <p className="dash-section-desc">Monthly student participation across all activities</p>
             </div>
           </div>
           <ResponsiveContainer width="100%" height={320}>
@@ -325,14 +325,14 @@ const AnalyticsTab = () => {
       {/* Section 3: Activities - Domain Pie + Year Bar */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {data.activitiesByDomain.length > 0 && (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-green-50 rounded-lg text-green-600">
+          <div className="dash-panel p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="p-2 bg-green-50 rounded-lg text-green-700 shrink-0">
                 {statCardIcons.activities}
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-800">Activities by Domain</h3>
-                <p className="text-sm text-gray-500">Distribution across domains</p>
+                <h3 className="dash-section-title">Activities by Domain</h3>
+                <p className="dash-section-desc">Distribution across domains</p>
               </div>
             </div>
             <ResponsiveContainer width="100%" height={300}>
@@ -353,7 +353,7 @@ const AnalyticsTab = () => {
                 <Tooltip content={<CustomTooltip />} />
                 <Legend
                   wrapperStyle={{ fontSize: '12px' }}
-                  formatter={value => <span className="text-gray-600">{value}</span>}
+                  formatter={value => <span className="text-slate-600">{value}</span>}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -361,14 +361,14 @@ const AnalyticsTab = () => {
         )}
 
         {data.activitiesByYear.length > 0 && (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-green-50 rounded-lg text-green-600">
+          <div className="dash-panel p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="p-2 bg-green-50 rounded-lg text-green-700 shrink-0">
                 {statCardIcons.activities}
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-800">Activities by Year</h3>
-                <p className="text-sm text-gray-500">
+                <h3 className="dash-section-title">Activities by Year</h3>
+                <p className="dash-section-desc">
                   Activity count and student participation per year
                 </p>
               </div>
@@ -381,7 +381,7 @@ const AnalyticsTab = () => {
                 <Tooltip content={<CustomTooltip />} />
                 <Legend
                   wrapperStyle={{ fontSize: '12px' }}
-                  formatter={value => <span className="text-gray-600">{value}</span>}
+                  formatter={value => <span className="text-slate-600">{value}</span>}
                 />
                 <Bar dataKey="count" name="Activities" fill="#008000" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="students" name="Students" fill="#4ade80" radius={[4, 4, 0, 0]} />
@@ -393,14 +393,14 @@ const AnalyticsTab = () => {
 
       {/* Section 4: Village Distribution by District */}
       {data.villagesByDistrict.length > 0 && (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-green-50 rounded-lg text-green-600">
+        <div className="dash-panel p-5 sm:p-6">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="p-2 bg-green-50 rounded-lg text-green-700 shrink-0">
               {statCardIcons.villages}
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-800">Village Distribution by District</h3>
-              <p className="text-sm text-gray-500">Number of adapted villages in each district</p>
+              <h3 className="dash-section-title">Village Distribution by District</h3>
+              <p className="dash-section-desc">Number of adapted villages in each district</p>
             </div>
           </div>
           <ResponsiveContainer
@@ -427,14 +427,14 @@ const AnalyticsTab = () => {
       {/* Section 5: Gallery by Domain + User Role Distribution */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {data.galleryByDomain.length > 0 && (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-green-50 rounded-lg text-green-600">
+          <div className="dash-panel p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="p-2 bg-green-50 rounded-lg text-green-700 shrink-0">
                 {statCardIcons.gallery}
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-800">Gallery Images by Domain</h3>
-                <p className="text-sm text-gray-500">Image distribution across domains</p>
+                <h3 className="dash-section-title">Gallery Images by Domain</h3>
+                <p className="dash-section-desc">Image distribution across domains</p>
               </div>
             </div>
             <ResponsiveContainer width="100%" height={300}>
@@ -456,7 +456,7 @@ const AnalyticsTab = () => {
                 <Tooltip content={<CustomTooltip />} />
                 <Legend
                   wrapperStyle={{ fontSize: '12px' }}
-                  formatter={value => <span className="text-gray-600">{value}</span>}
+                  formatter={value => <span className="text-slate-600">{value}</span>}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -464,12 +464,12 @@ const AnalyticsTab = () => {
         )}
 
         {data.usersByRole.length > 0 && (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-green-50 rounded-lg text-green-600">{statCardIcons.users}</div>
+          <div className="dash-panel p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="p-2 bg-green-50 rounded-lg text-green-700 shrink-0">{statCardIcons.users}</div>
               <div>
-                <h3 className="text-lg font-bold text-gray-800">User Role Distribution</h3>
-                <p className="text-sm text-gray-500">System users by role</p>
+                <h3 className="dash-section-title">User Role Distribution</h3>
+                <p className="dash-section-desc">System users by role</p>
               </div>
             </div>
             <ResponsiveContainer width="100%" height={300}>
@@ -490,7 +490,7 @@ const AnalyticsTab = () => {
                 <Tooltip content={<CustomTooltip />} />
                 <Legend
                   wrapperStyle={{ fontSize: '12px' }}
-                  formatter={value => <span className="text-gray-600 capitalize">{value}</span>}
+                  formatter={value => <span className="text-slate-600 capitalize">{value}</span>}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -500,14 +500,14 @@ const AnalyticsTab = () => {
 
       {/* Section 6: GOP Registration Trends */}
       {data.registrationsByMonth.length > 0 && (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-green-50 rounded-lg text-green-600">
+        <div className="dash-panel p-5 sm:p-6">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="p-2 bg-green-50 rounded-lg text-green-700 shrink-0">
               {statCardIcons.registrations}
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-800">GOP Registration Trends</h3>
-              <p className="text-sm text-gray-500">Organization registrations over time</p>
+              <h3 className="dash-section-title">GOP Registration Trends</h3>
+              <p className="dash-section-desc">Organization registrations over time</p>
             </div>
           </div>
           <ResponsiveContainer width="100%" height={320}>
@@ -533,14 +533,14 @@ const AnalyticsTab = () => {
       {/* Section 7: GOP Interested Domains + Awards by Year */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {data.gopInterestedDomains.length > 0 && (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-green-50 rounded-lg text-green-600">
+          <div className="dash-panel p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="p-2 bg-green-50 rounded-lg text-green-700 shrink-0">
                 {statCardIcons.registrations}
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-800">Popular Domains of Interest</h3>
-                <p className="text-sm text-gray-500">Most requested domains by GOP organizations</p>
+                <h3 className="dash-section-title">Popular Domains of Interest</h3>
+                <p className="dash-section-desc">Most requested domains by GOP organizations</p>
               </div>
             </div>
             <ResponsiveContainer
@@ -570,14 +570,14 @@ const AnalyticsTab = () => {
         )}
 
         {data.awardsByYear.length > 0 && (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-orange-50 rounded-lg text-orange-500">
+          <div className="dash-panel p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="p-2 bg-amber-50 rounded-lg text-amber-700 shrink-0">
                 {statCardIcons.awards}
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-800">Awards by Year</h3>
-                <p className="text-sm text-gray-500">Recognition and awards received per year</p>
+                <h3 className="dash-section-title">Awards by Year</h3>
+                <p className="dash-section-desc">Recognition and awards received per year</p>
               </div>
             </div>
             <ResponsiveContainer width="100%" height={300}>

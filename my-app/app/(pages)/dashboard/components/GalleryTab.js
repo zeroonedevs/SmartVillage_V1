@@ -170,7 +170,7 @@ const GalleryTab = () => {
   return (
     <div className="space-y-8">
       {/* Upload Section */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+      <div className="dash-panel p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 bg-green-50 rounded-lg text-green-600">
             <svg
@@ -347,7 +347,7 @@ const GalleryTab = () => {
       </div>
 
       {/* Gallery Grid */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+      <div className="dash-panel p-6 sm:p-8">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-xl font-bold text-gray-800">Gallery Images</h3>
           <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">
