@@ -71,9 +71,27 @@ const Activity = mongoose.models.Activity || mongoose.model('Activity', Activity
 // --- Seed: default users (reset only) ---
 
 const defaultUsers = [
-  { userID: 1, name: 'System Admin', password: 'admin123', role: 'admin', email: '2300030350@kluniversity.in' },
-  { userID: 1002, name: 'Operations Staff', password: 'staff123', role: 'staff', email: 'staff@example.com' },
-  { userID: 1003, name: 'Project Lead', password: 'lead123', role: 'lead', email: 'lead@example.com' },
+  {
+    userID: 1,
+    name: 'System Admin',
+    password: 'admin123',
+    role: 'admin',
+    email: '2300030350@kluniversity.in',
+  },
+  {
+    userID: 1002,
+    name: 'Operations Staff',
+    password: 'staff123',
+    role: 'staff',
+    email: 'staff@example.com',
+  },
+  {
+    userID: 1003,
+    name: 'Project Lead',
+    password: 'lead123',
+    role: 'lead',
+    email: 'lead@example.com',
+  },
 ];
 
 // --- Static news ---
@@ -125,7 +143,8 @@ const newsArticles = [
     date: '28-09-2019',
     imageUrl:
       'https://firebasestorage.googleapis.com/v0/b/svrwebsite-1e892.appspot.com/o/news%2Frevolution.png?alt=media&token=3b5e8f62-fa87-4819-abe5-182cbb5922c2',
-    excerpt: 'A ralley was conducted against use of plastic along with MLA Vasantha in the village Milavaram for a better society.',
+    excerpt:
+      'A ralley was conducted against use of plastic along with MLA Vasantha in the village Milavaram for a better society.',
     link: '',
   },
   {
@@ -247,7 +266,8 @@ const awards = [
     id: 6,
     title: 'Best Village Development Project',
     image: 'https://i.imghippo.com/files/FD9892Urk.png',
-    description: 'Received the 27TH NATIONAL YOUTH FESTIVAL Award from ministry of youth affairs and sports.',
+    description:
+      'Received the 27TH NATIONAL YOUTH FESTIVAL Award from ministry of youth affairs and sports.',
     year: '2024',
   },
   {
@@ -340,7 +360,7 @@ async function runImportNews() {
   console.log(`Skipped: ${skipped}`);
   if (errors.length) {
     console.log(`Errors: ${errors.length}`);
-    errors.forEach((err) => console.error(`  - ${err}`));
+    errors.forEach(err => console.error(`  - ${err}`));
   }
 }
 
@@ -375,7 +395,7 @@ async function runImportAwards() {
   console.log(`Skipped: ${skipped}`);
   if (errors.length) {
     console.log(`Errors: ${errors.length}`);
-    errors.forEach((err) => console.error(`  - ${err}`));
+    errors.forEach(err => console.error(`  - ${err}`));
   }
 }
 
@@ -392,9 +412,13 @@ async function runImportActivities() {
   for (let i = 0; i < activitiesData.length; i++) {
     const item = activitiesData[i];
     try {
-      const activityName = item['Name of the activity'] || item['Name of the activity \nDD-MM-YYYY'];
+      const activityName =
+        item['Name of the activity'] || item['Name of the activity \nDD-MM-YYYY'];
       const dateString = item['Date of the activity \nDD-MM-YYYY'] || item['Date of the activity'];
-      const studentsCount = parseInt(item['Number of students participated in such activities'] || '0', 10);
+      const studentsCount = parseInt(
+        item['Number of students participated in such activities'] || '0',
+        10
+      );
       const reportLink = item['Web Links'] || '';
       const year = item['Year'] || '';
 
@@ -441,7 +465,7 @@ async function runImportActivities() {
   console.log(`Errors: ${errCount}`);
   if (errorDetails.length && errCount <= 20) {
     console.log('\nError details:');
-    errorDetails.forEach((e) => console.error(`  - ${e}`));
+    errorDetails.forEach(e => console.error(`  - ${e}`));
   } else if (errCount > 20) {
     console.log(`\n(First errors shown; total errors: ${errCount})`);
   }
@@ -515,7 +539,10 @@ async function runReset() {
       name: activityName,
       date: activityDate,
       year: item['Year'] || undefined,
-      studentsParticipated: parseInt(item['Number of students participated in such activities'] || '0', 10),
+      studentsParticipated: parseInt(
+        item['Number of students participated in such activities'] || '0',
+        10
+      ),
       reportLink,
     });
     seeded++;
@@ -547,7 +574,7 @@ Requires MONGODB_URI in .env.local and: npm install
 async function main() {
   const argv = process.argv.slice(2);
   const hasConfirm = argv.includes('--confirm');
-  const cmd = argv.find((a) => !a.startsWith('-')) || 'all';
+  const cmd = argv.find(a => !a.startsWith('-')) || 'all';
 
   if (argv.includes('help') || argv.includes('-h') || argv.includes('--help')) {
     printHelp();

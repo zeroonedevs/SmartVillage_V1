@@ -1,97 +1,95 @@
 @media screen and (min-width: 1550px) and (max-width: 2240px) {
-  
-    .home-three-one h1 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
-      color: black;
-      font-size: 4rem;
-      color: green;
-      line-height: 5rem;
-      font-weight: 600;
-    }
-  
-    .home-two-in-header h1 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      color: black;
-      font-size: 4rem;
-      color: green;
-    }
-    .home-two-in-one-in-one-in p {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
-      color: black;
-      font-size: 1.5rem;
-      color: black;
-    }
-    .home-two-in-one-in-boxes-in-box-in p {
-      font-size: 1.2rem;
-    }
-    .home-eight-two-in h1 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      color: black;
-      font-size: 4rem;
-      color: orange;
-    }
-    .home-eight-two-in p {
-      font-size: 1.5rem;
-    }
-    .home-four-two-in p {
-      font-size: 1.6rem;
-    }
-    .home-ten-header-in h1 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
-      color: black;
-      font-size: 4rem;
-      color: orange;
-      font-weight: 600;
-      width: 90%;
-    }
-    .home-ten-one-in-one {
-      width: 70%;
-    }
-    .home-ten-one-in-oneo {
-      width: 30%;
-    }
-    .home-ten-one-in-one-in h2 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      color: black;
-      font-size: 3rem;
-      color: green;
-      width: 90%;
-    }
-    .home-ten-one-in-one-in p {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
-      color: black;
-      font-size: 1.5rem;
-      color: black;
-      line-height: 2rem;
-      padding: 1rem 0rem;
-      color: rgb(35, 35, 35);
-      margin-bottom: 1rem;
-    }
-    .home-bt-one-in-one-in-one-in p {
-      font-size: 1.3rem;
-      line-height: 2rem;
-      color: rgb(35, 35, 35);
-      margin-bottom: 1rem;
-    }
+  .home-three-one h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: black;
+    font-size: 4rem;
+    color: green;
+    line-height: 5rem;
+    font-weight: 600;
+  }
 
-    .home-ten-one-in-two-in p{
-      font-size: 1.5rem;
-      padding: 1rem 6rem;
-    }
+  .home-two-in-header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: black;
+    font-size: 4rem;
+    color: green;
+  }
+  .home-two-in-one-in-one-in p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: black;
+    font-size: 1.5rem;
+    color: black;
+  }
+  .home-two-in-one-in-boxes-in-box-in p {
+    font-size: 1.2rem;
+  }
+  .home-eight-two-in h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: black;
+    font-size: 4rem;
+    color: orange;
+  }
+  .home-eight-two-in p {
+    font-size: 1.5rem;
+  }
+  .home-four-two-in p {
+    font-size: 1.6rem;
+  }
+  .home-ten-header-in h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: black;
+    font-size: 4rem;
+    color: orange;
+    font-weight: 600;
+    width: 90%;
+  }
+  .home-ten-one-in-one {
+    width: 70%;
+  }
+  .home-ten-one-in-oneo {
+    width: 30%;
+  }
+  .home-ten-one-in-one-in h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: black;
+    font-size: 3rem;
+    color: green;
+    width: 90%;
+  }
+  .home-ten-one-in-one-in p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: black;
+    font-size: 1.5rem;
+    color: black;
+    line-height: 2rem;
+    padding: 1rem 0rem;
+    color: rgb(35, 35, 35);
+    margin-bottom: 1rem;
+  }
+  .home-bt-one-in-one-in-one-in p {
+    font-size: 1.3rem;
+    line-height: 2rem;
+    color: rgb(35, 35, 35);
+    margin-bottom: 1rem;
+  }
 
-    /* .home-six-in-two-in{
+  .home-ten-one-in-two-in p {
+    font-size: 1.5rem;
+    padding: 1rem 6rem;
+  }
+
+  /* .home-six-in-two-in{
       padding: .5rem;
     } */
 
-    .home-six-two-in p {
-        font-size: 1.7rem;
-      }
-   
+  .home-six-two-in p {
+    font-size: 1.7rem;
+  }
 }

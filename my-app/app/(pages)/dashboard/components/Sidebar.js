@@ -1,149 +1,136 @@
-"use client";
+'use client';
 import React from 'react';
 import {
-    BarChart3,
-    ClipboardList,
-    Image,
-    Activity,
-    Newspaper,
-    Award,
-    Users,
-    MapPin,
-    UserCog,
-    Settings,
-    LogOut,
-    ChevronLeft,
-    ChevronRight,
-    Layout,
-    Briefcase,
-    Target
+  BarChart3,
+  ClipboardList,
+  Image,
+  Activity,
+  Newspaper,
+  Award,
+  Users,
+  MapPin,
+  UserCog,
+  Settings,
+  ChevronLeft,
+  ChevronRight,
+  Layout,
+  Briefcase,
+  Target,
 } from 'lucide-react';
 
-const Sidebar = ({
-    sidebarOpen,
-    setSidebarOpen,
-    activeTab,
-    setActiveTab,
-    userRole,
-    handleBackToLogin
-}) => {
-    // Define all possible tabs
-    const allTabs = [
-        {
-            id: 'analytics', label: 'Analytics', icon: <BarChart3 className="h-5 w-5" />
-        },
-        {
-            id: 'registrations', label: 'GOP Registrations', icon: <ClipboardList className="h-5 w-5" />
-        },
-        {
-            id: 'gallery', label: 'Gallery Images', icon: <Image className="h-5 w-5" />
-        },
-        {
-            id: 'activities', label: 'Activity Reports', icon: <Activity className="h-5 w-5" />
-        },
-        {
-            id: 'news', label: 'News Management', icon: <Newspaper className="h-5 w-5" />
-        },
-        {
-            id: 'awards', label: 'Awards & Honors', icon: <Award className="h-5 w-5" />
-        },
-        {
-            id: 'staff', label: 'Staff Directory', icon: <Users className="h-5 w-5" />
-        },
-        {
-            id: 'villages', label: 'Adapted Villages', icon: <MapPin className="h-5 w-5" />
-        },
-        {
-            id: 'users', label: 'User Management', icon: <UserCog className="h-5 w-5" />
-        },
-        {
-            id: 'hero', label: 'Hero Slides', icon: <Layout className="h-5 w-5" />
-        },
-        {
-            id: 'areas-of-work', label: 'Areas of Work', icon: <Briefcase className="h-5 w-5" />
-        },
-        {
-            id: 'focus-areas', label: 'Focus Areas (9-Way)', icon: <Target className="h-5 w-5" />
-        }
-    ];
+const NAV_GROUPS = [
+  {
+    items: [{ id: 'analytics', label: 'Analytics', Icon: BarChart3 }],
+  },
+    {
+    items: [{ id: 'users', label: 'Users', Icon: UserCog }],
+  },
+  {
+    items: [
+      { id: 'registrations', label: 'GOP registrations', Icon: ClipboardList },
+      { id: 'gallery', label: 'Gallery', Icon: Image },
+      { id: 'activities', label: 'Activity reports', Icon: Activity },
+      { id: 'news', label: 'News', Icon: Newspaper },
+      { id: 'awards', label: 'Awards & honors', Icon: Award },
+    ],
+  },
+  {
+    items: [
+      { id: 'staff', label: 'Staff directory', Icon: Users },
+      { id: 'villages', label: 'Adapted villages', Icon: MapPin },
+    ],
+  },
+  {
+    items: [
+      { id: 'hero', label: 'Hero slides', Icon: Layout },
+      { id: 'areas-of-work', label: 'Areas of work', Icon: Briefcase },
+      { id: 'focus-areas', label: 'Focus areas (9-way)', Icon: Target },
+    ],
+  },
+];
 
-    // Filter tabs based on role
-    const tabs = allTabs.filter(tab => {
-        if (userRole === 'admin') return true;
-        if (userRole === 'staff') {
-            // everything except GOP (registrations), users, and analytics
-            return tab.id !== 'registrations' && tab.id !== 'users' && tab.id !== 'analytics';
-        }
-        if (userRole === 'lead') {
-            // only acitvities , news , awards , gallery
-            return ['activities', 'news', 'awards', 'gallery'].includes(tab.id);
-        }
-        return false;
-    });
+const ALL_NAV_ITEMS = NAV_GROUPS.flatMap(g => g.items);
 
+function isItemAllowedForRole(tabId, userRole) {
+  if (userRole === 'admin') return true;
+  if (userRole === 'staff') {
+    return !['registrations', 'users', 'analytics'].includes(tabId);
+  }
+  if (userRole === 'lead') {
+    return ['activities', 'news', 'awards', 'gallery'].includes(tabId);
+  }
+  return false;
+}
+
+const Sidebar = ({ sidebarOpen, setSidebarOpen, activeTab, setActiveTab, userRole, onOpenSettings }) => {
+  const visibleItems = ALL_NAV_ITEMS.filter(item => isItemAllowedForRole(item.id, userRole));
+
+  const renderNavButton = item => {
+    const { id, label, Icon } = item;
+    const isActive = activeTab === id;
     return (
-        <div className={`${sidebarOpen ? 'w-64' : 'w-20'} bg-white border-r border-gray-200 transition-all duration-300 flex flex-col fixed h-screen z-40 shadow-sm`}>
-            {/* Sidebar Header */}
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between min-h-[73px]">
-                {sidebarOpen && (
-                    <div className="animate-fade-in">
-                        <h2 className="text-xl font-bold text-green-800">SmartVillage</h2>
-                        <p className="text-xs text-gray-500 font-medium">Dashboard</p>
-                    </div>
-                )}
-                <button
-                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className="p-2 rounded-lg hover:bg-green-50 text-gray-600 hover:text-green-700 transition-all duration-200"
-                    title={sidebarOpen ? "Collapse Sidebar" : "Expand Sidebar"}
-                >
-                    {sidebarOpen ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
-                </button>
-            </div>
-
-            {/* Sidebar Navigation */}
-            <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto custom-scrollbar">
-                {tabs.map((tab) => (
-                    <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md transition-all duration-200 group ${activeTab === tab.id
-                            ? 'bg-white text-gray-900 font-semibold shadow-md ring-1 ring-gray-200'
-                            : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
-                            }`}
-                    >
-                        <span className="flex-shrink-0">
-                            {tab.icon}
-                        </span>
-                        {sidebarOpen && (
-                            <span className="text-sm tracking-wide">
-                                {tab.label}
-                            </span>
-                        )}
-                    </button>
-                ))}
-            </nav>
-
-            {/* Sidebar Footer */}
-            <div className="p-4 border-t border-gray-100 bg-gray-50/50 space-y-2">
-                <button
-                    onClick={() => setActiveTab('settings')}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white border border-gray-100 text-gray-600 hover:bg-gray-50 transition-all group ${!sidebarOpen ? 'justify-center p-3' : ''}`}
-                    title="Change Password"
-                >
-                    <Settings className="h-5 w-5" />
-                    {sidebarOpen && <span className="font-bold text-sm">SECURITY</span>}
-                </button>
-
-                <button
-                    onClick={handleBackToLogin}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white border border-red-100 text-red-600 hover:bg-red-600 hover:text-white hover:border-red-600 shadow-sm transition-all duration-300 group ${!sidebarOpen ? 'justify-center p-3' : ''}`}
-                >
-                    <LogOut className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1" />
-                    {sidebarOpen && <span className="font-bold text-sm tracking-uppercase">LOGOUT</span>}
-                </button>
-            </div>
-        </div>
+      <button
+        key={id}
+        type="button"
+        onClick={() => setActiveTab(id)}
+        title={!sidebarOpen ? label : undefined}
+        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-none text-left text-sm ${
+          isActive
+            ? 'bg-green-50 text-green-800 border border-green-200'
+            : 'text-gray-800 border border-transparent'
+        }`}
+      >
+        <span className={`flex-shrink-0 ${isActive ? 'text-green-700' : 'text-gray-700'}`}>
+          <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
+        </span>
+        {sidebarOpen && <span className="leading-snug">{label}</span>}
+      </button>
     );
+  };
+
+  return (
+    <div
+      className={`dashboard-sidebar ${sidebarOpen ? 'w-64' : 'w-[4.5rem]'} bg-white border-r border-gray-200 transition-[width] duration-300 flex flex-col fixed h-screen z-40 text-black shadow-lg`}
+    >
+      <div className="p-3 border-b border-gray-200 flex items-center gap-2 min-h-[72px] bg-white">
+        {sidebarOpen ? (
+          <div className="flex-1 min-w-0 animate-fade-in pl-1">
+            <h2 className="text-lg font-normal text-black tracking-tight truncate font-style-bold">SmartVillage</h2>
+          </div>
+        ) : (
+          <div className="flex-1" aria-hidden />
+        )}
+        <button
+          type="button"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="p-2 rounded-none text-black shrink-0"
+          title={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+        >
+          {sidebarOpen ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
+        </button>
+      </div>
+
+      <nav className="flex-1 overflow-y-auto custom-scrollbar px-2.5 py-3 space-y-0.5">
+        {visibleItems.map(renderNavButton)}
+      </nav>
+
+      <div className="p-3 border-t border-gray-200 bg-white">
+        <button
+          type="button"
+          onClick={onOpenSettings}
+          title={!sidebarOpen ? 'Account & security' : undefined}
+          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-none border text-sm ${
+            activeTab === 'settings'
+              ? 'border-black bg-black text-white shadow-sm'
+              : 'border-gray-300 bg-gray-100 text-black'
+          } ${!sidebarOpen ? 'justify-center px-2' : ''}`}
+        >
+          <Settings className="h-[18px] w-[18px] shrink-0" strokeWidth={2} />
+          {sidebarOpen && <span className="font-normal">Account & security</span>}
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default Sidebar;

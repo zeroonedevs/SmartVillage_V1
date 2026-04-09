@@ -1,41 +1,41 @@
-"use client";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import CountUp from "react-countup";
-import Model from "./components/modal/modal";
-import { TbExternalLink } from "react-icons/tb";
-import Link from "next/link";
+'use client';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import CountUp from 'react-countup';
+import Model from './components/modal/modal';
+import { TbExternalLink } from 'react-icons/tb';
+import Link from 'next/link';
 
 // components
 
-import HeroSlider from "./components/home/HeroSlider";
-import AreasOfWork from "./components/home/AreasOfWork";
-import FocusAreas from "./components/home/FocusAreas";
-import Navigation from "./components/Navigation/Navigation";
-import Footer from "./components/footer/Footer";
-import PlantPreloader from "./components/animation/Plant";
+import HeroSlider from './components/home/HeroSlider';
+import AreasOfWork from './components/home/AreasOfWork';
+import FocusAreas from './components/home/FocusAreas';
+import Navigation from './components/Navigation/Navigation';
+import Footer from './components/footer/Footer';
+import PlantPreloader from './components/animation/Plant';
 
-import "./globals.css";
+import './globals.css';
 
-import SVR_Image_1 from "./Assets/President.jpeg";
-import SVR_UpdateImage_1 from "./Assets/Updated Images/Agriculture.png";
-import SVR_UpdateImage_2 from "./Assets/Updated Images/Education.png";
-import SVR_UpdateImage_3 from "./Assets/Updated Images/Health .png";
-import SVR_UpdateImage_5 from "./Assets/Updated Images/Infrastruture.png";
-import SVR_UpdateImage_11 from "./Assets/Updated Images/RenewableEnergy.png";
-import SVR_UpdateImage_12 from "./Assets/Updated Images/WomenEmpowerMent.png";
-import SVR_UpdateImage_13 from "./Assets/Women2.png";
-import SVR_UpdateImage_16 from "./Assets/Updated Images/Health_new.png";
-import SVR_UpdateImage_17 from "./Assets/Updated Images/Culture.png";
-import SVR_UpdateImage_19 from "./Assets/Updated Images/LatestCultureAndCommunity.png";
-import SVR_UpdateImage_20 from "./Assets/NewDigi.png";
+import SVR_Image_1 from './Assets/President.jpeg';
+import SVR_UpdateImage_1 from './Assets/Updated Images/Agriculture.png';
+import SVR_UpdateImage_2 from './Assets/Updated Images/Education.png';
+import SVR_UpdateImage_3 from './Assets/Updated Images/Health .png';
+import SVR_UpdateImage_5 from './Assets/Updated Images/Infrastruture.png';
+import SVR_UpdateImage_11 from './Assets/Updated Images/RenewableEnergy.png';
+import SVR_UpdateImage_12 from './Assets/Updated Images/WomenEmpowerMent.png';
+import SVR_UpdateImage_13 from './Assets/Women2.png';
+import SVR_UpdateImage_16 from './Assets/Updated Images/Health_new.png';
+import SVR_UpdateImage_17 from './Assets/Updated Images/Culture.png';
+import SVR_UpdateImage_19 from './Assets/Updated Images/LatestCultureAndCommunity.png';
+import SVR_UpdateImage_20 from './Assets/NewDigi.png';
 
-import VijaySirUpdated from "./Assets/Updated Images/SAC_Director_Updated.png";
-import President from "./Assets/President.jpeg";
-import Modi from "./Assets/Modi.jpeg";
-import AnnualReportImage from "../public/hero/1president.jpg";
+import VijaySirUpdated from './Assets/Updated Images/SAC_Director_Updated.png';
+import President from './Assets/President.jpeg';
+import Modi from './Assets/Modi.jpeg';
+import AnnualReportImage from '../public/hero/1president.jpg';
 
-const PLANT_PRELOADER_SESSION_KEY = "svr_plant_preloader_shown";
+const PLANT_PRELOADER_SESSION_KEY = 'svr_plant_preloader_shown';
 
 // Add Image loading optimization
 const ImageWithLoading = ({ src, alt, priority = false, ...props }) => {
@@ -43,7 +43,7 @@ const ImageWithLoading = ({ src, alt, priority = false, ...props }) => {
     <Image
       src={src}
       alt={alt}
-      {...priority ? { priority: true } : { loading: 'lazy' }}
+      {...(priority ? { priority: true } : { loading: 'lazy' })}
       {...props}
     />
   );
@@ -55,18 +55,18 @@ export default function Home() {
   const [showPlantPreloader, setShowPlantPreloader] = useState(false);
 
   useEffect(() => {
-    const seen =
-      typeof window !== "undefined" &&
-      sessionStorage.getItem(PLANT_PRELOADER_SESSION_KEY);
-    setShowPlantPreloader(!seen);
-    setPreloaderBootstrapped(true);
+    queueMicrotask(() => {
+      const seen = sessionStorage.getItem(PLANT_PRELOADER_SESSION_KEY);
+      setShowPlantPreloader(!seen);
+      setPreloaderBootstrapped(true);
+    });
   }, []);
 
   useEffect(() => {
     if (!preloaderBootstrapped || !showPlantPreloader) return;
     const durationMs = 3000;
     const t = setTimeout(() => {
-      sessionStorage.setItem(PLANT_PRELOADER_SESSION_KEY, "true");
+      sessionStorage.setItem(PLANT_PRELOADER_SESSION_KEY, 'true');
       setShowPlantPreloader(false);
     }, durationMs);
     return () => clearTimeout(t);
@@ -81,7 +81,7 @@ export default function Home() {
           setTotalStudents(data.count);
         }
       } catch (error) {
-        console.error("Failed to fetch stats", error);
+        console.error('Failed to fetch stats', error);
       }
     };
     fetchStats();
@@ -96,23 +96,21 @@ export default function Home() {
     setIsModalOpen(false);
   };
   const OpenLink = () => {
-    window.open("https://firebasestorage.googleapis.com/v0/b/svrwebsite-1e892.appspot.com/o/PDFS%2FSVR.pdf?alt=media&token=39c8fe16-79c6-495d-b424-611285e88264", "_blank");
+    window.open(
+      'https://firebasestorage.googleapis.com/v0/b/svrwebsite-1e892.appspot.com/o/PDFS%2FSVR.pdf?alt=media&token=39c8fe16-79c6-495d-b424-611285e88264',
+      '_blank'
+    );
   };
   //-----------------------For Modal END------------------------//
 
   //-----------------------For Modal END------------------------//
 
-  const handleDomainClick = (domain) => {
+  const handleDomainClick = domain => {
     window.location.href = `/gallery?domain=${encodeURIComponent(domain)}`;
   };
 
   if (!preloaderBootstrapped) {
-    return (
-      <div
-        className="fixed inset-0 z-[2147483646] bg-white"
-        aria-hidden
-      />
-    );
+    return <div className="fixed inset-0 z-[2147483646] bg-white" aria-hidden />;
   }
 
   if (showPlantPreloader) {
@@ -135,25 +133,20 @@ export default function Home() {
             <div className="home-three-one">
               <div className="home-three-one-in">
                 <h1>
-                  K L University's Smart Village Revolution - Empowering
-                  Communities with Innovation and Sustainability.
+                  K L University's Smart Village Revolution - Empowering Communities with Innovation
+                  and Sustainability.
                 </h1>
                 <p>
-                  In the smart village revolution, traditional wisdom and
-                  cutting-edge concepts coexist harmoniously. Solar-powered
-                  schools, quick access to medical assistance, and
-                  cellphone-enabled soil monitoring empower communities.
-                  Progress flows effortlessly and sustainably, nourishing
-                  villages like water touched by the sun. Tradition endures as
-                  innovation fortifies it, fostering common aspirations and
+                  In the smart village revolution, traditional wisdom and cutting-edge concepts
+                  coexist harmoniously. Solar-powered schools, quick access to medical assistance,
+                  and cellphone-enabled soil monitoring empower communities. Progress flows
+                  effortlessly and sustainably, nourishing villages like water touched by the sun.
+                  Tradition endures as innovation fortifies it, fostering common aspirations and
                   promising tomorrows.
                 </p>
 
                 <div className="home-three-on-in-link">
-                  <button
-                    className="home-three-one-in-link"
-                    onClick={OpenLink}
-                  >
+                  <button className="home-three-one-in-link" onClick={OpenLink}>
                     <span>Learn More About What We Do</span>
                   </button>
                 </div>
@@ -173,9 +166,11 @@ export default function Home() {
                         <div className="home-three-two-in-two-box-in-two-main">
                           <p>
                             <Link href="https://drive.google.com/file/d/1hqXfW0VcCbDN8Dz_QDi3UuzMU1h7z96I/view?usp=share_link">
-                              <span>Villages Adopted <TbExternalLink /> </span>
-                            </Link> by K L University
-                            Under Smart Village Revolution Project
+                              <span>
+                                Villages Adopted <TbExternalLink />{' '}
+                              </span>
+                            </Link>{' '}
+                            by K L University Under Smart Village Revolution Project
                           </p>
                         </div>
                       </div>
@@ -189,8 +184,7 @@ export default function Home() {
                         </div>
                         <div className="home-three-two-in-two-box-in-two">
                           <p>
-                            <span>The Students Actively </span>involved in
-                            community endeavors
+                            <span>The Students Actively </span>involved in community endeavors
                           </p>
                         </div>
                       </div>
@@ -204,8 +198,8 @@ export default function Home() {
                         </div>
                         <div className="home-three-two-in-two-box-in-two">
                           <p>
-                            <span>The villagers demonstrated proactive </span>{" "}
-                            and engaged involvement.
+                            <span>The villagers demonstrated proactive </span> and engaged
+                            involvement.
                           </p>
                         </div>
                       </div>
@@ -222,8 +216,8 @@ export default function Home() {
             <div className="home-two-in-header">
               {/* <h1>Smart Village Revolution at K L Deemed to be University: Steps towards Adarsh Gram </h1> */}
               <h1>
-                Smart Village Revolution at K L Deemed to be University: Steps
-                towards Sansad Adarsh Gram
+                Smart Village Revolution at K L Deemed to be University: Steps towards Sansad Adarsh
+                Gram
               </h1>
             </div>
             <div className="home-two-in-one">
@@ -232,14 +226,12 @@ export default function Home() {
                   <div className="home-two-in-one-in-one-in">
                     {/* <p>Smart Village Revolution at K L Deemed to be University is a rural development programme broadly focusing upon the development in the villages which includes social development, cultural development and spread motivation among the people on social mobilization of the village community. The programme was launched by the President of KLEF, Hon'ble Shri Koneru Lakshmaiah on the birth anniversary of Jayaprakash Narayan, on 11 October 2014.</p> */}
                     <p>
-                      At K L Deemed to be University, the Smart Village
-                      Revolution unfolds through deliberate steps towards Sansad
-                      Adarsh Gram . Education, community engagement, and
-                      sustainable practices form the foundation. Together, we're
-                      crafting a future where technology meets tradition, and
-                      our village becomes a model of progress, prosperity, and
-                      excellence. The programme was launched by the President of
-                      KLEF, Hon'ble Shri Koneru Satyanarayana Garu on the birth
+                      At K L Deemed to be University, the Smart Village Revolution unfolds through
+                      deliberate steps towards Sansad Adarsh Gram . Education, community engagement,
+                      and sustainable practices form the foundation. Together, we're crafting a
+                      future where technology meets tradition, and our village becomes a model of
+                      progress, prosperity, and excellence. The programme was launched by the
+                      President of KLEF, Hon'ble Shri Koneru Satyanarayana Garu on the birth
                       anniversary of Jayaprakash Narayan, on 11 October 2014.
                     </p>
                     <div className="home-two-in-one-in-boxes">
@@ -247,16 +239,16 @@ export default function Home() {
                         <div className="home-two-in-one-in-boxes-in-box">
                           <div className="home-two-in-one-in-boxes-in">
                             {[
-                              "Health & Hygiene",
-                              "Agriculture",
-                              "Quality Education",
-                              "Village Infrastructure",
-                              "Water conservation",
-                              "Energy Availablity and Efficieny",
-                              "Material and Resources",
-                              "Social Community Actions",
-                              "Green Innovation",
-                              "Women Empowerment",
+                              'Health & Hygiene',
+                              'Agriculture',
+                              'Quality Education',
+                              'Village Infrastructure',
+                              'Water conservation',
+                              'Energy Availablity and Efficieny',
+                              'Material and Resources',
+                              'Social Community Actions',
+                              'Green Innovation',
+                              'Women Empowerment',
                             ].map((item, index) => (
                               <div className="home-two-in-one-in-boxes-in-box" key={index}>
                                 <div className="home-two-in-one-in-boxes-in-box-in">
@@ -299,7 +291,7 @@ export default function Home() {
                     style={{
                       width: '100%',
                       height: '100%',
-                      objectFit: 'contain'
+                      objectFit: 'contain',
                     }}
                     priority
                   />
@@ -308,30 +300,58 @@ export default function Home() {
             </div>
             <div className="home-eight-two">
               <div className="home-eight-two-in">
-                <h1>
-                  Overall Annual Reports : Smart Village Revolution
-                </h1>
+                <h1>Overall Annual Reports : Smart Village Revolution</h1>
                 <p>
-                  Empowering Futures: A Journey of Impact and Growth – Annual
-                  Reports of Smart Village Revolution from past years
+                  Empowering Futures: A Journey of Impact and Growth – Annual Reports of Smart
+                  Village Revolution from past years
                 </p>
                 <div className="home-eight-two-in-buttons">
-                  <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1Gt-D_i7NwEHnQ0xRzdhlhJJOpCpJmfde/view" target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="home-eight-two-in-activitie-link"
+                    href="https://drive.google.com/file/d/1Gt-D_i7NwEHnQ0xRzdhlhJJOpCpJmfde/view"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     2018-2020
                   </a>
-                  <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1sf2RI5RhnJwnAspcmv7qIFEˀ1MgVwaD4v/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="home-eight-two-in-activitie-link"
+                    href="https://drive.google.com/file/d/1sf2RI5RhnJwnAspcmv7qIFEˀ1MgVwaD4v/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     2020-2021
                   </a>
-                  <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1bVyvCPpnf8zdhiZ25AP2sS--UpyurMgB/view" target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="home-eight-two-in-activitie-link"
+                    href="https://drive.google.com/file/d/1bVyvCPpnf8zdhiZ25AP2sS--UpyurMgB/view"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     2021-2022
                   </a>
-                  <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1weldRzdMTCZsbsKKCwvZ559MB8fROn9_/view" target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="home-eight-two-in-activitie-link"
+                    href="https://drive.google.com/file/d/1weldRzdMTCZsbsKKCwvZ559MB8fROn9_/view"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     2022-2023
                   </a>
-                  <a className="home-eight-two-in-activitie-link" href="https://drive.google.com/file/d/1fX-LHDcBiq5y2dWYkh8keYELPJ2-l57v/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="home-eight-two-in-activitie-link"
+                    href="https://drive.google.com/file/d/1fX-LHDcBiq5y2dWYkh8keYELPJ2-l57v/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     2023-2024
                   </a>
-                  <a className="home-eight-two-in-activitie-link" href="/activities" target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="home-eight-two-in-activitie-link"
+                    href="/activities"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     View Activities
                   </a>
                 </div>
@@ -349,10 +369,7 @@ export default function Home() {
           <div className="home-ten-in">
             <div className="home-ten-header">
               <div className="home-ten-header-in">
-                <h1>
-                  K L's Smart Village Revolution: In the Line of Sansad Adarsh
-                  Gram Yojana
-                </h1>
+                <h1>K L's Smart Village Revolution: In the Line of Sansad Adarsh Gram Yojana</h1>
               </div>
             </div>
             <div className="home-ten-one">
@@ -360,19 +377,16 @@ export default function Home() {
                 <div className="home-ten-one-in-one">
                   <div className="home-ten-one-in-one-in">
                     <h2>
-                      K L's Smart Village Revolution: In the Line of Sansad
-                      Adarsh Gram Yojana
+                      K L's Smart Village Revolution: In the Line of Sansad Adarsh Gram Yojana
                     </h2>
                     <p>
-                      On Independence Day, I had made commitment to you on
-                      behalf of my colleagues in the Parliament. I laid out my
-                      dream of Adarsh Grams as the nucleus of health,
-                      cleanliness, greenery and cordiality within the community.
-                      The Guidelines that follow are based on these principles
-                      and present the complete blueprint of the Saansad Adarsh
-                      Gram Yojana for each Member of Parliament to make one
-                      village of his or her constituency a Model Village by 2016
-                      and two more model villages by 2019.
+                      On Independence Day, I had made commitment to you on behalf of my colleagues
+                      in the Parliament. I laid out my dream of Adarsh Grams as the nucleus of
+                      health, cleanliness, greenery and cordiality within the community. The
+                      Guidelines that follow are based on these principles and present the complete
+                      blueprint of the Saansad Adarsh Gram Yojana for each Member of Parliament to
+                      make one village of his or her constituency a Model Village by 2016 and two
+                      more model villages by 2019.
                     </p>
 
                     <Link
@@ -393,7 +407,7 @@ export default function Home() {
                       width={0}
                       height={0}
                       alt="Picture of the author"
-                    // style={{ width: "100%" }}
+                      // style={{ width: "100%" }}
                     />
                     <p>
                       Shri Narendra Modi <br />
@@ -422,7 +436,7 @@ export default function Home() {
                       height={0}
                       sizes="100vw"
                       alt="Picture of the author"
-                      style={{ width: "100%", height: "auto" }} // optional
+                      style={{ width: '100%', height: 'auto' }} // optional
                     />
 
                     <p>
@@ -436,21 +450,17 @@ export default function Home() {
               <div className="home-four-two">
                 <div className="home-four-two-in">
                   <p>
-                    The Smart Village Revolution (SVR) is a KLEF initiative
-                    dedicated to leveraging technology acquired in classrooms
-                    for the benefit of rural communities. This community-driven
-                    effort mobilizes the collective strengths of faculty,
-                    students, and various professionals, integrating them with
-                    technology to serve rural areas. Inspired by Gandhian
-                    principles, SVR focuses on providing technical solutions to
-                    local needs. Encouraging the construction of green
-                    buildings, the initiative enhances economic and
-                    environmental performance. KLEF envisions a mass movement,
-                    empowering communities with knowledge and skills to face
-                    technological challenges. This project aligns with the
-                    university's commitment to sustainable rural development,
-                    extending its impact beyond academia, fostering social
-                    development.
+                    The Smart Village Revolution (SVR) is a KLEF initiative dedicated to leveraging
+                    technology acquired in classrooms for the benefit of rural communities. This
+                    community-driven effort mobilizes the collective strengths of faculty, students,
+                    and various professionals, integrating them with technology to serve rural
+                    areas. Inspired by Gandhian principles, SVR focuses on providing technical
+                    solutions to local needs. Encouraging the construction of green buildings, the
+                    initiative enhances economic and environmental performance. KLEF envisions a
+                    mass movement, empowering communities with knowledge and skills to face
+                    technological challenges. This project aligns with the university's commitment
+                    to sustainable rural development, extending its impact beyond academia,
+                    fostering social development.
                   </p>
                 </div>
               </div>
@@ -476,7 +486,7 @@ export default function Home() {
                       height={0}
                       sizes="100vw"
                       alt="Picture of the author"
-                      style={{ width: "100%", height: "auto" }} // optional
+                      style={{ width: '100%', height: 'auto' }} // optional
                     />
 
                     <p>
@@ -490,23 +500,20 @@ export default function Home() {
               <div className="home-six-two">
                 <div className="home-six-two-in">
                   <p>
-                    Welcome to the Smart Village Revolution (SVR) project, where
-                    students spearhead research, innovate solutions, and drive
-                    rural development. With a focus on sustainable change, our
-                    student-led initiatives tackle pressing issues through
-                    innovative projects. From water conservation to healthcare
-                    accessibility, we empower rural communities with tailored
-                    solutions. Through hands-on research and project
-                    implementation, students contribute to transformative
-                    change, making a lasting impact on society. Join us as we
-                    revolutionize rural development, one project at a time.
+                    Welcome to the Smart Village Revolution (SVR) project, where students spearhead
+                    research, innovate solutions, and drive rural development. With a focus on
+                    sustainable change, our student-led initiatives tackle pressing issues through
+                    innovative projects. From water conservation to healthcare accessibility, we
+                    empower rural communities with tailored solutions. Through hands-on research and
+                    project implementation, students contribute to transformative change, making a
+                    lasting impact on society. Join us as we revolutionize rural development, one
+                    project at a time.
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
 
         <div className="home-five" id="home-five">
           <div className="home-five-in">
@@ -520,8 +527,7 @@ export default function Home() {
         <div className="Footer">
           <Footer />
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }
-
