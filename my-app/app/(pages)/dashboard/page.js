@@ -139,6 +139,7 @@ const SVRDashboard = () => {
         setActiveTab={setActiveTab}
         userRole={userRole}
         onOpenSettings={openSettings}
+        onLogout={handleLogout}
       />
 
       <div
