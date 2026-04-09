@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { X } from 'lucide-react';
 
 const ChangePasswordModal = ({ isOpen, onClose }) => {
     const [passwords, setPasswords] = useState({
@@ -21,91 +22,106 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
             return;
         }
 
+        if (passwords.new.length < 6) {
+            setMessage({ type: 'error', text: 'Password must be at least 6 characters' });
+            return;
+        }
+
         setLoading(true);
         try {
-            // Mock API call
             const response = await fetch('/api/auth/change-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
                 body: JSON.stringify(passwords)
             });
 
-            if (response.ok) {
-                setMessage({ type: 'success', text: 'Password changed successfully!' });
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                setMessage({ type: 'success', text: data.message || 'Password changed successfully!' });
+                setPasswords({ current: '', new: '', confirm: '' });
                 setTimeout(onClose, 2000);
             } else {
-                setMessage({ type: 'error', text: 'Failed to change password' });
+                setMessage({ type: 'error', text: data.message || 'Failed to change password' });
             }
         } catch (err) {
-            setMessage({ type: 'error', text: 'An error occurred' });
+            setMessage({ type: 'error', text: 'An error occurred. Please try again.' });
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-            <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl animate-scale-up">
-                <div className="p-8">
-                    <div className="flex justify-between items-center mb-6">
-                        <h2 className="text-2xl font-bold text-gray-800">Change Password</h2>
-                        <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+            <div className="bg-white rounded-lg w-full max-w-md shadow-xl animate-scale-up border border-gray-200">
+                <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+                    <h2 className="text-base font-semibold text-gray-900">Change Password</h2>
+                    <button
+                        onClick={onClose}
+                        className="p-1 rounded-md hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors"
+                    >
+                        <X className="h-4 w-4" />
+                    </button>
+                </div>
 
+                <div className="p-6">
                     {message.text && (
-                        <div className={`p-4 rounded-xl mb-6 text-sm font-medium ${message.type === 'success' ? 'bg-green-50 text-green-700 border border-green-100' : 'bg-red-50 text-red-700 border border-red-100'}`}>
+                        <div className={`px-3 py-2 rounded-md mb-4 text-sm ${
+                            message.type === 'success'
+                                ? 'bg-green-50 text-green-700 border border-green-200'
+                                : 'bg-red-50 text-red-700 border border-red-200'
+                        }`}>
                             {message.text}
                         </div>
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Current Password</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Current Password</label>
                             <input
                                 type="password"
                                 required
-                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-colors"
                                 value={passwords.current}
                                 onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
                             />
                         </div>
-                        <div className="pt-2 border-t border-gray-100">
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">New Password</label>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">New Password</label>
                             <input
                                 type="password"
                                 required
-                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                                minLength={6}
+                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-colors"
                                 value={passwords.new}
                                 onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Confirm New Password</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Confirm New Password</label>
                             <input
                                 type="password"
                                 required
-                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                                minLength={6}
+                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-colors"
                                 value={passwords.confirm}
                                 onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
                             />
                         </div>
 
-                        <div className="flex gap-4 pt-6">
+                        <div className="flex gap-3 pt-2">
                             <button
                                 type="button"
                                 onClick={onClose}
-                                className="flex-1 py-3.5 rounded-xl font-bold text-gray-500 border border-gray-200 hover:bg-gray-50 transition-all"
+                                className="flex-1 px-4 py-2 rounded-md text-sm font-medium text-gray-700 border border-gray-300 hover:bg-gray-50 transition-colors"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="flex-1 py-3.5 rounded-xl font-bold text-white bg-green-700 hover:bg-green-800 shadow-lg shadow-green-100 transition-all disabled:bg-gray-400"
+                                className="flex-1 px-4 py-2 rounded-md text-sm font-medium text-white bg-green-600 hover:bg-green-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
                             >
                                 {loading ? 'Updating...' : 'Update Password'}
                             </button>

@@ -1,11 +1,9 @@
-
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import SmallFooter from "@/app/components/SmallFooter/footer";
 import Sidebar from './components/Sidebar';
 
-// Tab Components
 import RegistrationsTab from './components/RegistrationsTab';
 import GalleryTab from './components/GalleryTab';
 import ActivitiesTab from './components/ActivitiesTab';
@@ -28,23 +26,36 @@ const SVRDashboard = () => {
     const [loading, setLoading] = useState(true);
     const router = useRouter();
 
-    // Role-based title mapping
     const tabTitles = {
-        'analytics': 'Analytics Dashboard',
+        'analytics': 'Analytics',
         'registrations': 'GOP Registrations',
-        'gallery': 'Gallery Images',
+        'gallery': 'Gallery',
         'activities': 'Activity Reports',
-        'news': 'News Management',
+        'news': 'News',
         'awards': 'Awards & Honors',
         'staff': 'Staff Directory',
         'villages': 'Adapted Villages',
         'users': 'User Management',
-        'hero': 'Hero Slides Management',
-        'areas-of-work': 'Areas of Work Management',
-        'focus-areas': 'Focus Areas (9-Way) Management'
+        'hero': 'Hero Slides',
+        'areas-of-work': 'Areas of Work',
+        'focus-areas': 'Focus Areas (9-Way)'
     };
 
-    // Check auth on mount
+    const tabDescriptions = {
+        'analytics': 'Overview of key metrics and trends',
+        'registrations': 'Manage GOP organization registrations',
+        'gallery': 'Upload and organize gallery images',
+        'activities': 'Document events and upload reports',
+        'news': 'Manage news articles and publications',
+        'awards': 'Track awards and achievements',
+        'staff': 'Manage staff members',
+        'villages': 'Manage adapted village records',
+        'users': 'Manage system users and roles',
+        'hero': 'Configure homepage hero slides',
+        'areas-of-work': 'Define areas of work content',
+        'focus-areas': 'Configure 9-way focus area items'
+    };
+
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
@@ -60,7 +71,6 @@ const SVRDashboard = () => {
                 }
 
                 if (!response.ok) {
-                    console.error('Auth check failed:', response.status, await response.text().catch(() => ''));
                     router.push('/login');
                     return;
                 }
@@ -95,7 +105,6 @@ const SVRDashboard = () => {
         try {
             await fetch('/api/gop/logout', { method: 'POST' });
         } catch (error) {
-            console.error('Logout failed', error);
             document.cookie = 'gop_admin_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
         }
         router.push('/login');
@@ -104,14 +113,13 @@ const SVRDashboard = () => {
     if (loading) {
         return (
             <div className="w-full min-h-screen flex items-center justify-center bg-gray-50">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-700"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-2 border-green-600 border-t-transparent"></div>
             </div>
         );
     }
 
     return (
-        <div className="w-full min-h-screen bg-gray-50 flex">
-            {/* Sidebar Component */}
+        <div className="w-full min-h-screen bg-gray-50/80 flex">
             <Sidebar
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}
@@ -121,30 +129,27 @@ const SVRDashboard = () => {
                 handleBackToLogin={handleLogout}
             />
 
-            {/* Main Content */}
-            <div className={`flex-1 transition-all duration-300 flex flex-col min-h-screen ${sidebarOpen ? 'ml-64' : 'ml-20'}`}>
-                <div className="flex-grow max-w-7xl mx-auto px-6 py-8 w-full">
-                    {/* Header */}
-                    <div className="mb-8 flex justify-between items-center">
+            <div className={`flex-1 transition-all duration-300 flex flex-col min-h-screen ${sidebarOpen ? 'ml-64' : 'ml-[70px]'}`}>
+                <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-sm border-b border-gray-200">
+                    <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-800 tracking-tight">
+                            <h1 className="text-lg font-semibold text-gray-900">
                                 {tabTitles[activeTab] || 'Dashboard'}
                             </h1>
-                            <p className="text-gray-500 text-sm mt-1.5">
-                                Manage your village infrastructure and records
+                            <p className="text-xs text-gray-500">
+                                {tabDescriptions[activeTab] || 'Manage your village infrastructure'}
                             </p>
                         </div>
                         {userRole && (
-                            <div className="bg-white px-4 py-2 rounded-md shadow-sm border border-gray-100 flex items-center gap-2">
-                                <span className="text-xs font-bold text-gray-600 uppercase tracking-widest">
-                                    Role: {userRole}
-                                </span>
-                            </div>
+                            <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-green-50 text-green-700 border border-green-200">
+                                {userRole.charAt(0).toUpperCase() + userRole.slice(1)}
+                            </span>
                         )}
                     </div>
+                </header>
 
-                    {/* Content Area */}
-                    <div className="animate-fade-in-up">
+                <main className="flex-grow max-w-7xl mx-auto px-6 py-6 w-full">
+                    <div className="animate-fade-in">
                         {activeTab === 'analytics' && userRole === 'admin' && <AnalyticsTab />}
                         {activeTab === 'registrations' && userRole === 'admin' && <RegistrationsTab />}
                         {activeTab === 'gallery' && (userRole === 'admin' || userRole === 'staff' || userRole === 'lead') && <GalleryTab />}
@@ -157,13 +162,12 @@ const SVRDashboard = () => {
                         {activeTab === 'hero' && (userRole === 'admin' || userRole === 'staff') && <HeroTab />}
                         {activeTab === 'areas-of-work' && (userRole === 'admin' || userRole === 'staff') && <AreasOfWorkTab />}
                         {activeTab === 'focus-areas' && (userRole === 'admin' || userRole === 'staff') && <FocusAreasTab />}
-                        {/* Modals */}
                         <ChangePasswordModal
                             isOpen={activeTab === 'settings'}
                             onClose={() => setActiveTab('activities')}
                         />
                     </div>
-                </div>
+                </main>
                 <div className="mt-auto">
                     <SmallFooter />
                 </div>
