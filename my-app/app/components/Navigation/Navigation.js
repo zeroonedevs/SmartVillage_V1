@@ -104,7 +104,7 @@ const Navigation = () => {
                   News
                 </Link>
 
-                <Link className="nav-link" href="/gop">
+                <Link className="nav-link" href="/GOP">
                   GOP
                 </Link>
               </div>
