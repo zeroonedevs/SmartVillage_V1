@@ -186,7 +186,7 @@ const Navigation = () => {
               News
             </Link>
 
-            <Link href="/gop" onClick={closeMobileMenu}>
+            <Link href="/GOP" onClick={closeMobileMenu}>
               GOP
             </Link>
           </div>
