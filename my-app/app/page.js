@@ -308,7 +308,7 @@ export default function Home() {
                 <div className="home-eight-two-in-buttons">
                   <a
                     className="home-eight-two-in-activitie-link"
-                    href="https://drive.google.com/file/d/1Gt-D_i7NwEHnQ0xRzdhlhJJOpCpJmfde/view"
+                    href="/activities?year=2018-2022"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -316,7 +316,7 @@ export default function Home() {
                   </a>
                   <a
                     className="home-eight-two-in-activitie-link"
-                    href="https://drive.google.com/file/d/1sf2RI5RhnJwnAspcmv7qIFEˀ1MgVwaD4v/view?usp=sharing"
+                    href="/activities?year=2022-2023"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -324,7 +324,7 @@ export default function Home() {
                   </a>
                   <a
                     className="home-eight-two-in-activitie-link"
-                    href="https://drive.google.com/file/d/1bVyvCPpnf8zdhiZ25AP2sS--UpyurMgB/view"
+                    href="/activities?year=2023-2024"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -332,7 +332,7 @@ export default function Home() {
                   </a>
                   <a
                     className="home-eight-two-in-activitie-link"
-                    href="#"
+                    href="/activities?year=2024-2025"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -340,7 +340,7 @@ export default function Home() {
                   </a>
                   <a
                     className="home-eight-two-in-activitie-link"
-                    href="#"
+                    href="/activities?year=2025-2026"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

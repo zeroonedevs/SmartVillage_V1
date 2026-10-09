@@ -13,6 +13,16 @@ function Page() {
   const [sortOrder, setSortOrder] = useState('desc');
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const year = params.get('year');
+      if (year) {
+        setSelectedYear(year);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchActivities = async () => {
       try {
         const response = await fetch('/api/dashboard/viewactivities');
