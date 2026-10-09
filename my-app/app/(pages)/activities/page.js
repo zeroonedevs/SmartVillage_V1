@@ -59,8 +59,28 @@ function Page() {
     }
   };
 
+  // Function to compute Academic Year based on June to June rule
+  const getAcademicYear = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return '';
+    const month = date.getMonth() + 1; // getMonth is 0-indexed
+    const year = date.getFullYear();
+    
+    if (month < 6) {
+      return `${year - 1}-${year}`;
+    } else {
+      return `${year}-${year + 1}`;
+    }
+  };
+
+  const enhancedActivities = activities.map(event => ({
+    ...event,
+    ComputedYear: getAcademicYear(event.date) || event.year
+  }));
+
   // Sort the data based on the selected column and order
-  let sortedData = [...activities];
+  let sortedData = [...enhancedActivities];
   if (sortBy) {
     sortedData = sortedData.sort((a, b) => {
       if (sortBy === 'date') {
@@ -78,7 +98,7 @@ function Page() {
   // Filtered data based on search query and selected year
   const filteredData = sortedData.filter(
     event =>
-      (selectedYear === '' || (event.year && event.year.includes(selectedYear))) &&
+      (selectedYear === '' || event.ComputedYear === selectedYear) &&
       Object.values(event).some(value =>
         String(value).toLowerCase().includes(searchQuery.toLowerCase())
       )
@@ -93,7 +113,7 @@ function Page() {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   // Extract unique years from the data for the dropdown options
-  const years = Array.from(new Set(activities.map(event => event.year)))
+  const years = Array.from(new Set(enhancedActivities.map(event => event.ComputedYear)))
     .filter(Boolean)
     .sort()
     .reverse();

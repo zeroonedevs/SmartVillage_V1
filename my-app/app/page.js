@@ -312,7 +312,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    2018-2020
+                    2018-2022
                   </a>
                   <a
                     className="home-eight-two-in-activitie-link"
@@ -320,7 +320,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    2020-2021
+                    2022-2023
                   </a>
                   <a
                     className="home-eight-two-in-activitie-link"
@@ -328,23 +328,23 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    2021-2022
-                  </a>
-                  <a
-                    className="home-eight-two-in-activitie-link"
-                    href="https://drive.google.com/file/d/1weldRzdMTCZsbsKKCwvZ559MB8fROn9_/view"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    2022-2023
-                  </a>
-                  <a
-                    className="home-eight-two-in-activitie-link"
-                    href="https://drive.google.com/file/d/1fX-LHDcBiq5y2dWYkh8keYELPJ2-l57v/view?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
                     2023-2024
+                  </a>
+                  <a
+                    className="home-eight-two-in-activitie-link"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    2024-2025
+                  </a>
+                  <a
+                    className="home-eight-two-in-activitie-link"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    2025-2026
                   </a>
                   <a
                     className="home-eight-two-in-activitie-link"
