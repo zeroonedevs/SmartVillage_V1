@@ -105,10 +105,20 @@ function Page() {
     });
   }
 
+  const isYearMatch = (computedYear, selected) => {
+    if (selected === '') return true;
+    if (computedYear === selected) return true;
+    if (selected === '2018-2022') {
+      const allowedYears = ['2018-2019', '2019-2020', '2020-2021', '2021-2022'];
+      return allowedYears.includes(computedYear);
+    }
+    return false;
+  };
+
   // Filtered data based on search query and selected year
   const filteredData = sortedData.filter(
     event =>
-      (selectedYear === '' || event.ComputedYear === selectedYear) &&
+      isYearMatch(event.ComputedYear, selectedYear) &&
       Object.values(event).some(value =>
         String(value).toLowerCase().includes(searchQuery.toLowerCase())
       )
@@ -124,9 +134,13 @@ function Page() {
 
   // Extract unique years from the data for the dropdown options
   const years = Array.from(new Set(enhancedActivities.map(event => event.ComputedYear)))
-    .filter(Boolean)
-    .sort()
-    .reverse();
+    .filter(Boolean);
+    
+  if (!years.includes('2018-2022')) {
+    years.push('2018-2022');
+  }
+  
+  years.sort().reverse();
 
   // Helper to format date for display
   const formatDate = dateString => {
