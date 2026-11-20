@@ -3,6 +3,31 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
+// Safely parse a response: servers/proxies can return HTML error pages (413, 502, 500)
+const parseJsonSafe = async res => {
+  const text = await res.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    if (res.status === 413) return { error: 'File too large for the server. Use a smaller PDF.' };
+    return { error: `Server error (${res.status}). Please try again.` };
+  }
+};
+
+// Accepts yyyy-mm-dd (native picker) or dd/mm/yyyy, dd-mm-yyyy, dd.mm.yyyy (typed) -> yyyy-mm-dd
+const normalizeDate = value => {
+  const v = (value || '').trim();
+  let y, m, d;
+  let match = v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if (match) [, y, m, d] = match;
+  else if ((match = v.match(/^(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})$/))) [, d, m, y] = match;
+  else return null;
+  const dt = new Date(Date.UTC(+y, +m - 1, +d));
+  if (dt.getUTCFullYear() !== +y || dt.getUTCMonth() !== +m - 1 || dt.getUTCDate() !== +d)
+    return null;
+  return `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+};
+
 const ActivitiesTab = () => {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,7 +73,8 @@ const ActivitiesTab = () => {
       const file = e.target.files[0];
 
       // Check file type - only PDF allowed
-      if (file.type !== 'application/pdf') {
+      const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+      if (!isPdf) {
         toast.error('Only PDF files are allowed. Please select a PDF file.');
         e.target.value = ''; // Reset input
         setSelectedFile(null);
@@ -97,6 +123,11 @@ const ActivitiesTab = () => {
     try {
       let fileUrl = '';
 
+      const isoDate = normalizeDate(formData.date);
+      if (!isoDate) {
+        throw new Error('Invalid date. Please enter it as dd/mm/yyyy.');
+      }
+
       // 1. Upload Report if selected
       if (selectedFile) {
         const formData = new FormData();
@@ -108,7 +139,7 @@ const ActivitiesTab = () => {
           body: formData,
         });
 
-        const uploadData = await uploadRes.json();
+        const uploadData = await parseJsonSafe(uploadRes);
         if (!uploadRes.ok) {
           throw new Error(uploadData.error || 'Report upload failed');
         }
@@ -123,16 +154,21 @@ const ActivitiesTab = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
+          date: isoDate,
           reportLink: fileUrl,
         }),
       });
 
-      const saveData = await saveRes.json();
+      const saveData = await parseJsonSafe(saveRes);
+      if (!saveRes.ok || !saveData.success) {
+        throw new Error(saveData.error || 'Could not save activity');
+      }
       if (saveData.success) {
         setActivities([saveData.data, ...activities]);
         setFormData({ name: '', date: '', studentsParticipated: '' });
         setSelectedFile(null);
-        document.getElementById('report-upload').value = '';
+        const input = document.getElementById('report-upload');
+        if (input) input.value = '';
         toast.success('Activity added successfully!');
       }
     } catch (err) {
@@ -188,7 +224,10 @@ const ActivitiesTab = () => {
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">Date</label>
               <input
-                type="date"
+                type="text"
+                inputMode="numeric"
+                placeholder="dd/mm/yyyy"
+                maxLength={10}
                 value={formData.date}
                 onChange={e => setFormData({ ...formData, date: e.target.value })}
                 className="block w-full rounded-lg border-gray-300 bg-gray-50 p-2.5 text-sm focus:bg-white focus:border-green-500 focus:ring-green-500 border transition-colors"
